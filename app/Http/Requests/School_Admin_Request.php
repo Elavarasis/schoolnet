@@ -25,25 +25,27 @@ class School_Admin_Request extends Request {
 	{
 		
 		return [
-			'first_name' 	=> 'required|max:255',
-            'last_name' 	=> 'required|max:255',
-            'email' 		=> 'required|email|max:255|unique:users',
-            'password'		=> 'required|min:6',
-			'designation'	=> 'required|max:255',
-			'dob' 			=> 'date',
-			'phone' 		=> 'max:255',
-			'mobile' 		=> 'max:255',
-			'website' 		=> 'max:255',
-			'image' 		=> 'max:255',
+			'first_name' => 'required|max:255',
+            'last_name' => 'required|max:255',
+			'designation' => 'required|max:255',
+			'dob' => 'required|date_format:d/m/Y',
+			'phone' => 'numeric',
+			'mobile' => 'required|numeric',
+			'website' => 'url|max:255',
+			'profile_image' => 'image|mimes:jpeg,png,jpg,gif,svg|max:2048'
 			 
 		];
 	}
 	
-	/* public function messages()
+	public function messages()
 	{
 		return [
-				'category_name.required' => 'The Category name field is required.',	
+				'first_name.required' => 'The Category name field is required.',	
+				'last_name.required' => 'The Category name field is required.',	
+				'designation.required' => 'The Category name field is required.',	
+				'dob.required' => 'The Category name field is required.',	
+				'mobile.required' => 'The Category name field is required.',	
 		];
-	} */
+	}
 	
 }
