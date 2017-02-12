@@ -1,6 +1,7 @@
 <?php
 namespace App\Http\Controllers\Admin;
 use Illuminate\Http\Request;
+use Illuminate\Http\School_Admin_Request;
 use App\Http\Controllers\Controller;
 use App\School_admin;
 use App\School;
@@ -87,7 +88,7 @@ class School_admins extends Controller
             
 				$file = $request->file('profile_image') ;
 				
-				$fileName = $file->getClientOriginalName() ;
+				$fileName = rand().'@@'.$file->getClientOriginalName();
 				$destinationPath = public_path().'/images/school_admin/' ;
 				$file->move($destinationPath,$fileName);
 				$profile_image = $fileName ;
@@ -148,13 +149,11 @@ class School_admins extends Controller
 
     public function edit($id)
     {
-		
 		$school_admin = DB::table('users')
 				->join('school_admin', 'school_admin.user_id', '=', 'users.id')
-				->select('users.first_name','users.last_name','school_admin.*')
+				->select('users.first_name','users.last_name','users.status','school_admin.*')
 				->where('users.id', $id)
-				->first();
-				
+				->first();		
 				
         return view('admin.school_admins.addedit',compact('school_admin'));
     }
@@ -199,7 +198,7 @@ class School_admins extends Controller
             
 				$file = $request->file('profile_image') ;
 				
-				$fileName = $file->getClientOriginalName() ;
+				$fileName = rand().'@@'.$file->getClientOriginalName();
 				$destinationPath = public_path().'/images/school_admin/' ;
 				$file->move($destinationPath,$fileName);
 				$profile_image = $fileName ;
@@ -284,7 +283,7 @@ class School_admins extends Controller
 		//Upload logo if exists
 		if($file = $request->hasFile('schl_logo')) {
 				$file = $request->file('schl_logo') ;
-				$fileName = $file->getClientOriginalName() ;
+				$fileName = rand().'@@'.$file->getClientOriginalName();
 				$destinationPath = public_path().'/images/school/' ;
 				$file->move($destinationPath,$fileName);
 				$schl_logo = $fileName;
