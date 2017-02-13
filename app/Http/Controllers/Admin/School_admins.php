@@ -1,7 +1,8 @@
 <?php
 namespace App\Http\Controllers\Admin;
 use Illuminate\Http\Request;
-use Illuminate\Http\School_Admin_Request;
+//use Illuminate\Http\School_Admin_Request;
+use App\Http\Requests\School_Admin_Request;
 use App\Http\Controllers\Controller;
 use App\School_admin;
 use App\School;
@@ -11,6 +12,7 @@ use App\State;
 use App\User;
 use DB;
 use Redirect;
+
 class School_admins extends Controller
 {
     /**
@@ -58,21 +60,8 @@ class School_admins extends Controller
 
      */
 
-    public function store(Request $request)
+    public function store(School_Admin_Request $request)
     {
-		$this->validate($request, [
-            'first_name' => 'required|max:255',
-            'last_name' => 'required|max:255',
-            'email' => 'required|email|max:255|unique:users',
-            'password' => 'required|min:6',
-			'designation' => 'required|max:255',
-			'dob' => 'required|date_format:d/m/Y',
-			'phone' => 'numeric',
-			'mobile' => 'required|numeric',
-			'website' => 'url|max:255',
-			'profile_image' => 'image|mimes:jpeg,png,jpg,gif,svg|max:2048'
-        ]);
-		
         $data = $request->all(); 
 		$user_id = User::create([
             'first_name' => $data['first_name'],
@@ -82,6 +71,7 @@ class School_admins extends Controller
             'role' => 'school_admin',
             'password' => bcrypt($data['password']),
         ])->id;
+		
 		if($user_id){
 			
 			if($file = $request->hasFile('profile_image')) {
@@ -179,6 +169,7 @@ class School_admins extends Controller
    		$this->validate($request, [
             'first_name' => 'required|max:255',
             'last_name' => 'required|max:255',
+			//'email' => 'required|email|max:255|unique:users,'.$id,
 			'designation' => 'required|max:255',
 			'dob' => 'required|date_format:d/m/Y',
 			'phone' => 'numeric',
