@@ -1,7 +1,6 @@
 <?php
 namespace App\Http\Controllers\Admin;
 use Illuminate\Http\Request;
-//use Illuminate\Http\School_Admin_Request;
 use App\Http\Requests\School_Admin_Request;
 use App\Http\Controllers\Controller;
 use App\School_admin;
@@ -12,6 +11,7 @@ use App\State;
 use App\User;
 use DB;
 use Redirect;
+use Input;
 
 class School_admins extends Controller
 {
@@ -44,7 +44,9 @@ class School_admins extends Controller
 
     public function create()
     {
-		return view('admin.school_admins.addedit');
+		$countries	= Country::where('country_status',1)->pluck('country', 'id' );
+		$states		= array();
+		return view('admin.school_admins.addedit',compact('countries','states'));
     }
 
 
@@ -63,35 +65,37 @@ class School_admins extends Controller
     public function store(School_Admin_Request $request)
     {
         $data = $request->all(); 
+		if($file = $request->hasFile('profile_image')) {
+            
+			$file = $request->file('profile_image') ;
+			
+			$fileName = rand().'@@'.$file->getClientOriginalName();
+			$destinationPath = public_path().'/images/school_admin/' ;
+			$file->move($destinationPath,$fileName);
+			$profile_image = $fileName ;
+		}
+			
 		$user_id = User::create([
             'first_name' => $data['first_name'],
             'last_name' => $data['last_name'],
             'email' => $data['email'],
             'status' => $data['status'],
+            'country_id' => $data['country_id'],
+            'state_id' => $data['state_id'],
             'role' => 'school_admin',
             'password' => bcrypt($data['password']),
+			'dob' => date("Y-m-d", strtotime($data['dob']) ),
+			'image' => $profile_image
         ])->id;
 		
-		if($user_id){
-			
-			if($file = $request->hasFile('profile_image')) {
-            
-				$file = $request->file('profile_image') ;
-				
-				$fileName = rand().'@@'.$file->getClientOriginalName();
-				$destinationPath = public_path().'/images/school_admin/' ;
-				$file->move($destinationPath,$fileName);
-				$profile_image = $fileName ;
-			}
+		if($user_id){	
 		
 			$user_id = School_admin::create([
 							'user_id' => $user_id,
 							'designation' => $data['designation'],
-							'dob' => date("Y-m-d", strtotime($data['dob']) ),
 							'phone' => $data['phone'],
 							'mobile' => $data['mobile'],
 							'website' => $data['website'],
-							'image' => $profile_image
 							])->id;
 				
 			return redirect()->route('admin.school_admins.index')->with('success','School admin added successfully');
@@ -117,7 +121,7 @@ class School_admins extends Controller
 
         $school_admin = DB::table('users')
 				->join('school_admin', 'school_admin.user_id', '=', 'users.id')
-				->select('users.first_name','users.last_name','users.email','users.status','school_admin.*')
+				->select('users.first_name','users.last_name','users.email','users.status','users.country_id','users.state_id','users.image','users.dob','school_admin.*')
 				->where('users.id', $id)
 				->first();
         return view('admin.school_admins.show',compact('school_admin'));
@@ -141,11 +145,14 @@ class School_admins extends Controller
     {
 		$school_admin = DB::table('users')
 				->join('school_admin', 'school_admin.user_id', '=', 'users.id')
-				->select('users.first_name','users.last_name','users.status','school_admin.*')
+				->select('users.first_name','users.last_name','users.status','users.country_id','users.state_id','users.image','users.dob','school_admin.*')
 				->where('users.id', $id)
-				->first();		
+				->first();
 				
-        return view('admin.school_admins.addedit',compact('school_admin'));
+		$countries	= Country::where('country_status',1)->pluck('country', 'id');
+		$states 	= State::where('region_id', $school_admin->country_id)->where('state_status',1)->orderBy('name')->pluck('name', 'id');	
+        
+		return view('admin.school_admins.addedit',compact('school_admin','countries','states'));
     }
 
 
@@ -163,48 +170,42 @@ class School_admins extends Controller
 
      */
 
-    public function update(Request $request, $id)
+    public function update(School_Admin_Request $request, $id)
     {
-
-   		$this->validate($request, [
-            'first_name' => 'required|max:255',
-            'last_name' => 'required|max:255',
-			//'email' => 'required|email|max:255|unique:users,'.$id,
-			'designation' => 'required|max:255',
-			'dob' => 'required|date_format:d/m/Y',
-			'phone' => 'numeric',
-			'mobile' => 'required|numeric',
-			'website' => 'url|max:255',
-			'profile_image' => 'image|mimes:jpeg,png,jpg,gif,svg|max:2048'
-        ]);
 		
 		$profile_image = '';
 		$data = $request->all();
-		$user = ['first_name' => $data['first_name'],
-		'last_name' => $data['last_name'],
-		'status' => $data['status']];
-		User::find($data['user_id'])->update($user);
-		
 		if($file = $request->hasFile('profile_image')) {
-            
-				$file = $request->file('profile_image') ;
-				
-				$fileName = rand().'@@'.$file->getClientOriginalName();
-				$destinationPath = public_path().'/images/school_admin/' ;
-				$file->move($destinationPath,$fileName);
-				$profile_image = $fileName ;
-			}
+		
+			$file = $request->file('profile_image') ;
+			
+			$fileName = rand().'@@'.$file->getClientOriginalName();
+			$destinationPath = public_path().'/images/school_admin/' ;
+			$file->move($destinationPath,$fileName);
+			$profile_image = $fileName ;
+		}
+			
+		$user = [
+		'first_name' => $data['first_name'],
+		'last_name' => $data['last_name'],
+		'country_id' => $data['country_id'],
+		'state_id' => $data['state_id'],
+		'dob' => date("Y-m-d", strtotime($data['dob']) ),
+		'status' => $data['status']];
+		
+		if(!empty($profile_image))
+			$user['image']=$profile_image;
+		
+		User::find($data['user_id'])->update($user);
 		
 		$sc_admin = [
 		'user_id' => $data['user_id'],
 		'designation' => $data['designation'],
-		'dob' => date("Y-m-d", strtotime($data['dob']) ),
 		'phone' => $data['phone'],
 		'mobile' => $data['mobile'],
 		'website' => $data['website']
 		];
-		if(!empty($profile_image))
-			$sc_admin['image']=$profile_image;
+
 		
 		School_admin::find($id)->update($sc_admin);
 

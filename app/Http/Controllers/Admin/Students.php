@@ -68,26 +68,16 @@ class Students extends Controller
             'email' => 'required|email|max:255|unique:users',
             'password' => 'required|min:6',
 			'st_school_id' => 'required|numeric',
-			'st_country_id' => 'required|numeric',
-			'st_state_id' => 'required|numeric',
-			'st_dob' => 'required|date_format:d/m/Y',
+			'country_id' => 'required|numeric',
+			'state_id' => 'required|numeric',
+			'dob' => 'required|date_format:d/m/Y',
 			'st_contact_no' => 'numeric',
-			'st_image' => 'image|mimes:jpeg,png,jpg,gif,svg|max:2048'
+			'image' => 'image|mimes:jpeg,png,jpg,gif,svg|max:2048'
         ]);
 		
-        $data = $request->all(); 
-		$user_id = User::create([
-            'first_name' => $data['first_name'],
-            'last_name' => $data['last_name'],
-            'email' => $data['email'],
-            'status' => $data['status'],
-            'role' => 'student',
-            'password' => bcrypt($data['password']),
-        ])->id;
+        $data = $request->all();
 		
-		if($user_id){
-			
-			if($file = $request->hasFile('st_image')) {
+		if($file = $request->hasFile('st_image')) {
             
 				$file = $request->file('st_image') ;
 				
@@ -96,20 +86,31 @@ class Students extends Controller
 				$file->move($destinationPath,$fileName);
 				$profile_image = $fileName ;
 			}
+			
+		$user_id = User::create([
+            'first_name' => $data['first_name'],
+            'last_name' => $data['last_name'],
+            'email' => $data['email'],
+            'password' => bcrypt($data['password']),
+            'status' => $data['status'],
+            'role' => 'student',
+			'address' => $data['address'],
+			'city' => $data['city'],
+			'country_id' => $data['country_id'],
+			'state_id' => $data['state_id'],
+			'dob' => date("Y-m-d", strtotime($data['dob']) ),
+			'image' => (isset($profile_image)) ? $profile_image : '',
+        ])->id;
+		
+		if($user_id){
 		
 			$user_id = Student::create([
 							'st_user_id' => $user_id,
 							'st_school_id' => $data['st_school_id'],
-							'st_class' => $data['st_class'],
-							'st_address' => $data['st_address'],
-							'st_city' => $data['st_city'],
-							'st_country_id' => $data['st_country_id'],
-							'st_state_id' => $data['st_state_id'],
-							'st_dob' => date("Y-m-d", strtotime($data['st_dob']) ),
+							'st_class' => $data['st_class'],							
 							'st_contact_no' => $data['st_contact_no'],
 							'st_hcyknow' => $data['st_hcyknow'],
-							'st_description' => $data['st_description'],
-							'st_image' => (isset($profile_image)) ? $profile_image : '',
+							'st_description' => $data['st_description'],							
 							])->id;
 				
 			return redirect()->route('admin.students.index')->with('success','Student added successfully');
@@ -159,11 +160,11 @@ class Students extends Controller
     {
 		$student = DB::table('users')
 				->join('students', 'students.st_user_id', '=', 'users.id')
-				->select('users.first_name','users.last_name','users.status','students.*')
+				->select('users.first_name','users.last_name','users.status','users.country_id','users.state_id','users.image','users.dob','users.address','users.city','students.*')
 				->where('users.id', $id)
 				->first();
 		$countries	= Country::where('country_status',1)->pluck('country', 'id');
-		$states 	= State::where('region_id', $student->st_country_id)->where('state_status',1)->orderBy('name')->pluck('name', 'id');
+		$states 	= State::where('region_id', $student->country_id)->where('state_status',1)->orderBy('name')->pluck('name', 'id');
 		$schools 	= School::orderBy('schl_name')->pluck('schl_name', 'id');
         return view('admin.students.addedit',compact('student','countries','states','schools'));
     }
@@ -190,44 +191,48 @@ class Students extends Controller
             'first_name' => 'required|max:255',
             'last_name' => 'required|max:255',
 			'st_school_id' => 'required|numeric',
-			'st_country_id' => 'required|numeric',
-			'st_state_id' => 'required|numeric',
-			'st_dob' => 'required|date_format:d/m/Y',
+			'country_id' => 'required|numeric',
+			'state_id' => 'required|numeric',
+			'dob' => 'required|date_format:d/m/Y',
 			'st_contact_no' => 'numeric',
-			'st_image' => 'image|mimes:jpeg,png,jpg,gif,svg|max:2048'
+			'image' => 'image|mimes:jpeg,png,jpg,gif,svg|max:2048'
         ]);
 		
 		$profile_image = '';
 		$data = $request->all();
-		$user = ['first_name' => $data['first_name'],
-		'last_name' => $data['last_name'],
-		'status' => $data['status']];
-		User::find($data['st_user_id'])->update($user);
 		
 		if($file = $request->hasFile('st_image')) {
-            
-				$file = $request->file('st_image') ;
-				
-				$fileName = $file->getClientOriginalName() ;
-				$destinationPath = public_path().'/images/student/' ;
-				$file->move($destinationPath,$fileName);
-				$profile_image = $fileName ;
-			}
+		
+			$file = $request->file('st_image') ;
+			
+			$fileName = $file->getClientOriginalName() ;
+			$destinationPath = public_path().'/images/student/' ;
+			$file->move($destinationPath,$fileName);
+			$profile_image = $fileName ;
+		}
+			
+		$user = ['first_name' => $data['first_name'],
+		'last_name' => $data['last_name'],
+		'address' => $data['address'],
+		'city' => $data['city'],
+		'country_id' => $data['country_id'],
+		'state_id' => $data['state_id'],
+		'dob' => date("Y-m-d", strtotime($data['dob']) ),
+		'status' => $data['status']];
+		
+		if(!empty($profile_image))
+			$student['image']=$profile_image;
+		
+		User::find($data['st_user_id'])->update($user);
 		
 		$student = ['st_user_id' => $data['st_user_id'],
 					'st_school_id' => $data['st_school_id'],
 					'st_class' => $data['st_class'],
-					'st_address' => $data['st_address'],
-					'st_city' => $data['st_city'],
-					'st_country_id' => $data['st_country_id'],
-					'st_state_id' => $data['st_state_id'],
-					'st_dob' => date("Y-m-d", strtotime($data['st_dob']) ),
 					'st_contact_no' => $data['st_contact_no'],
 					'st_hcyknow' => $data['st_hcyknow'],
 					'st_description' => $data['st_description'],
 					];
-		if(!empty($profile_image))
-			$student['st_image']=$profile_image;
+
 		
 		Student::find($id)->update($student);
 
