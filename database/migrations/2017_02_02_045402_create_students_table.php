@@ -17,15 +17,9 @@ class CreateStudentsTable extends Migration
 			$table->integer('st_user_id')->unsigned();
 			$table->integer('st_school_id')->unsigned();
 			$table->string('st_class');
-			$table->string('st_address');
-			$table->string('st_city');
-			$table->integer('st_country_id')->unsigned();
-			$table->integer('st_state_id')->unsigned();
-			$table->date('st_dob');
             $table->string('st_contact_no');
             $table->string('st_hcyknow');
             $table->string('st_description');
-            $table->string('st_image');
             $table->timestamps();
         });
 		
@@ -33,8 +27,6 @@ class CreateStudentsTable extends Migration
 		Schema::table('students', function (Blueprint $table) {
 			$table->foreign('st_user_id')->references('id')->on('users');
 			$table->foreign('st_school_id')->references('id')->on('schools');
-			$table->foreign('st_country_id')->references('id')->on('countries');
-			$table->foreign('st_state_id')->references('id')->on('states');
 		});
     }
 

@@ -16,11 +16,9 @@ class CreateSchoolAdminTable extends Migration
             $table->increments('id');
 			$table->integer('user_id')->unsigned();
             $table->string('designation');
-            $table->date('dob');
             $table->string('phone');
             $table->string('mobile');
             $table->string('website');
-			$table->string('image');
             $table->timestamps();
         });
     }
