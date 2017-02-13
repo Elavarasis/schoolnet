@@ -98,6 +98,16 @@
                 </div>  
 				
 				<div class="form-group">
+                  <label for="exampleInputEmail1">Country</label>
+                  {!! Form::select('country_id', $countries, null, array('class' => 'form-control', 'id' => 'country_id')) !!}
+                </div>
+				
+				<div class="form-group">
+                  <label for="exampleInputEmail1">State</label>
+                  {!! Form::select('state_id', $states, null, array('class' => 'form-control', 'id' => 'state_id')) !!}
+                </div>
+				
+				<div class="form-group">
                   <label for=" ">Phone Number</label>
                   {!! Form::text('phone', null, array('placeholder' => 'Phone Number','class' => 'form-control')) !!}
                 </div>

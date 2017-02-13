@@ -60,7 +60,7 @@
             @if(isset($student))
 				{!! Form::model($student, ['files'=> true, 'method' => 'PATCH','route' => ['admin.students.update', $student->id]]) !!}
 			
-				{{--*/ $student->st_dob = date("d/m/Y", strtotime($student->st_dob) ) /*--}} <!-- change date format of DOB to d/m/Y -->
+				{{--*/ $student->dob = date("d/m/Y", strtotime($student->dob) ) /*--}} <!-- change date format of DOB to d/m/Y -->
 			@else
 				{!! Form::open(array('files'=> true, 'route' => 'admin.students.store','method'=>'POST')) !!}
 			@endif
@@ -99,27 +99,27 @@
 				
 				<div class="form-group">
                   <label for=" ">Address</label>
-				  {!! Form::textarea('st_address',null,['placeholder' => 'Adress','class'=>'form-control', 'rows' => 3]) !!}
+				  {!! Form::textarea('address',null,['placeholder' => 'Adress','class'=>'form-control', 'rows' => 3]) !!}
                 </div>
 				
 				<div class="form-group">
                   <label for=" ">City</label>
-                  {!! Form::text('st_city', null, array('placeholder' => 'City','class' => 'form-control')) !!}
+                  {!! Form::text('city', null, array('placeholder' => 'City','class' => 'form-control')) !!}
                 </div>
 				
 				<div class="form-group">
                   <label for="exampleInputEmail1">Country</label>
-                  {!! Form::select('st_country_id', $countries, null, array('class' => 'form-control', 'id' => 'country_id')) !!}
+                  {!! Form::select('country_id', $countries, null, array('class' => 'form-control', 'id' => 'country_id')) !!}
                 </div>
 				
 				<div class="form-group">
                   <label for="exampleInputEmail1">State</label>
-                  {!! Form::select('st_state_id', $states, null, array('class' => 'form-control', 'id' => 'state_id')) !!}
+                  {!! Form::select('state_id', $states, null, array('class' => 'form-control', 'id' => 'state_id')) !!}
                 </div>
 				
 				<div class="form-group">
                   <label for=" ">Date of Birth</label>
-                  {!! Form::text('st_dob', null, array('placeholder' => 'Date of Birth','class' => 'form-control dob')) !!}
+                  {!! Form::text('dob', null, array('placeholder' => 'Date of Birth','class' => 'form-control dob')) !!}
                 </div>  
 				
 				<div class="form-group">
@@ -140,7 +140,7 @@
 				<div class="form-group">
                   <label for=" ">Profile Image</label>
 				  @if(isset($student))
-					<img width="100px" src="{{ URL::to('/') }}/public/images/student/{{$student->st_image}}" alt="" />
+					<img width="100px" src="{{ URL::to('/') }}/public/images/student/{{$student->image}}" alt="" />
 				  @endif
 				  {!! Form::file('st_image', ['class' => 'form-control']) !!}
                 </div>
