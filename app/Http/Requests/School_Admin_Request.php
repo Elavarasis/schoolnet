@@ -36,14 +36,23 @@ class School_Admin_Request extends Request {
 		];
 	}
 	
+	public function attributes()
+    {
+        return [
+            'first_name' => 'First Name',
+			'email' => 'Email',
+			'last_name' => 'Last Name',
+			'designation' => 'Designation',
+			'dob' => 'Date of Birth',
+			'mobile' => 'Mobile Number',
+        ];
+    }
+	
 	public function messages()
 	{
 		return [
-				'first_name.required' => 'The First name field is required.',	
-				'last_name.required' => 'The Last name field is required.',	
-				'designation.required' => 'The Designation field is required.',	
-				'dob.required' => 'The D.O.B field is required.',	
-				'mobile.required' => 'The Mobile number field is required.',	
+				//'first_name.required' => ':attribute is required.',	
+				//'last_name.required' => ':attribute is required.',	
 		];
 	}
 	
