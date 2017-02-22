@@ -21,34 +21,25 @@ class School_Admin_Request extends Request {
 	 * @return array
 	 */
 	public function rules()
-	{	
-	
-		if(Request::input('email') != null){
+	{
+		$rules =  [
+			'first_name' => 'required|max:255',
+			'last_name' => 'required|max:255',
+			'designation' => 'required|max:255',
+			'dob' => 'required|date_format:d/m/Y',
+			'phone' => 'numeric',
+			'mobile' => 'required|numeric',
+			'website' => 'url|max:255',
+			'profile_image' => 'image|mimes:jpeg,png,jpg,gif,svg|max:2048'			 
+		];
+		
+		if( $this->method() == 'POST' ){
 
-			return [
-				'first_name' => 'required|max:255',
-				'last_name' => 'required|max:255',
-				'email' => 'required|email|max:255|unique:users',
-				'password' => 'required|min:6',
-				'designation' => 'required|max:255',
-				'dob' => 'required|date_format:d/m/Y',
-				'phone' => 'numeric',
-				'mobile' => 'required|numeric',
-				'website' => 'url|max:255',
-				'profile_image' => 'image|mimes:jpeg,png,jpg,gif,svg|max:2048'			 
-			];
-		}else{
-			return [
-				'first_name' => 'required|max:255',
-				'last_name' => 'required|max:255',
-				'designation' => 'required|max:255',
-				'dob' => 'required|date_format:d/m/Y',
-				'phone' => 'numeric',
-				'mobile' => 'required|numeric',
-				'website' => 'url|max:255',
-				'profile_image' => 'image|mimes:jpeg,png,jpg,gif,svg|max:2048'			 
-			];
+			$rules['email'] = 'required|email|max:255|unique:users';
+			$rules['password'] = 'required|min:6';
 		}
+		
+		return $rules;
 	}
 	
 	public function attributes()
@@ -56,6 +47,7 @@ class School_Admin_Request extends Request {
         return [
             'first_name' => 'First Name',
 			'email' => 'Email',
+			'password' => 'Password',
 			'last_name' => 'Last Name',
 			'designation' => 'Designation',
 			'dob' => 'Date of Birth',
@@ -65,13 +57,5 @@ class School_Admin_Request extends Request {
 			'profile_image' => 'Profile image',
         ];
     }
-	
-	public function messages()
-	{
-		return [
-				//'first_name.required' => ':attribute is required.',	
-				//'last_name.required' => ':attribute is required.',	
-		];
-	}
 	
 }
