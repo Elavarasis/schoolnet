@@ -3,7 +3,7 @@ namespace App\Http\Requests;
 
 use App\Http\Requests\Request;
 
-class Normal_User_Request extends Request {
+class Student_Request extends Request {
 
 	/**
 	 * Determine if the user is authorized to make this request.
@@ -36,11 +36,12 @@ class Normal_User_Request extends Request {
 					'last_name' => 'required|max:255',
 					'email' => 'required|email|max:255|unique:users',
 					'password' => 'required|min:6',
+					'st_school_id' => 'required|numeric',
 					'country_id' => 'required|numeric',
 					'state_id' => 'required|numeric',
 					'dob' => 'required|date_format:d/m/Y',
-					'nu_contact_no' => 'numeric',
-					'nu_image' => 'image|mimes:jpeg,png,jpg,gif,svg|max:2048'		 
+					'st_contact_no' => 'numeric',
+					'st_image' => 'image|mimes:jpeg,png,jpg,gif,svg|max:2048'	 
 				];
 			}
 			case 'PUT':
@@ -49,11 +50,12 @@ class Normal_User_Request extends Request {
 				return [
 					'first_name' => 'required|max:255',
 					'last_name' => 'required|max:255',
+					'st_school_id' => 'required|numeric',
 					'country_id' => 'required|numeric',
 					'state_id' => 'required|numeric',
 					'dob' => 'required|date_format:d/m/Y',
-					'nu_contact_no' => 'numeric',
-					'nu_image' => 'image|mimes:jpeg,png,jpg,gif,svg|max:2048'		 
+					'st_contact_no' => 'numeric',
+					'st_image' => 'image|mimes:jpeg,png,jpg,gif,svg|max:2048'		 
 				];
 			}
 			default:break;
@@ -72,7 +74,7 @@ class Normal_User_Request extends Request {
 			'mobile' => 'Mobile Number',
 			'phone' => 'Phone Number',
 			'website' => 'Website Number',
-			'nu_image' => 'Profile image',
+			'st_image' => 'Profile image',
         ];
     }
 	
