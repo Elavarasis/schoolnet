@@ -65,6 +65,7 @@ class School_admins extends Controller
     public function store(School_Admin_Request $request)
     {
         $data = $request->all(); 
+		$profile_image = '';
 		if($file = $request->hasFile('profile_image')) {
             
 			$file = $request->file('profile_image') ;
