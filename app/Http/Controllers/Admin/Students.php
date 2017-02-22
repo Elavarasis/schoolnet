@@ -1,6 +1,7 @@
 <?php
 namespace App\Http\Controllers\Admin;
 use Illuminate\Http\Request;
+use App\Http\Requests\Student_Request;
 use App\Http\Controllers\Controller;
 use App\Student;
 use App\School;
@@ -60,20 +61,8 @@ class Students extends Controller
 
      */
 
-    public function store(Request $request)
+    public function store(Student_Request $request)
     {
-		$this->validate($request, [
-            'first_name' => 'required|max:255',
-            'last_name' => 'required|max:255',
-            'email' => 'required|email|max:255|unique:users',
-            'password' => 'required|min:6',
-			'st_school_id' => 'required|numeric',
-			'country_id' => 'required|numeric',
-			'state_id' => 'required|numeric',
-			'dob' => 'required|date_format:d/m/Y',
-			'st_contact_no' => 'numeric',
-			'image' => 'image|mimes:jpeg,png,jpg,gif,svg|max:2048'
-        ]);
 		
         $data = $request->all();
 		
@@ -184,19 +173,8 @@ class Students extends Controller
 
      */
 
-    public function update(Request $request, $id)
+    public function update(Student_Request $request, $id)
     {
-
-   		$this->validate($request, [
-            'first_name' => 'required|max:255',
-            'last_name' => 'required|max:255',
-			'st_school_id' => 'required|numeric',
-			'country_id' => 'required|numeric',
-			'state_id' => 'required|numeric',
-			'dob' => 'required|date_format:d/m/Y',
-			'st_contact_no' => 'numeric',
-			'image' => 'image|mimes:jpeg,png,jpg,gif,svg|max:2048'
-        ]);
 		
 		$profile_image = '';
 		$data = $request->all();
