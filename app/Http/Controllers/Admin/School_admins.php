@@ -2,6 +2,7 @@
 namespace App\Http\Controllers\Admin;
 use Illuminate\Http\Request;
 use App\Http\Requests\School_Admin_Request;
+use App\Http\Requests\School_Request;
 use App\Http\Controllers\Controller;
 use App\School_admin;
 use App\School;
@@ -75,7 +76,7 @@ class School_admins extends Controller
 			$file->move($destinationPath,$fileName);
 			$profile_image = $fileName ;
 		}
-			
+		DB::beginTransaction();	
 		$user_id = User::create([
             'first_name' => $data['first_name'],
             'last_name' => $data['last_name'],
@@ -91,14 +92,17 @@ class School_admins extends Controller
 		
 		if($user_id){	
 		
-			$user_id = School_admin::create([
+			$sa_id = School_admin::create([
 							'user_id' => $user_id,
 							'designation' => $data['designation'],
 							'phone' => $data['phone'],
 							'mobile' => $data['mobile'],
 							'website' => $data['website'],
 							])->id;
-				
+			if(empty($sa_id)){
+				DB::rollback();
+			}
+			DB::commit();	
 			return redirect()->route('admin.school_admins.index')->with('success','School admin added successfully');
 		}
 		
@@ -197,6 +201,8 @@ class School_admins extends Controller
 		if(!empty($profile_image))
 			$user['image']=$profile_image;
 		
+		DB::beginTransaction();	
+		
 		User::find($data['user_id'])->update($user);
 		
 		$sc_admin = [
@@ -208,9 +214,13 @@ class School_admins extends Controller
 		];
 
 		
-		School_admin::find($id)->update($sc_admin);
-
-			return redirect()->route('admin.school_admins.index')->with('success','School admin updated successfully');
+		$sa_id = School_admin::find($id)->update($sc_admin);
+		if(empty($sa_id)){
+				DB::rollback();
+		}
+		DB::commit();
+		
+		return redirect()->route('admin.school_admins.index')->with('success','School admin updated successfully');
 
     }
 
@@ -248,30 +258,9 @@ class School_admins extends Controller
         return view('admin.school_admins.manage-school',compact('school','admin_id','countries','states','cities'));
 	}
 	
-	public function save_school(Request $request){
+	public function save_school(School_Request $request){
 		
 		$data = $request->all(); 
-		
-		//Set Custom Attribute names for validation
-		$customAttributes = array(
-						'schl_name' => 'School Name',
-						'schl_country_id' => 'Country',
-						'schl_state_id' => 'State',
-						'schl_city_id' => 'City',
-						'schl_contact_no' => 'Contact Number',
-						'email' => 'Email'
-						);
-		
-		//Do validation
-		//$this->validate(Request $request, $rules, $messages, $customAttributes) //syntax
-		$this->validate($request,[
-				'schl_name' => 'required|max:255',
-				'schl_country_id' => 'required|numeric',
-				'schl_state_id' => 'required|numeric',
-				'schl_city_id' => 'required|numeric',
-				'schl_contact_no' => 'numeric',
-				'email' => 'email|max:255',
-			],[],$customAttributes);
 			
 		//Upload logo if exists
 		if($file = $request->hasFile('schl_logo')) {

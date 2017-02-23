@@ -75,7 +75,7 @@ class Students extends Controller
 				$file->move($destinationPath,$fileName);
 				$profile_image = $fileName ;
 			}
-			
+		DB::beginTransaction();		
 		$user_id = User::create([
             'first_name' => $data['first_name'],
             'last_name' => $data['last_name'],
@@ -93,7 +93,7 @@ class Students extends Controller
 		
 		if($user_id){
 		
-			$user_id = Student::create([
+			$stud_id = Student::create([
 							'st_user_id' => $user_id,
 							'st_school_id' => $data['st_school_id'],
 							'st_class' => $data['st_class'],							
@@ -101,7 +101,11 @@ class Students extends Controller
 							'st_hcyknow' => $data['st_hcyknow'],
 							'st_description' => $data['st_description'],							
 							])->id;
-				
+			if(empty($stud_id)){
+				DB::rollback();
+			}
+			DB::commit();
+			
 			return redirect()->route('admin.students.index')->with('success','Student added successfully');
 		}
 		
@@ -201,6 +205,8 @@ class Students extends Controller
 		if(!empty($profile_image))
 			$student['image']=$profile_image;
 		
+		DB::beginTransaction();
+		
 		User::find($data['st_user_id'])->update($user);
 		
 		$student = ['st_user_id' => $data['st_user_id'],
@@ -212,8 +218,13 @@ class Students extends Controller
 					];
 
 		
-		Student::find($id)->update($student);
-
+		$stud_id = Student::find($id)->update($student);
+		
+		if(empty($stud_id)){
+				DB::rollback();
+		}
+		DB::commit();
+		
 		return redirect()->route('admin.students.index')->with('success','Student updated successfully');
 
     }
