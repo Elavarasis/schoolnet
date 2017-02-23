@@ -109,6 +109,8 @@
 		
 		<li><a href="{{ route('admin.widgets.index') }}"><i class="fa fa-circle-o"></i> <span>Widget Management</span></a></li>
 		
+		<li><a href="{{ url('admin/newsletters/') }}"><i class="fa fa-circle-o"></i> <span>Newsletters</span></a></li>
+		
         <!--<li class="treeview">
           <a href="#">
             <i class="fa fa-share"></i> <span>Multilevel</span>

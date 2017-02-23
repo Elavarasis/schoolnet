@@ -271,14 +271,15 @@ class ComposerStaticInit6bfc94c8dff1dd7be1ec095d36ef6890
     );
 
     public static $classMap = array (
-        'CreateCitiesTable' => __DIR__ . '/../..' . '/database/migrations/2017_01_19_054420_create_cities_table.php',
-        'CreateOptionsTable' => __DIR__ . '/../..' . '/database/migrations/2017_02_03_050003_create_options_table.php',
-        'CreatePasswordResetsTable' => __DIR__ . '/../..' . '/database/migrations/2014_10_12_100000_create_password_resets_table.php',
-        'CreateSchoolAdminTable' => __DIR__ . '/../..' . '/database/migrations/2014_10_12_000000_create_school_admin_table.php',
-        'CreateSchoolsTable' => __DIR__ . '/../..' . '/database/migrations/2017_02_02_053721_create_schools_table.php',
-        'CreateStudentsTable' => __DIR__ . '/../..' . '/database/migrations/2017_02_02_045402_create_students_table.php',
-        'CreateUsersTable' => __DIR__ . '/../..' . '/database/migrations/2014_10_12_000000_create_users_table.php',
-        'CreateUsersTable2' => __DIR__ . '/../..' . '/database/migrations/2014_10_12_000000_create_users_table_2.php',
+        'CreateCitiesTable' => __DIR__ . '/../..' . '/database/migrations/2017_02_03_000000_create_cities_table.php',
+        'CreateNewslettersTable' => __DIR__ . '/../..' . '/database/migrations/2017_02_22_121339_create_newsletters_table.php',
+        'CreateNormalUserTable' => __DIR__ . '/../..' . '/database/migrations/2017_02_08_103513_create_normal_user_table.php',
+        'CreateOptionsTable' => __DIR__ . '/../..' . '/database/migrations/2017_02_07_000000_create_options_table.php',
+        'CreatePasswordResetsTable' => __DIR__ . '/../..' . '/database/migrations/2017_02_02_000000_create_password_resets_table.php',
+        'CreateSchoolAdminTable' => __DIR__ . '/../..' . '/database/migrations/2017_02_04_000000_create_school_admin_table.php',
+        'CreateSchoolsTable' => __DIR__ . '/../..' . '/database/migrations/2017_02_05_000000_create_schools_table.php',
+        'CreateStudentsTable' => __DIR__ . '/../..' . '/database/migrations/2017_02_06_000000_create_students_table.php',
+        'CreateUsersTable' => __DIR__ . '/../..' . '/database/migrations/2017_02_01_000000_create_users_table.php',
         'DatabaseSeeder' => __DIR__ . '/../..' . '/database/seeds/DatabaseSeeder.php',
         'File_Iterator' => __DIR__ . '/..' . '/phpunit/php-file-iterator/src/Iterator.php',
         'File_Iterator_Facade' => __DIR__ . '/..' . '/phpunit/php-file-iterator/src/Facade.php',

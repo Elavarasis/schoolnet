@@ -6,14 +6,15 @@ $vendorDir = dirname(dirname(__FILE__));
 $baseDir = dirname($vendorDir);
 
 return array(
-    'CreateCitiesTable' => $baseDir . '/database/migrations/2017_01_19_054420_create_cities_table.php',
-    'CreateOptionsTable' => $baseDir . '/database/migrations/2017_02_03_050003_create_options_table.php',
-    'CreatePasswordResetsTable' => $baseDir . '/database/migrations/2014_10_12_100000_create_password_resets_table.php',
-    'CreateSchoolAdminTable' => $baseDir . '/database/migrations/2014_10_12_000000_create_school_admin_table.php',
-    'CreateSchoolsTable' => $baseDir . '/database/migrations/2017_02_02_053721_create_schools_table.php',
-    'CreateStudentsTable' => $baseDir . '/database/migrations/2017_02_02_045402_create_students_table.php',
-    'CreateUsersTable' => $baseDir . '/database/migrations/2014_10_12_000000_create_users_table.php',
-    'CreateUsersTable2' => $baseDir . '/database/migrations/2014_10_12_000000_create_users_table_2.php',
+    'CreateCitiesTable' => $baseDir . '/database/migrations/2017_02_03_000000_create_cities_table.php',
+    'CreateNewslettersTable' => $baseDir . '/database/migrations/2017_02_22_121339_create_newsletters_table.php',
+    'CreateNormalUserTable' => $baseDir . '/database/migrations/2017_02_08_103513_create_normal_user_table.php',
+    'CreateOptionsTable' => $baseDir . '/database/migrations/2017_02_07_000000_create_options_table.php',
+    'CreatePasswordResetsTable' => $baseDir . '/database/migrations/2017_02_02_000000_create_password_resets_table.php',
+    'CreateSchoolAdminTable' => $baseDir . '/database/migrations/2017_02_04_000000_create_school_admin_table.php',
+    'CreateSchoolsTable' => $baseDir . '/database/migrations/2017_02_05_000000_create_schools_table.php',
+    'CreateStudentsTable' => $baseDir . '/database/migrations/2017_02_06_000000_create_students_table.php',
+    'CreateUsersTable' => $baseDir . '/database/migrations/2017_02_01_000000_create_users_table.php',
     'DatabaseSeeder' => $baseDir . '/database/seeds/DatabaseSeeder.php',
     'File_Iterator' => $vendorDir . '/phpunit/php-file-iterator/src/Iterator.php',
     'File_Iterator_Facade' => $vendorDir . '/phpunit/php-file-iterator/src/Facade.php',
