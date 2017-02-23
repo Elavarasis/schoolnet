@@ -158,6 +158,7 @@ return [
 		
 		/* new line added for use {!! Form !!}}*/
 		Collective\Html\HtmlServiceProvider::class,
+		Intervention\Image\ImageServiceProvider::class,
 
     ],
 
@@ -207,6 +208,7 @@ return [
 		/* new 2 lines added for use {!! Form !!}}*/
 		'Form' => Collective\Html\FormFacade::class,
 		'Html' => Collective\Html\HtmlFacade::class,
+		'Image' => Intervention\Image\Facades\Image::class,
     ],
 
 ];
