@@ -9,6 +9,7 @@ use App\Country;
 use App\State;
 use App\User;
 use DB;
+use Image;
 use Redirect;
 class Normal_users extends Controller
 {
@@ -184,6 +185,8 @@ class Normal_users extends Controller
 			
 			$fileName = $file->getClientOriginalName() ;
 			$destinationPath = public_path().'/images/normal_user/' ;
+			$destinationPath = public_path();
+			Image::make($file)->resize(200, 200)->save($destinationPath);
 			$file->move($destinationPath,$fileName);
 			$profile_image = $fileName ;
 		}
