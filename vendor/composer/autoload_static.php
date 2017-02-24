@@ -290,7 +290,6 @@ class ComposerStaticInit6bfc94c8dff1dd7be1ec095d36ef6890
     );
 
     public static $classMap = array (
-<<<<<<< .mine
         'App\\City' => __DIR__ . '/../..' . '/app/City.php',
         'App\\Console\\Commands\\Inspire' => __DIR__ . '/../..' . '/app/Console/Commands/Inspire.php',
         'App\\Console\\Kernel' => __DIR__ . '/../..' . '/app/Console/Kernel.php',
@@ -377,7 +376,6 @@ class ComposerStaticInit6bfc94c8dff1dd7be1ec095d36ef6890
         'Cron\\MinutesField' => __DIR__ . '/..' . '/mtdowling/cron-expression/src/Cron/MinutesField.php',
         'Cron\\MonthField' => __DIR__ . '/..' . '/mtdowling/cron-expression/src/Cron/MonthField.php',
         'Cron\\YearField' => __DIR__ . '/..' . '/mtdowling/cron-expression/src/Cron/YearField.php',
-||||||| .r6
         'CreateCitiesTable' => __DIR__ . '/../..' . '/database/migrations/2017_01_19_054420_create_cities_table.php',
         'CreateOptionsTable' => __DIR__ . '/../..' . '/database/migrations/2017_02_03_050003_create_options_table.php',
         'CreatePasswordResetsTable' => __DIR__ . '/../..' . '/database/migrations/2014_10_12_100000_create_password_resets_table.php',
@@ -386,17 +384,6 @@ class ComposerStaticInit6bfc94c8dff1dd7be1ec095d36ef6890
         'CreateStudentsTable' => __DIR__ . '/../..' . '/database/migrations/2017_02_02_045402_create_students_table.php',
         'CreateUsersTable' => __DIR__ . '/../..' . '/database/migrations/2014_10_12_000000_create_users_table.php',
         'CreateUsersTable2' => __DIR__ . '/../..' . '/database/migrations/2014_10_12_000000_create_users_table_2.php',
-=======
-        'CreateCitiesTable' => __DIR__ . '/../..' . '/database/migrations/2017_02_03_000000_create_cities_table.php',
-        'CreateNewslettersTable' => __DIR__ . '/../..' . '/database/migrations/2017_02_22_121339_create_newsletters_table.php',
-        'CreateNormalUserTable' => __DIR__ . '/../..' . '/database/migrations/2017_02_08_103513_create_normal_user_table.php',
-        'CreateOptionsTable' => __DIR__ . '/../..' . '/database/migrations/2017_02_07_000000_create_options_table.php',
-        'CreatePasswordResetsTable' => __DIR__ . '/../..' . '/database/migrations/2017_02_02_000000_create_password_resets_table.php',
-        'CreateSchoolAdminTable' => __DIR__ . '/../..' . '/database/migrations/2017_02_04_000000_create_school_admin_table.php',
-        'CreateSchoolsTable' => __DIR__ . '/../..' . '/database/migrations/2017_02_05_000000_create_schools_table.php',
-        'CreateStudentsTable' => __DIR__ . '/../..' . '/database/migrations/2017_02_06_000000_create_students_table.php',
-        'CreateUsersTable' => __DIR__ . '/../..' . '/database/migrations/2017_02_01_000000_create_users_table.php',
->>>>>>> .r32
         'DatabaseSeeder' => __DIR__ . '/../..' . '/database/seeds/DatabaseSeeder.php',
         'Doctrine\\Common\\Inflector\\Inflector' => __DIR__ . '/..' . '/doctrine/inflector/lib/Doctrine/Common/Inflector/Inflector.php',
         'Doctrine\\Instantiator\\Exception\\ExceptionInterface' => __DIR__ . '/..' . '/doctrine/instantiator/src/Doctrine/Instantiator/Exception/ExceptionInterface.php',
