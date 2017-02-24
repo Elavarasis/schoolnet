@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 
 use App\Option;
+use Image;
 
 class Adverts extends Controller
 {
@@ -49,8 +50,11 @@ class Adverts extends Controller
 				$file = $request->file('opt_image') ;
 				$fileName = $file->getClientOriginalName() ;
 				$destinationPath = public_path().'/images/option/' ;
-				$file->move($destinationPath,$fileName);
-				$opt_image = $fileName ;
+				
+				Image::make($file->getRealPath())->resize(IMG_SW, IMG_SH)->save($destinationPath . 'small--'.IMG_PREFIX.$fileName);
+				Image::make($file->getRealPath())->resize(IMG_MW, IMG_MH)->save($destinationPath . 'medium--'.IMG_PREFIX.$fileName);
+				$file->move($destinationPath, IMG_PREFIX.$fileName);
+				$opt_image = IMG_PREFIX.$fileName;
 			}
 			
 		if(isset($opt_image))
@@ -128,8 +132,11 @@ class Adverts extends Controller
 				$file = $request->file('opt_image') ;
 				$fileName = $file->getClientOriginalName() ;
 				$destinationPath = public_path().'/images/option/' ;
-				$file->move($destinationPath,$fileName);
-				$opt_image = $fileName ;
+				
+				Image::make($file->getRealPath())->resize(IMG_SW, IMG_SH)->save($destinationPath . 'small--'.IMG_PREFIX.$fileName);
+				Image::make($file->getRealPath())->resize(IMG_MW, IMG_MH)->save($destinationPath . 'medium--'.IMG_PREFIX.$fileName);
+				$file->move($destinationPath, IMG_PREFIX.$fileName);
+				$opt_image = IMG_PREFIX.$fileName;
 			}
 		
 		$payment = ['opt_status' => $data['opt_status']];

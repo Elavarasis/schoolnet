@@ -10,6 +10,7 @@ use App\Country;
 use App\State;
 use App\User;
 use DB;
+use Image;
 use Redirect;
 class Students extends Controller
 {
@@ -72,8 +73,12 @@ class Students extends Controller
 				
 				$fileName = $file->getClientOriginalName() ;
 				$destinationPath = public_path().'/images/student/' ;
-				$file->move($destinationPath,$fileName);
-				$profile_image = $fileName ;
+				
+				Image::make($file->getRealPath())->resize(IMG_SW, IMG_SH)->save($destinationPath . 'small--'.IMG_PREFIX.$fileName);
+				Image::make($file->getRealPath())->resize(IMG_MW, IMG_MH)->save($destinationPath . 'medium--'.IMG_PREFIX.$fileName);
+				$file->move($destinationPath, IMG_PREFIX.$fileName);
+				$profile_image = IMG_PREFIX.$fileName;
+			
 			}
 		DB::beginTransaction();		
 		$user_id = User::create([
@@ -189,8 +194,11 @@ class Students extends Controller
 			
 			$fileName = $file->getClientOriginalName() ;
 			$destinationPath = public_path().'/images/student/' ;
-			$file->move($destinationPath,$fileName);
-			$profile_image = $fileName ;
+			
+			Image::make($file->getRealPath())->resize(IMG_SW, IMG_SH)->save($destinationPath . 'small--'.IMG_PREFIX.$fileName);
+			Image::make($file->getRealPath())->resize(IMG_MW, IMG_MH)->save($destinationPath . 'medium--'.IMG_PREFIX.$fileName);
+			$file->move($destinationPath, IMG_PREFIX.$fileName);
+			$profile_image = IMG_PREFIX.$fileName;
 		}
 			
 		$user = ['first_name' => $data['first_name'],

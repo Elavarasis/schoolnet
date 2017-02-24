@@ -11,6 +11,7 @@ use App\Country;
 use App\State;
 use App\User;
 use DB;
+use Image;
 use Redirect;
 use Input;
 
@@ -71,10 +72,12 @@ class School_admins extends Controller
             
 			$file = $request->file('profile_image') ;
 			
-			$fileName = rand().'@@'.$file->getClientOriginalName();
+			$fileName = $file->getClientOriginalName();
 			$destinationPath = public_path().'/images/school_admin/' ;
-			$file->move($destinationPath,$fileName);
-			$profile_image = $fileName ;
+			Image::make($file->getRealPath())->resize(IMG_SW, IMG_SH)->save($destinationPath . 'small--'.IMG_PREFIX.$fileName);
+			Image::make($file->getRealPath())->resize(IMG_MW, IMG_MH)->save($destinationPath . 'medium--'.IMG_PREFIX.$fileName);
+			$file->move($destinationPath, IMG_PREFIX.$fileName);
+			$profile_image = IMG_PREFIX.$fileName;
 		}
 		DB::beginTransaction();	
 		$user_id = User::create([
@@ -184,10 +187,12 @@ class School_admins extends Controller
 		
 			$file = $request->file('profile_image') ;
 			
-			$fileName = rand().'@@'.$file->getClientOriginalName();
+			$fileName = $file->getClientOriginalName();
 			$destinationPath = public_path().'/images/school_admin/' ;
-			$file->move($destinationPath,$fileName);
-			$profile_image = $fileName ;
+			Image::make($file->getRealPath())->resize(IMG_SW, IMG_SH)->save($destinationPath . 'small--'.IMG_PREFIX.$fileName);
+			Image::make($file->getRealPath())->resize(IMG_MW, IMG_MH)->save($destinationPath . 'medium--'.IMG_PREFIX.$fileName);
+			$file->move($destinationPath, IMG_PREFIX.$fileName);
+			$profile_image = IMG_PREFIX.$fileName;
 		}
 			
 		$user = [
@@ -265,10 +270,13 @@ class School_admins extends Controller
 		//Upload logo if exists
 		if($file = $request->hasFile('schl_logo')) {
 				$file = $request->file('schl_logo') ;
-				$fileName = rand().'@@'.$file->getClientOriginalName();
+				$fileName = $file->getClientOriginalName();
 				$destinationPath = public_path().'/images/school/' ;
-				$file->move($destinationPath,$fileName);
-				$schl_logo = $fileName;
+				
+				Image::make($file->getRealPath())->resize(IMG_SW, IMG_SH)->save($destinationPath . 'small--'.IMG_PREFIX.$fileName);
+				Image::make($file->getRealPath())->resize(IMG_MW, IMG_MH)->save($destinationPath . 'medium--'.IMG_PREFIX.$fileName);
+				$file->move($destinationPath, IMG_PREFIX.$fileName);
+				$schl_logo = IMG_PREFIX.$fileName;
 		}
 		
 		//Update if data exist else Insert new record

@@ -67,13 +67,15 @@ class Normal_users extends Controller
 		
 		if($file = $request->hasFile('nu_image')) {
             
-				$file = $request->file('nu_image') ;
-				
-				$fileName = $file->getClientOriginalName() ;
-				$destinationPath = public_path().'/images/normal_user/' ;
-				$file->move($destinationPath,$fileName);
-				$profile_image = $fileName ;
-			}
+			$file = $request->file('nu_image') ;
+			
+			$fileName = $file->getClientOriginalName() ;
+			$destinationPath = public_path().'/images/normal_user/' ;
+			Image::make($file->getRealPath())->resize(IMG_SW, IMG_SH)->save($destinationPath . 'small--'.IMG_PREFIX.$fileName);
+			Image::make($file->getRealPath())->resize(IMG_MW, IMG_MH)->save($destinationPath . 'medium--'.IMG_PREFIX.$fileName);
+			$file->move($destinationPath, IMG_PREFIX.$fileName);
+			$profile_image = IMG_PREFIX.$fileName;
+		}
 		DB::beginTransaction();	
 		$user_id = User::create([
             'first_name' => $data['first_name'],
@@ -185,10 +187,10 @@ class Normal_users extends Controller
 			
 			$fileName = $file->getClientOriginalName() ;
 			$destinationPath = public_path().'/images/normal_user/' ;
-			$destinationPath = public_path();
-			Image::make($file)->resize(200, 200)->save($destinationPath);
-			$file->move($destinationPath,$fileName);
-			$profile_image = $fileName ;
+			Image::make($file->getRealPath())->resize(IMG_SW, IMG_SH)->save($destinationPath . 'small--'.IMG_PREFIX.$fileName);
+			Image::make($file->getRealPath())->resize(IMG_MW, IMG_MH)->save($destinationPath . 'medium--'.IMG_PREFIX.$fileName);
+			$file->move($destinationPath, IMG_PREFIX.$fileName);
+			$profile_image = IMG_PREFIX.$fileName;
 		}
 			
 		$user = ['first_name' => $data['first_name'],
