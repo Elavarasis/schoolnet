@@ -285,10 +285,11 @@ class ComposerStaticInit6bfc94c8dff1dd7be1ec095d36ef6890
     );
 
     public static $classMap = array (
-        'CreateCategoriesTable' => __DIR__ . '/../..' . '/database/migrations/2017_03_16_052729_create_categories_table.php',
+        'CreateCategoriesTable' => __DIR__ . '/../..' . '/database/migrations/2017_02_10_000000_create_categories_table.php',
         'CreateCitiesTable' => __DIR__ . '/../..' . '/database/migrations/2017_02_03_000000_create_cities_table.php',
+        'CreateCoursesTable' => __DIR__ . '/../..' . '/database/migrations/2017_03_16_083844_create_courses_table.php',
         'CreateNewslettersTable' => __DIR__ . '/../..' . '/database/migrations/2017_02_09_000006_create_newsletters_table.php',
-        'CreateNormalUserTable' => __DIR__ . '/../..' . '/database/migrations/2017_02_08_103513_create_normal_user_table.php',
+        'CreateNormalUserTable' => __DIR__ . '/../..' . '/database/migrations/2017_02_08_000000_create_normal_user_table.php',
         'CreateOptionsTable' => __DIR__ . '/../..' . '/database/migrations/2017_02_07_000000_create_options_table.php',
         'CreatePasswordResetsTable' => __DIR__ . '/../..' . '/database/migrations/2017_02_02_000000_create_password_resets_table.php',
         'CreateSchoolAdminTable' => __DIR__ . '/../..' . '/database/migrations/2017_02_04_000000_create_school_admin_table.php',

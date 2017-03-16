@@ -5,7 +5,7 @@
     <!-- Content Header (Page header) -->
     <section class="content-header">
       <h1>
-        General Form Elements
+        City Details
         <small>Preview</small>
       </h1>
       <ol class="breadcrumb">
@@ -55,10 +55,6 @@
                 </div>
               </div>
               <!-- /.box-body -->
-
-              <div class="box-footer">
-                <button type="submit" class="btn btn-primary">Submit</button>
-              </div>
             
           </div>
           <!-- /.box -->

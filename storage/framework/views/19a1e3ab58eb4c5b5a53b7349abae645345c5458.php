@@ -111,6 +111,32 @@
 		
 		<li><a href="<?php echo e(url('admin/newsletters/')); ?>"><i class="fa fa-circle-o"></i> <span>Newsletters</span></a></li>
 		
+		<li class="treeview">
+          <a href="#">
+            <i class="fa fa-share"></i> <span>Categories</span>
+                <span class="pull-right-container">
+                  <i class="fa fa-angle-left pull-right"></i>
+                </span>
+          </a>
+          <ul class="treeview-menu">
+			<li><a href="<?php echo e(route('admin.categories.index')); ?>"><i class="fa fa-circle-o"></i> <span>Manage Categories</span></a></li>
+			<li><a href="<?php echo e(route('admin.categories.create')); ?>"><i class="fa fa-circle-o"></i> <span>New Category</span></a></li>
+          </ul>
+        </li>
+		
+		<li class="treeview">
+          <a href="#">
+            <i class="fa fa-share"></i> <span>Courses</span>
+                <span class="pull-right-container">
+                  <i class="fa fa-angle-left pull-right"></i>
+                </span>
+          </a>
+          <ul class="treeview-menu">
+			<li><a href="<?php echo e(route('admin.courses.index')); ?>"><i class="fa fa-circle-o"></i> <span>Manage Courses</span></a></li>
+			<li><a href="<?php echo e(route('admin.courses.create')); ?>"><i class="fa fa-circle-o"></i> <span>New Course</span></a></li>
+          </ul>
+        </li>
+		
         <!--<li class="treeview">
           <a href="#">
             <i class="fa fa-share"></i> <span>Multilevel</span>

@@ -38,6 +38,8 @@ Route::group(array('namespace' => 'Admin', 'prefix' => 'admin', 'middleware' => 
 	Route::get('newsletters', 'Newsletters@index');
 	Route::post('newsletters/send/', 'Newsletters@send');
 	Route::resource('categories', 'Categories');
+	Route::get('courses/sub/{id}', 'Courses@sub');
+	Route::resource('courses', 'Courses');
 });
 
 

@@ -158,9 +158,9 @@ class Categories extends Controller
             'cat_name' => 'required'
         ]);
 		
-		if($file = $request->hasFile('st_image')) {
+		if($file = $request->hasFile('cat_image')) {
 		
-			$file = $request->file('st_image') ;
+			$file = $request->file('cat_image') ;
 			
 			$fileName = $file->getClientOriginalName() ;
 			$destinationPath = public_path().'/images/student/' ;
