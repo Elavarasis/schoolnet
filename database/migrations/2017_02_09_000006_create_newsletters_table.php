@@ -27,11 +27,11 @@ class CreateNewslettersTable extends Migration
 		
 		
 		//Temporary section
-		for($i=1;$i<=14;$i++){
+		/*for($i=1;$i<=14;$i++){
 			$email = 'ela10192@gmail.com';
 			if(($i % 2) == 0) $email = 'jobingrg4@gmail.com';
 			DB::table('newsletters')->insert(array('nl_email' => $email, 'nl_status' => 1));
-		}
+		}*/
 		//Temporary section
 		
     }

@@ -37,7 +37,7 @@ Route::group(array('namespace' => 'Admin', 'prefix' => 'admin', 'middleware' => 
 	Route::post('getcities', 'School_admins@getcities');
 	Route::get('newsletters', 'Newsletters@index');
 	Route::post('newsletters/send/', 'Newsletters@send');
-	
+	Route::resource('categories', 'Categories');
 });
 
 
