@@ -111,6 +111,19 @@
 		
 		<li><a href="{{ url('admin/newsletters/') }}"><i class="fa fa-circle-o"></i> <span>Newsletters</span></a></li>
 		
+		<li class="treeview">
+          <a href="#">
+            <i class="fa fa-share"></i> <span>Categories</span>
+                <span class="pull-right-container">
+                  <i class="fa fa-angle-left pull-right"></i>
+                </span>
+          </a>
+          <ul class="treeview-menu">
+			<li><a href="{{ route('admin.categories.index') }}"><i class="fa fa-circle-o"></i> <span>Manage Categories</span></a></li>
+			<li><a href="{{ route('admin.categories.create') }}"><i class="fa fa-circle-o"></i> <span>New Category</span></a></li>
+          </ul>
+        </li>
+		
         <!--<li class="treeview">
           <a href="#">
             <i class="fa fa-share"></i> <span>Multilevel</span>
