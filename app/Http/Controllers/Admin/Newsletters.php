@@ -37,14 +37,21 @@ class Newsletters extends Controller
 		}
 		
 		$file 			= $request->file('attachment');
-		$file_path 		= $file->getPathName();
+		if(!empty($file)){
+			$file_path 	= $file->getPathName();
+		} else {
+			$file_path 	= '';
+		}
+		
 
 		Mail::raw($data['mail_content'], function($message) use ($to_emails,$data,$file_path)
 		{    
 			$message->from('admin@schoolnet.com', 'School Network');
 			$message->to($to_emails);
 			$message->subject($data['mail_subject']);
-			$message->attach($file_path);
+			if(!empty($file_path)){
+				$message->attach($file_path);
+			}
 		});
 		
     }
