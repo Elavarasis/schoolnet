@@ -1,4 +1,4 @@
-@extends('layouts.admin.datatable')
+@extends('layouts.tenant.datatable')
 
 @section('content')
 	
@@ -7,7 +7,7 @@
     <!-- Content Header (Page header) -->
     <section class="content-header">
       <h1>
-        Manage {{ $title }}
+        Manage Events
         <small>Settings</small>
       </h1>
       <ol class="breadcrumb">
@@ -24,13 +24,9 @@
           <div class="box">
             <div class="box-header">
 				<div class="pull-right">
-					@if( strtolower($title) == 'courses')
-						<a class="btn btn-success" href="{{ route('admin.courses.create') }}">Add New</a>
-					@else
-						<a class="btn-sm btn-primary" href="{{ url()->previous() }}">Back</a>
-					@endif
+					<a class="btn btn-success" href="{{ route('tenant.events.create') }}">Add New</a>
 				</div>
-				<h3 class="box-title">List of all {{ $title }}</h3>
+				<h3 class="box-title">List of all Events</h3>
             </div>
             <!-- /.box-header -->
             <div class="box-body">
@@ -48,9 +44,10 @@
                 <thead>
                 <tr>
 					<th>No</th>
-					<th>Title</th>
-					<th>Duration</th>
-					<th>Fee</th>
+					<th>Event</th>
+					<th>Venue</th>
+					<th>Start Date</th>
+					<th>End Date</th>
 					<th>Image</th>
 					<th>Status</th>
 					<th>Action</th>
@@ -58,31 +55,28 @@
                 </thead>
                 <tbody>
 					{{--*/ $i = 0 /*--}}
-					@foreach ($courses as $key => $course)
+					@foreach ($events as $key => $event)
 					<tr>
 						<td>{{ ++$i }}</td>
-						<td>{{ $course->course_title }}</td>
-						<td>{{ $course->course_duration }}</td>
-						<td>{{ $course->course_fee }}</td>
+						<td>{{ $event->event_name }}</td>
+						<td>{{ $event->event_venue }}</td>
+						<td>{{ $event->event_startDate }}</td>
+						<td>{{ $event->event_endDate }}</td>
 						<td>
-							@if(isset($course->course_image))
-								<img width="50px" src="{{ URL::to('/') }}/public/images/course/small--{{$course->course_image}}" alt="" />
+							@if(isset($event->event_image))
+								<img width="50px" src="{{ URL::to('/') }}/public/images/event/small--{{$event->event_image}}" alt="" />
 							@endif
 						</td>
 						<td>
-							@if($course->course_status == 1)
+							@if($event->event_status == 1)
 								<span class="btn-xs btn-success">Active</a>
 							@else
 								<span class="btn-xs btn-danger">In-Active</a>
 							@endif
 						</td>
 						<td>
-							<a class="btn btn-info" href="{{ route('admin.courses.show',$course->id) }}">Show</a>
-							@if (DB::table('courses')->where('course_parent', '=', $course->id)->exists())
-								<a class="btn btn-info" href="{{ url('admin/courses/sub',$course->id) }}">Sub Courses</a>
-							@endif
-							<a class="btn btn-primary" href="{{ route('admin.courses.edit',$course->id) }}">Edit</a>
-							{!! Form::open(['method' => 'DELETE','route' => ['admin.courses.destroy', $course->id],'style'=>'display:inline','onsubmit' => 'return ConfirmDelete()']) !!}
+							<a class="btn btn-primary" href="{{ route('tenant.events.edit',$event->id) }}">Edit</a>
+							{!! Form::open(['method' => 'DELETE','route' => ['tenant.events.destroy', $event->id],'style'=>'display:inline','onsubmit' => 'return ConfirmDelete()']) !!}
 
 							{!! Form::submit('Delete', ['class' => 'btn btn-danger']) !!}
 
@@ -94,9 +88,10 @@
                 <tfoot>
                 <tr>
 					<th>No</th>
-					<th>Title</th>
-					<th>Duration</th>
-					<th>Fee</th>
+					<th>Event</th>
+					<th>Venue</th>
+					<th>Start Date</th>
+					<th>End Date</th>
 					<th>Image</th>
 					<th>Status</th>
 					<th>Action</th>
