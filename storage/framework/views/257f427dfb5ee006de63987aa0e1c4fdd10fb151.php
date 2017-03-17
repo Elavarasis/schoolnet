@@ -22,7 +22,7 @@
           <div class="box box-primary">
             <div class="box-header with-border">
 				<div class="pull-right">
-					<a class="btn-sm btn-primary" href="<?php echo e(route('admin.courses.index')); ?>"> Back</a>
+					<a class="btn-sm btn-primary" href="<?php echo e(url()->previous()); ?>"> Back</a>
 				</div>
 				<h3 class="box-title">
 					<?php if(isset($course)): ?>

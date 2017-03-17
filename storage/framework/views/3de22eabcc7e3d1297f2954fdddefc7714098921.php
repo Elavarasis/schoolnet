@@ -77,7 +77,9 @@
 						</td>
 						<td>
 							<a class="btn btn-info" href="<?php echo e(route('admin.courses.show',$course->id)); ?>">Show</a>
-							<a class="btn btn-info" href="<?php echo e(url('admin/courses/sub',$course->id)); ?>">Sub Courses</a>
+							<?php if(DB::table('courses')->where('course_parent', '=', $course->id)->exists()): ?>
+								<a class="btn btn-info" href="<?php echo e(url('admin/courses/sub',$course->id)); ?>">Sub Courses</a>
+							<?php endif; ?>
 							<a class="btn btn-primary" href="<?php echo e(route('admin.courses.edit',$course->id)); ?>">Edit</a>
 							<?php echo Form::open(['method' => 'DELETE','route' => ['admin.courses.destroy', $course->id],'style'=>'display:inline','onsubmit' => 'return ConfirmDelete()']); ?>
 
