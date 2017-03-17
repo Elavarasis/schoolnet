@@ -29,6 +29,10 @@ class User extends Authenticatable
         return $this->hasOne('App\School_admin','user_id','id');
     }
 	
+	public function get_parent()
+    {
+        return $this->hasOne('App\Parents','pa_user_id','id');
+    }
 	public function get_student()
     {
         return $this->hasOne('App\Student','st_user_id','id');
