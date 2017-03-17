@@ -34,6 +34,18 @@ class CreateUsersTable extends Migration
 			$table->foreign('country_id')->references('id')->on('countries');
 			$table->foreign('state_id')->references('id')->on('states');
 		});
+		
+		DB::table('users')->insert(
+						array(
+							'first_name' => 'ela',
+							'last_name' => 's',
+							'email' => 'admin@gmail.com',
+							'password' => bcrypt('admin123'),
+							'role' => 'superadmin'
+						)
+					);
+					
+					
     }
 
     /**

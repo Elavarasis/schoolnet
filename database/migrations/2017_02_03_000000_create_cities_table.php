@@ -27,6 +27,15 @@ class CreateCitiesTable extends Migration
 			$table->foreign('country_id')->references('id')->on('countries');
 			$table->foreign('state_id')->references('id')->on('states');
 		});
+		
+		DB::table('cities')->insert(
+						array(
+							'city_name' => 'Trivandrum',
+							'state_id' => 1313,
+							'country_id' => 356
+						)
+					);
+					
     }
 
     /**
