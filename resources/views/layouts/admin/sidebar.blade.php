@@ -83,6 +83,17 @@
           </ul>
 		  <ul class="treeview-menu">
             <li>
+              <a href="#"><i class="fa fa-circle-o"></i> Manage Parents
+                <span class="pull-right-container">
+                  <i class="fa fa-angle-left pull-right"></i>
+                </span>
+              </a>
+              <ul class="treeview-menu">
+                <li><a href="{{ route('admin.parents.index') }}"><i class="fa fa-circle-o"></i>Manage Parents</a></li>
+				<li><a href="{{ route('admin.parents.create') }}"><i class="fa fa-circle-o"></i>New Parent</a></li>
+              </ul>
+            </li>
+			<li>
               <a href="#"><i class="fa fa-circle-o"></i> Manage Students
                 <span class="pull-right-container">
                   <i class="fa fa-angle-left pull-right"></i>
