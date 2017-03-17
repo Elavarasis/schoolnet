@@ -14,4 +14,20 @@ class School extends Model
 		return $this->hasOne('App\State','id','schl_state_id');
 		return $this->hasOne('App\City','id','schl_city_id');
     }
+	
+	public function get_country()
+    {
+        return $this->hasOne('App\Country','id','schl_country_id');
+    }
+	
+	public function get_state()
+    {
+        return $this->hasOne('App\State','id','schl_state_id');
+    }
+	
+	public function get_city()
+    {
+        return $this->hasOne('App\City','id','schl_city_id');
+    }
+	
 }

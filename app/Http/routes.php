@@ -42,6 +42,17 @@ Route::group(array('namespace' => 'Admin', 'prefix' => 'admin', 'middleware' => 
 	Route::resource('courses', 'Courses');
 });
 
+Route::group(array('namespace' => 'Tenant', 'prefix' => 'tenant', 'middleware' => ['auth', 'tenant']), function()
+{
+    Route::post('getstates', 'Home@getstates');
+	Route::post('getcities', 'Home@getcities');
+	Route::post('home/save_school/', 'Home@save_school');
+	Route::post('home/save_profile/', 'Home@save_profile');
+	Route::post('home/reset_password/', 'Home@reset_password');
+	Route::resource('home', 'Home');
+	Route::resource('events', 'Events');
+	Route::resource('calendars', 'Calendars');
+});
 
 /*
 Sample routings#

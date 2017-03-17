@@ -24,7 +24,7 @@ class User extends Authenticatable
         'password', 'remember_token',
     ];
 	
-	public function get_school_admin()
+	public function get_tenant()
     {
         return $this->hasOne('App\School_admin','user_id','id');
     }
@@ -33,8 +33,24 @@ class User extends Authenticatable
     {
         return $this->hasOne('App\Student','st_user_id','id');
     }
+	
 	public function get_normal_user()
     {
         return $this->hasOne('App\Normal_user','nu_user_id','id');
+    }
+	
+	public function get_country()
+    {
+        return $this->hasOne('App\Country','id','country_id');
+    }
+	
+	public function get_state()
+    {
+        return $this->hasOne('App\State','id','state_id');
+    }
+	
+	public function get_city()
+    {
+        return $this->hasOne('App\City','id','city');
     }
 }

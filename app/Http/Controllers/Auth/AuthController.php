@@ -77,6 +77,8 @@ class AuthController extends Controller
     {
         if($user->role === 'superadmin') {
             return redirect()->intended('/admin/home');
+        } else if($user->role === 'tenant') {
+            return redirect()->intended('/tenant/home');
         }
 
         return redirect()->intended('/');
