@@ -28,6 +28,7 @@
     24 => 'App\\Providers\\RouteServiceProvider',
     25 => 'Collective\\Html\\HtmlServiceProvider',
     26 => 'Intervention\\Image\\ImageServiceProvider',
+    27 => 'Maatwebsite\\Excel\\ExcelServiceProvider',
   ),
   'eager' => 
   array (
@@ -45,6 +46,7 @@
     11 => 'App\\Providers\\EventServiceProvider',
     12 => 'App\\Providers\\RouteServiceProvider',
     13 => 'Intervention\\Image\\ImageServiceProvider',
+    14 => 'Maatwebsite\\Excel\\ExcelServiceProvider',
   ),
   'deferred' => 
   array (
