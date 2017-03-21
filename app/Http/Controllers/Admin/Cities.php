@@ -1,13 +1,14 @@
 <?php
 namespace App\Http\Controllers\Admin;
-
 use Illuminate\Http\Request;
-
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Input;
 
 use App\City;
 use App\Country;
 use App\State;
+use Excel;
+use DB;
 
 class Cities extends Controller
 {
@@ -186,6 +187,47 @@ class Cities extends Controller
 			]);
 			return $res;
 		}
+	}
+	
+	
+	/* import */
+	public function import()
+	{
+		return view('admin.cities.import');
+	}
+	
+	public function import_now(Request $request)
+	{
+		if(Input::hasFile('import_file')){
+			$path = Input::file('import_file')->getRealPath();
+			$data = Excel::load($path, function($reader) {
+
+			})->get();
+			
+			$insert	=	array();
+			if(!empty($data) && $data->count()){
+
+				foreach ($data as $key => $value) {
+					foreach ($value as $row)
+					{
+						var_dump($row->city);
+						$insert[] = [
+									'city_name' => $row->city,
+									'state_id' => $row->state,
+									'country_id' => $row->country,
+									'status' => $row->status,
+									];
+					}
+				}
+
+				/*if(!empty($insert)){
+					DB::table('cities')->insert($insert);
+					dd('Insert Record successfully.');
+				}*/
+			}
+		}
+
+		//return back();
 	}
 
 	

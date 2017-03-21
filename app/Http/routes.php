@@ -28,12 +28,15 @@ Route::group(array('namespace' => 'Admin', 'prefix' => 'admin', 'middleware' => 
 	Route::get('countries/states/{id}', 'Countries@states');
 	Route::post('countries/state_status/', 'Countries@state_status');
 	Route::resource('countries', 'Countries');
+	Route::post('getstates', 'Cities@getstates');
+	Route::get('cities/import', 'Cities@import');
+	Route::post('cities/import_now', 'Cities@import_now');
 	Route::resource('cities', 'Cities');
 	Route::resource('students', 'Students');
 	Route::resource('payments', 'Payments');
 	Route::resource('adverts', 'Adverts');
 	Route::resource('widgets', 'Widgets');
-	Route::post('getstates', 'Cities@getstates');
+	
 	Route::post('getcities', 'School_admins@getcities');
 	Route::get('newsletters', 'Newsletters@index');
 	Route::post('newsletters/send/', 'Newsletters@send');
