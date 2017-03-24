@@ -5,6 +5,6 @@ use Illuminate\Database\Eloquent\Model;
 
 class Student extends Model
 {
-    public $fillable = ['st_user_id','st_school_id','st_class','st_address','st_city','st_country_id','st_state_id','st_dob','st_contact_no','st_hcyknow','st_description','st_image','st_status'];
+    public $fillable = ['st_user_id','st_school_id', 'st_parent_id', 'st_class','st_address','st_city','st_country_id','st_state_id','st_dob','st_contact_no','st_hcyknow','st_description','st_image','st_status'];
 	
 }
