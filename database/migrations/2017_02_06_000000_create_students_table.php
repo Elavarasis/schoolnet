@@ -16,6 +16,7 @@ class CreateStudentsTable extends Migration
             $table->increments('id');
 			$table->integer('st_user_id')->unsigned();
 			$table->integer('st_school_id')->unsigned();
+			$table->integer('st_parent_id')->unsigned();
 			$table->string('st_class');
             $table->string('st_contact_no');
             $table->string('st_hcyknow');
@@ -27,6 +28,7 @@ class CreateStudentsTable extends Migration
 		Schema::table('students', function (Blueprint $table) {
 			$table->foreign('st_user_id')->references('id')->on('users');
 			$table->foreign('st_school_id')->references('id')->on('schools');
+			$table->foreign('st_parent_id')->references('id')->on('parents');
 		});
     }
 

@@ -15,6 +15,8 @@ class CreateParentsTable extends Migration
         Schema::create('parents', function (Blueprint $table) {
             $table->increments('id');
 			$table->integer('pa_user_id')->unsigned();
+            $table->string('pa_mother_fname');
+            $table->string('pa_mother_lname');
 			$table->integer('pa_school_id')->unsigned();
 			$table->integer('guardian')->default(0);
             $table->string('pa_contact_no');
