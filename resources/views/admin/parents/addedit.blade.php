@@ -73,6 +73,16 @@
 				<div class="form-group">
                   <label for=" ">Last Name</label>
                   {!! Form::text('last_name', null, array('placeholder' => 'Last Name','class' => 'form-control')) !!}
+                </div>
+				
+				<div class="form-group">
+                  <label for=" ">Mother's First Name</label>
+                  {!! Form::text('pa_mother_fname', null, array('placeholder' => "Mother's First Name",'class' => 'form-control')) !!}
+                </div>
+				
+				<div class="form-group">
+                  <label for=" ">Mother's Last Name</label>
+                  {!! Form::text('pa_mother_lname', null, array('placeholder' => "Mother's Last Name",'class' => 'form-control')) !!}
                 </div>             
 
 				@if(!isset($parent))
