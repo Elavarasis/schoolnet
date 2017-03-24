@@ -98,6 +98,8 @@ class SN_Parents extends Controller
 		
 			$pa_id = Parents::create([
 							'pa_user_id' => $user_id,
+							'pa_mother_fname' => $data['pa_mother_fname'],
+							'pa_mother_lname' => $data['pa_mother_lname'],
 							'pa_school_id' => $data['pa_school_id'],
 							'pa_guardian' => $data['pa_guardian'],
 							'pa_contact_no' => $data['pa_contact_no'],
@@ -216,7 +218,10 @@ class SN_Parents extends Controller
 		User::find($data['pa_user_id'])->update($user);
 		
 		$parent = ['pa_user_id' => $data['pa_user_id'],
+					'pa_mother_fname' => $data['pa_mother_fname'],
+					'pa_mother_lname' => $data['pa_mother_lname'],
 					'pa_school_id' => $data['pa_school_id'],
+					'pa_guardian' => $data['pa_guardian'],
 					'pa_contact_no' => $data['pa_contact_no'],
 					'pa_hcyknow' => $data['pa_hcyknow'],
 					'pa_description' => $data['pa_description'],

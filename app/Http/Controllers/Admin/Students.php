@@ -3,6 +3,7 @@ namespace App\Http\Controllers\Admin;
 use Illuminate\Http\Request;
 use App\Http\Requests\Student_Request;
 use App\Http\Controllers\Controller;
+use App\Parents;
 use App\Student;
 use App\School;
 use App\City;

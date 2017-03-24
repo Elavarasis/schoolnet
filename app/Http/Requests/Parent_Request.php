@@ -34,6 +34,8 @@ class Parent_Request extends Request {
 				return [
 					'first_name' => 'required|max:255',
 					'last_name' => 'required|max:255',
+					'pa_mother_fname' => 'required|max:255',
+					'pa_mother_lname' => 'required|max:255',
 					'email' => 'required|email|max:255|unique:users',
 					'password' => 'required|min:6',
 					'pa_school_id' => 'required|numeric',
@@ -50,6 +52,8 @@ class Parent_Request extends Request {
 				return [
 					'first_name' => 'required|max:255',
 					'last_name' => 'required|max:255',
+					'pa_mother_fname' => 'required|max:255',
+					'pa_mother_lname' => 'required|max:255',
 					'pa_school_id' => 'required|numeric',
 					'country_id' => 'required|numeric',
 					'state_id' => 'required|numeric',
@@ -66,15 +70,15 @@ class Parent_Request extends Request {
 	public function attributes()
     {
         return [
-            'first_name' => 'First Name',
-			'email' => 'Email',
+            'first_name' => 'First Name',			
 			'last_name' => 'Last Name',
-			'nu_contact_no' => 'Contact Number',
+			'email' => 'Email',
+			'password' => 'Password',
+			'pa_mother_fname' => "Mother's First Name",
+			'pa_mother_lname' => "Mother's Last Name",
+			'pa_contact_no' => 'Contact Number',
 			'dob' => 'Date of Birth',
-			'mobile' => 'Mobile Number',
-			'phone' => 'Phone Number',
-			'website' => 'Website Number',
-			'st_image' => 'Profile image',
+			'pa_image' => 'Profile image',
         ];
     }
 	
