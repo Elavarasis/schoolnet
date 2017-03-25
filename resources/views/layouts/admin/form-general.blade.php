@@ -580,6 +580,19 @@
   } );
 </script>
 <!-- Datepicker end -->
+
+<!-- Date & Time picker range start -->
+	<!-- TimePicker -->
+	{!! Html::script('assets/admin/datetimerange/js/jquery.timepicker.js'); !!}
+	{!! Html::style('assets/admin/datetimerange/css/jquery.timepicker.css') !!}
+
+	<!-- DatePicker -->
+	{!! Html::script('assets/admin/datetimerange/js/bootstrap-datepicker.js'); !!}
+	{!! Html::style('assets/admin/datetimerange/css/datepicker.css') !!}
+
+	<!-- Code that links the two -->
+	{!! Html::script('assets/admin/datetimerange/js/datepair.js'); !!}
+<!-- Date & Time picker range end -->
 </body>
 </html>
 

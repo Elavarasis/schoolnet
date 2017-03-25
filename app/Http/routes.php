@@ -65,6 +65,7 @@ Route::group(array('namespace' => 'Student', 'prefix' => 'stud', 'middleware' =>
 	Route::post('home/save_profile/', 'Home@save_profile');
 	Route::post('home/reset_password/', 'Home@reset_password');
 	Route::resource('home', 'Home');
+	Route::resource('leaves', 'Leaves');
 });
 
 /*

@@ -588,6 +588,24 @@
   } );
 </script>
 <!-- Datepicker end -->
+
+<!-- Date & Time picker range start -->
+	<!-- TimePicker -->
+	<?php echo Html::script('assets/admin/datetimerange/js/jquery.timepicker.js');; ?>
+
+	<?php echo Html::style('assets/admin/datetimerange/css/jquery.timepicker.css'); ?>
+
+
+	<!-- DatePicker -->
+	<?php echo Html::script('assets/admin/datetimerange/js/bootstrap-datepicker.js');; ?>
+
+	<?php echo Html::style('assets/admin/datetimerange/css/datepicker.css'); ?>
+
+
+	<!-- Code that links the two -->
+	<?php echo Html::script('assets/admin/datetimerange/js/datepair.js');; ?>
+
+<!-- Date & Time picker range end -->
 </body>
 </html>
 
