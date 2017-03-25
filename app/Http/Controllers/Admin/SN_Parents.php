@@ -45,8 +45,9 @@ class SN_Parents extends Controller
     {
 		$countries	= Country::where('country_status',1)->pluck('country', 'id' );
 		$states		= array();
+		$cities		= array();
 		$schools 	= School::orderBy('schl_name')->pluck('schl_name', 'id');
-		return view('admin.parents.addedit',compact('countries','states','schools'));
+		return view('admin.parents.addedit',compact('countries','states','cities','schools'));
     }
 
 
@@ -163,8 +164,9 @@ class SN_Parents extends Controller
 				->first();
 		$countries	= Country::where('country_status',1)->pluck('country', 'id');
 		$states 	= State::where('region_id', $parent->country_id)->where('state_status',1)->orderBy('name')->pluck('name', 'id');
+		$cities 	= City::where('state_id', $parent->state_id)->where('status',1)->orderBy('city_name')->pluck('city_name', 'id');
 		$schools 	= School::orderBy('schl_name')->pluck('schl_name', 'id');
-        return view('admin.parents.addedit',compact('parent','countries','states','schools'));
+        return view('admin.parents.addedit',compact('parent','countries','states','cities','schools'));
     }
 
 

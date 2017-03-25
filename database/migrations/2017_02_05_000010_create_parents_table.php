@@ -18,7 +18,7 @@ class CreateParentsTable extends Migration
             $table->string('pa_mother_fname');
             $table->string('pa_mother_lname');
 			$table->integer('pa_school_id')->unsigned();
-			$table->integer('guardian')->default(0);
+			$table->integer('pa_guardian')->default(0);
             $table->string('pa_contact_no');
             $table->string('pa_hcyknow');
             $table->string('pa_description');

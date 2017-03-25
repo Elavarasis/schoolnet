@@ -44,7 +44,8 @@ class Normal_users extends Controller
     {
 		$countries	= Country::where('country_status',1)->pluck('country', 'id' );
 		$states		= array();
-		return view('admin.normal_users.addedit',compact('countries','states'));
+		$cities		= array();
+		return view('admin.normal_users.addedit',compact('countries','states','cities'));
     }
 
 
@@ -157,7 +158,9 @@ class Normal_users extends Controller
 				->first();
 		$countries	= Country::where('country_status',1)->pluck('country', 'id');
 		$states 	= State::where('region_id', $normal_user->country_id)->where('state_status',1)->orderBy('name')->pluck('name', 'id');
-        return view('admin.normal_users.addedit',compact('normal_user','countries','states'));
+   		$cities 	= City::where('state_id', $normal_user->state_id)->where('status',1)->orderBy('city_name')->pluck('city_name', 'id');
+
+		return view('admin.normal_users.addedit',compact('normal_user','countries','states','cities'));
     }
 
 

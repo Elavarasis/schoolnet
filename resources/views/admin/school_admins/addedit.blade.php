@@ -108,6 +108,11 @@
                 </div>
 				
 				<div class="form-group">
+                  <label for=" ">City</label>
+                  {!! Form::select('city', $cities, null, array('class' => 'form-control', 'id' => 'city_id')) !!}
+                </div>
+				
+				<div class="form-group">
                   <label for=" ">Phone Number</label>
                   {!! Form::text('phone', null, array('placeholder' => 'Phone Number','class' => 'form-control')) !!}
                 </div>

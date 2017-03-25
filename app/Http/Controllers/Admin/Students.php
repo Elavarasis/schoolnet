@@ -46,8 +46,10 @@ class Students extends Controller
     {
 		$countries	= Country::where('country_status',1)->pluck('country', 'id' );
 		$states		= array();
-		$schools 	= School::orderBy('schl_name')->pluck('schl_name', 'id');
-		return view('admin.students.addedit',compact('countries','states','schools'));
+		$cities		= array();
+		$schools 	= ['0'=>'Please select'] + School::orderBy('schl_name')->pluck('schl_name', 'id')->all();
+		$parents	= array();
+		return view('admin.students.addedit',compact('countries','states','cities','schools','parents'));
     }
 
 
@@ -102,6 +104,7 @@ class Students extends Controller
 			$stud_id = Student::create([
 							'st_user_id' => $user_id,
 							'st_school_id' => $data['st_school_id'],
+							'st_parent_id' => $data['st_parent_id'],
 							'st_class' => $data['st_class'],							
 							'st_contact_no' => $data['st_contact_no'],
 							'st_hcyknow' => $data['st_hcyknow'],
@@ -164,8 +167,19 @@ class Students extends Controller
 				->first();
 		$countries	= Country::where('country_status',1)->pluck('country', 'id');
 		$states 	= State::where('region_id', $student->country_id)->where('state_status',1)->orderBy('name')->pluck('name', 'id');
-		$schools 	= School::orderBy('schl_name')->pluck('schl_name', 'id');
-        return view('admin.students.addedit',compact('student','countries','states','schools'));
+		$cities 	= City::where('state_id', $student->state_id)->where('status',1)->orderBy('city_name')->pluck('city_name', 'id');
+		$schools 	= ['0'=>'Please select'] + School::orderBy('schl_name')->pluck('schl_name', 'id')->all();
+		$parents = DB::table('users')
+				->join('parents', 'parents.pa_user_id', '=', 'users.id')
+				->select(DB::raw('CONCAT(first_name, " ", last_name) AS parent_name'),'parents.id')
+				->where('users.role', 'parent')
+				->where('users.status', '!=' , 2)
+				->orderBy('users.first_name')
+				->where('parents.pa_school_id', $student->st_school_id)
+				->pluck(DB::raw('CONCAT(first_name, " ", last_name) AS parent_name'),'parents.id');   
+				
+		$parents = ['0'=>'select'] + User::where('status', '!=' , 2)->where('id', $student->st_parent_id)->orderBy('first_name')->pluck('first_name', 'id')->all();
+		return view('admin.students.addedit',compact('student','countries','states','cities','schools','parents'));
     }
 
 
@@ -220,6 +234,7 @@ class Students extends Controller
 		
 		$student = ['st_user_id' => $data['st_user_id'],
 					'st_school_id' => $data['st_school_id'],
+					'st_parent_id' => $data['st_parent_id'],
 					'st_class' => $data['st_class'],
 					'st_contact_no' => $data['st_contact_no'],
 					'st_hcyknow' => $data['st_hcyknow'],
@@ -257,5 +272,29 @@ class Students extends Controller
         return redirect()->route('admin.students.index')
                         ->with('success','Student deleted successfully');
     }
+	
+	/* Get parents by school id through ajax */
+	public function getparents(Request $request)
+	{
+		//$state 		= State::find($request->input('s_id'));
+		
+		$parents = DB::table('users')
+				->join('parents', 'parents.pa_user_id', '=', 'users.id')
+				->select(DB::raw('CONCAT(first_name, " ", last_name) AS parent_name'),'users.id')
+				->where('users.role', 'parent')
+				->where('users.status', '!=' , 2)
+				->orderBy('users.first_name')
+				->where('parents.pa_school_id', $request->input('sh_id'))
+				->get();
+				
+				
+		//$cities 	= User::where('pa_school_id', $request->input('s_id'))->where('status',1)->get(['id','city_name']);
+		if($request->ajax()){
+			$res = response()->json([
+				'parents' => $parents
+			]);
+			return $res;
+		}
+	}
 	
 }

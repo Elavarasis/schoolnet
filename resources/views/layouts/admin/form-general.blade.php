@@ -556,6 +556,28 @@
             });
         });
 		
+		$('#school_id').change(function(){
+            var ramo, token, url, data;
+            token = $('input[name=_token]').val();
+            school_id = $('#school_id').val();
+			url = '<?php echo url('/admin/getparents'); ?>';
+            data = {sh_id: school_id};
+            $('#parent_id').empty();
+            $.ajax({
+                url: url,
+                headers: {'X-CSRF-TOKEN': token},
+                data: data,
+                type: 'POST',
+                datatype: 'JSON',
+                success: function (resp) {
+					$('#parent_id').append('<option value="0">Please select</option>');
+                    $.each(resp.parents, function (key, value) {
+                        $('#parent_id').append('<option value="'+value.id+'">'+ value.parent_name +'</option>');
+                    });
+                }
+            });
+        });
+		
     });
 </script>
 

@@ -14,4 +14,8 @@ Route::group(array('namespace' => 'Admin', 'prefix' => 'admin', 'middleware' => 
 	Route::resource('school_admins', 'School_admins');
 	Route::resource('normal_users', 'Normal_users');
 	Route::resource('parents', 'SN_Parents');
+	Route::resource('students', 'Students');
+	Route::resource('teachers', 'Teachers');
+	
+
 });

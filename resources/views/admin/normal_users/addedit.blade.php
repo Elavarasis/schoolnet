@@ -96,12 +96,7 @@
                   <label for=" ">Address</label>
 				  {!! Form::textarea('address',null,['placeholder' => 'Adress','class'=>'form-control', 'rows' => 3]) !!}
                 </div>
-				
-				<div class="form-group">
-                  <label for=" ">City</label>
-                  {!! Form::text('city', null, array('placeholder' => 'City','class' => 'form-control')) !!}
-                </div>
-				
+							
 				<div class="form-group">
                   <label for="exampleInputEmail1">Country</label>
                   {!! Form::select('country_id', $countries, null, array('class' => 'form-control', 'id' => 'country_id')) !!}
@@ -110,6 +105,11 @@
 				<div class="form-group">
                   <label for="exampleInputEmail1">State</label>
                   {!! Form::select('state_id', $states, null, array('class' => 'form-control', 'id' => 'state_id')) !!}
+                </div>
+				
+				<div class="form-group">
+                  <label for=" ">City</label>
+                  {!! Form::select('city', $cities, null, array('class' => 'form-control', 'id' => 'city_id')) !!}
                 </div>
 				
 				<div class="form-group">

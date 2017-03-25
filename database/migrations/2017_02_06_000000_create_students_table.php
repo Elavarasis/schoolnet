@@ -28,7 +28,7 @@ class CreateStudentsTable extends Migration
 		Schema::table('students', function (Blueprint $table) {
 			$table->foreign('st_user_id')->references('id')->on('users');
 			$table->foreign('st_school_id')->references('id')->on('schools');
-			$table->foreign('st_parent_id')->references('id')->on('parents');
+			$table->foreign('st_parent_id')->references('id')->on('users');
 		});
     }
 

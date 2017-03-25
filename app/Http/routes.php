@@ -32,11 +32,11 @@ Route::group(array('namespace' => 'Admin', 'prefix' => 'admin', 'middleware' => 
 	Route::get('cities/import', 'Cities@import');
 	Route::post('cities/import_now', 'Cities@import_now');
 	Route::resource('cities', 'Cities');
-	Route::resource('students', 'Students');
 	Route::resource('payments', 'Payments');
 	Route::resource('adverts', 'Adverts');
 	Route::resource('widgets', 'Widgets');
 	
+	Route::post('getparents', 'Students@getparents');
 	Route::post('getcities', 'School_admins@getcities');
 	Route::get('newsletters', 'Newsletters@index');
 	Route::post('newsletters/send/', 'Newsletters@send');

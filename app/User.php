@@ -40,6 +40,10 @@ class User extends Authenticatable
 	public function get_student()
     {
         return $this->hasOne('App\Student','st_user_id','id');
+    }	
+	public function get_teacher()
+    {
+        return $this->hasOne('App\Teacher','te_user_id','id');
     }
 	
 	public function get_normal_user()

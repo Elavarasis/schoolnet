@@ -48,7 +48,8 @@ class School_admins extends Controller
     {
 		$countries	= Country::where('country_status',1)->pluck('country', 'id' );
 		$states		= array();
-		return view('admin.school_admins.addedit',compact('countries','states'));
+		$cities		= array();
+		return view('admin.school_admins.addedit',compact('countries','states','cities'));
     }
 
 
@@ -87,6 +88,7 @@ class School_admins extends Controller
             'status' => $data['status'],
             'country_id' => $data['country_id'],
             'state_id' => $data['state_id'],
+            'city' => $data['city'],
             'role' => 'school_admin',
             'password' => bcrypt($data['password']),
 			'dob' => date("Y-m-d", strtotime($data['dob']) ),
@@ -153,14 +155,14 @@ class School_admins extends Controller
     {
 		$school_admin = DB::table('users')
 				->join('school_admin', 'school_admin.user_id', '=', 'users.id')
-				->select('users.first_name','users.last_name','users.status','users.country_id','users.state_id','users.image','users.dob','school_admin.*')
+				->select('users.first_name','users.last_name','users.status','users.country_id','users.state_id','users.city','users.image','users.dob','school_admin.*')
 				->where('users.id', $id)
 				->first();
 				
 		$countries	= Country::where('country_status',1)->pluck('country', 'id');
 		$states 	= State::where('region_id', $school_admin->country_id)->where('state_status',1)->orderBy('name')->pluck('name', 'id');	
-        
-		return view('admin.school_admins.addedit',compact('school_admin','countries','states'));
+		$cities 	= City::where('state_id', $school_admin->state_id)->where('status',1)->orderBy('city_name')->pluck('city_name', 'id');
+		return view('admin.school_admins.addedit',compact('school_admin','countries','states','cities'));
     }
 
 
@@ -200,6 +202,7 @@ class School_admins extends Controller
 		'last_name' => $data['last_name'],
 		'country_id' => $data['country_id'],
 		'state_id' => $data['state_id'],
+		'city' => $data['city'],
 		'dob' => date("Y-m-d", strtotime($data['dob']) ),
 		'status' => $data['status']];
 		

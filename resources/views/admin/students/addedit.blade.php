@@ -90,6 +90,11 @@
 				<div class="form-group">
                   <label for="exampleInputEmail1">School</label>
                   {!! Form::select('st_school_id', $schools, null, array('class' => 'form-control', 'id' => 'school_id')) !!}
+                </div>				
+				
+				<div class="form-group">
+                  <label for="exampleInputEmail1">Parent</label>
+                  {!! Form::select('st_parent_id', $parents, null, array('class' => 'form-control', 'id' => 'parent_id')) !!}
                 </div>
 				
 				<div class="form-group">
@@ -103,11 +108,6 @@
                 </div>
 				
 				<div class="form-group">
-                  <label for=" ">City</label>
-                  {!! Form::text('city', null, array('placeholder' => 'City','class' => 'form-control')) !!}
-                </div>
-				
-				<div class="form-group">
                   <label for="exampleInputEmail1">Country</label>
                   {!! Form::select('country_id', $countries, null, array('class' => 'form-control', 'id' => 'country_id')) !!}
                 </div>
@@ -117,6 +117,11 @@
                   {!! Form::select('state_id', $states, null, array('class' => 'form-control', 'id' => 'state_id')) !!}
                 </div>
 				
+				<div class="form-group">
+                  <label for=" ">City</label>
+                  {!! Form::select('city', $cities, null, array('class' => 'form-control', 'id' => 'city_id')) !!}
+                </div>
+
 				<div class="form-group">
                   <label for=" ">Date of Birth</label>
                   {!! Form::text('dob', null, array('placeholder' => 'Date of Birth','class' => 'form-control dob')) !!}
