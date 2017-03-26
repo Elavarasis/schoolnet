@@ -40,6 +40,10 @@
           </ul>
         </li>
 		
+		<li><a href="{{ route('tenant.leaves.index') }}"><i class="fa fa-circle-o"></i> <span>Leave Management</span></a></li>
+		
+		<li><a href="{{ url('tenant/attendances/import') }}"><i class="fa fa-circle-o"></i> <span>Attentance Management</span></a></li>
+		
 		<li><a href="{{ route('tenant.calendars.index') }}"><i class="fa fa-circle-o"></i> <span>My Calendar</span></a></li> 
 		
       </ul>

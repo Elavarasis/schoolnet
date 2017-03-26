@@ -296,7 +296,17 @@
     </nav>
   </header>
   
-  <?php echo $__env->make('layouts.admin.sidebar', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>
+  <?php if(Auth::user()->role == 'superadmin'): ?>
+	<?php echo $__env->make('layouts.admin.sidebar_admin', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>
+  <?php elseif(Auth::user()->role == 'tenant'): ?>
+	<?php echo $__env->make('layouts.admin.sidebar_tenant', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>
+  <?php elseif(Auth::user()->role == 'staf'): ?>
+	<?php echo $__env->make('layouts.admin.sidebar_staf', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>
+  <?php elseif(Auth::user()->role == 'parent'): ?>
+	<?php echo $__env->make('layouts.admin.sidebar_parent', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>
+  <?php elseif(Auth::user()->role == 'student'): ?>
+	<?php echo $__env->make('layouts.admin.sidebar_student', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>
+  <?php endif; ?>
 
   <?php echo $__env->yieldContent('content'); ?>
   
@@ -559,6 +569,28 @@
                 success: function (resp) {
                     $.each(resp.cities, function (key, value) {
                         $('#city_id').append('<option value="'+value.id+'">'+ value.city_name +'</option>');
+                    });
+                }
+            });
+        });
+		
+		$('#school_id').change(function(){
+            var ramo, token, url, data;
+            token = $('input[name=_token]').val();
+            school_id = $('#school_id').val();
+			url = '<?php echo url('/admin/getparents'); ?>';
+            data = {sh_id: school_id};
+            $('#parent_id').empty();
+            $.ajax({
+                url: url,
+                headers: {'X-CSRF-TOKEN': token},
+                data: data,
+                type: 'POST',
+                datatype: 'JSON',
+                success: function (resp) {
+					$('#parent_id').append('<option value="0">Please select</option>');
+                    $.each(resp.parents, function (key, value) {
+                        $('#parent_id').append('<option value="'+value.id+'">'+ value.parent_name +'</option>');
                     });
                 }
             });

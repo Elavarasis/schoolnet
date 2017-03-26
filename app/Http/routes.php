@@ -55,6 +55,11 @@ Route::group(array('namespace' => 'Tenant', 'prefix' => 'tenant', 'middleware' =
 	Route::resource('home', 'Home');
 	Route::resource('events', 'Events');
 	Route::resource('calendars', 'Calendars');
+	Route::post('leaves/update_status/', 'Leaves@update_status');
+	Route::resource('leaves', 'Leaves');
+	Route::get('attendances/import', 'Attendances@import');
+	Route::post('attendances/import_now', 'Attendances@import_now');
+	Route::resource('attendances', 'Attendances');
 });
 
 

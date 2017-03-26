@@ -189,7 +189,17 @@
   </header>
   <!-- Left side column. contains the logo and sidebar -->
   
-  @include('layouts.admin.sidebar')
+  @if(Auth::user()->role == 'superadmin')
+	@include('layouts.admin.sidebar_admin')
+  @elseif(Auth::user()->role == 'tenant')
+	@include('layouts.admin.sidebar_tenant')
+  @elseif(Auth::user()->role == 'staf')
+	@include('layouts.admin.sidebar_staf')
+  @elseif(Auth::user()->role == 'parent')
+	@include('layouts.admin.sidebar_parent')
+  @elseif(Auth::user()->role == 'student')
+	@include('layouts.admin.sidebar_student')
+  @endif
 
   @yield('content')
   

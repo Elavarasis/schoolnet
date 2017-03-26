@@ -299,8 +299,18 @@
     </nav>
   </header>
   
-  <?php echo $__env->make('layouts.admin.sidebar', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>
-
+  <?php if(Auth::user()->role == 'superadmin'): ?>
+	<?php echo $__env->make('layouts.admin.sidebar_admin', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>
+  <?php elseif(Auth::user()->role == 'tenant'): ?>
+	<?php echo $__env->make('layouts.admin.sidebar_tenant', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>
+  <?php elseif(Auth::user()->role == 'staf'): ?>
+	<?php echo $__env->make('layouts.admin.sidebar_staf', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>
+  <?php elseif(Auth::user()->role == 'parent'): ?>
+	<?php echo $__env->make('layouts.admin.sidebar_parent', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>
+  <?php elseif(Auth::user()->role == 'student'): ?>
+	<?php echo $__env->make('layouts.admin.sidebar_student', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>
+  <?php endif; ?>
+	
   <?php echo $__env->yieldContent('content'); ?>
   
   <footer class="main-footer">

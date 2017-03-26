@@ -1,4 +1,4 @@
-@extends('layouts.tenant.tabs')
+@extends('layouts.admin.tabs')
 
 @section('content')
 

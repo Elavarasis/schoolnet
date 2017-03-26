@@ -12,8 +12,9 @@ class Calendars extends Controller
 {
     public function index(Request $request)
     {
-		$events = Event::orderBy('id', 'desc')->get();
-		return view('tenant.calendar.index',compact('events'));
+		$allevents 			= Event::orderBy('id', 'desc')->get();
+		$cur_month_events 	= Event::where('event_startDate','2017-03-27')->orderBy('id', 'desc')->get();
+		return view('tenant.calendar.index',compact('events','cur_month_events'));
     }
 	
 }
