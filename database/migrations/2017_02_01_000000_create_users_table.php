@@ -41,7 +41,8 @@ class CreateUsersTable extends Migration
 							'last_name' => 's',
 							'email' => 'admin@gmail.com',
 							'password' => bcrypt('admin123'),
-							'role' => 'superadmin'
+							'role' => 'superadmin',
+							'image' => 'user.png'
 						)
 					);
 					
