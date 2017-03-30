@@ -2,12 +2,16 @@
     <!-- sidebar: style can be found in sidebar.less -->
     <section class="sidebar">
       <!-- Sidebar user panel -->
-      <div class="user-panel">
+      <div class="user-panel">{{Auth::user()->role}}
         <div class="pull-left image">
-          <img src="../../dist/img/user2-160x160.jpg" class="img-circle" alt="User Image">
+			@if(isset(Auth::user()->image))
+				<img src="{{ URL::to('/') }}/public/images/{{Auth::user()->role}}/{{Auth::user()->image}}" class="img-circle" alt="User Image">
+			@else
+			  <img src="{{ url('/public/images/user.png') }}" class="user-image" alt="User Image">
+			@endif
         </div>
         <div class="pull-left info">
-          <p>Alexander Pierce</p>
+          <p>{{ ucfirst(Auth::user()->first_name) }} {{ ucfirst(Auth::user()->last_name) }}</p>
           <a href="#"><i class="fa fa-circle text-success"></i> Online</a>
         </div>
       </div>

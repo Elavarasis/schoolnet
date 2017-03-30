@@ -24,7 +24,7 @@
           <!-- Profile Image -->
           <div class="box box-primary">
             <div class="box-body box-profile">
-              <img class="profile-user-img img-responsive img-circle" src="{{ URL::to('/') }}/public/images/school_admin/{{$user->image}}" alt="Profile picture" width="100px;">
+              <img class="profile-user-img img-responsive img-circle" src="{{ URL::to('/') }}/public/images/tenant/{{$user->image}}" alt="Profile picture" width="100px;">
 
               <h3 class="profile-username text-center">{{ $user->first_name }} {{ $user->last_name }}</h3>
 

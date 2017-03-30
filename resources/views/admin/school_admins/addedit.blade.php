@@ -130,7 +130,7 @@
 				<div class="form-group">
                   <label for=" ">Photo</label>
 				  @if(isset($school_admin))
-					<img width="100px" src="{{ URL::to('/') }}/public/images/school_admin/{{$school_admin->image}}" alt="" />
+					<img width="100px" src="{{ URL::to('/') }}/public/images/tenant/{{$school_admin->image}}" alt="" />
 				  @endif
 				  {!! Form::file('profile_image', ['class' => 'form-control']) !!}
                 </div>  
