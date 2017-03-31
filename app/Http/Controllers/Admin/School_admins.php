@@ -29,7 +29,7 @@ class School_admins extends Controller
 
     public function index(Request $request)
     {
-		$school_admins = User::where('role', 'school_admin')->where('status', '!=' , 2)->orderBy('first_name', 'asc')->get();
+		$school_admins = User::where('role', 'tenant')->where('status', '!=' , 2)->orderBy('first_name', 'asc')->get();
 		return view('admin.school_admins.index',compact('school_admins'));
     }
 
@@ -89,7 +89,7 @@ class School_admins extends Controller
             'country_id' => $data['country_id'],
             'state_id' => $data['state_id'],
             'city' => $data['city'],
-            'role' => 'school_admin',
+            'role' => 'tenant',
             'password' => bcrypt($data['password']),
 			'dob' => date("Y-m-d", strtotime($data['dob']) ),
 			'image' => $profile_image

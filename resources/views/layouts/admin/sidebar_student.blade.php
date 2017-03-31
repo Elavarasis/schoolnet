@@ -29,22 +29,21 @@
       <!-- sidebar menu: : style can be found in sidebar.less -->
       <ul class="sidebar-menu">
         <li class="header">MAIN NAVIGATION</li>
-		<li><a href="{{ route('tenant.home.index') }}"><i class="fa fa-dashboard"></i> <span>Profile</span></a></li> 
+		<li><a href="{{ route('stud.home.index') }}"><i class="fa fa-dashboard"></i> <span>Profile</span></a></li> 
 		
 		<li class="treeview">
           <a href="#">
-            <i class="fa fa-share"></i> <span>Events</span>
+            <i class="fa fa-share"></i> <span>Leaves</span>
                 <span class="pull-right-container">
                   <i class="fa fa-angle-left pull-right"></i>
                 </span>
           </a>
           <ul class="treeview-menu">
-			<li><a href="{{ route('tenant.events.index') }}"><i class="fa fa-circle-o"></i> <span>Manage Events</span></a></li>
-			<li><a href="{{ route('tenant.events.create') }}"><i class="fa fa-circle-o"></i> <span>New Event</span></a></li>
+			<li><a href="{{ route('stud.leaves.index') }}"><i class="fa fa-circle-o"></i> <span>Manage Leaves</span></a></li>
+			<li><a href="{{ route('stud.leaves.create') }}"><i class="fa fa-circle-o"></i> <span>Apply For Leave</span></a></li>
           </ul>
         </li>
 		
-		<li><a href="{{ route('tenant.calendars.index') }}"><i class="fa fa-circle-o"></i> <span>My Calendar</span></a></li> 
 		
       </ul>
     </section>
