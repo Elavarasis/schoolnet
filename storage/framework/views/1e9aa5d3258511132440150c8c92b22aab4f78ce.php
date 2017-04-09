@@ -114,12 +114,6 @@
 					</div>
 					
 					<div class="form-group">
-					  <label for=" ">City</label>
-					  <?php echo Form::text('city', null, array('placeholder' => 'City','class' => 'form-control')); ?>
-
-					</div>
-					
-					<div class="form-group">
 					  <label for="exampleInputEmail1">Country</label>
 					  <?php echo Form::select('country_id', $countries, null, array('class' => 'form-control', 'id' => 'country_id')); ?>
 
@@ -128,6 +122,12 @@
 					<div class="form-group">
 					  <label for="exampleInputEmail1">State</label>
 					  <?php echo Form::select('state_id', $states, null, array('class' => 'form-control', 'id' => 'state_id')); ?>
+
+					</div>
+					
+					<div class="form-group">
+					  <label for=" ">City</label>
+					  <?php echo Form::select('city', $cities, null, array('class' => 'form-control', 'id' => 'city_id')); ?>
 
 					</div>
 					

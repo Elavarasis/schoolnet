@@ -164,6 +164,19 @@
           </ul>
         </li>
 		
+		<li class="treeview">
+          <a href="#">
+            <i class="fa fa-share"></i> <span>Events</span>
+                <span class="pull-right-container">
+                  <i class="fa fa-angle-left pull-right"></i>
+                </span>
+          </a>
+          <ul class="treeview-menu">
+			<li><a href="{{ route('admin.events.index') }}"><i class="fa fa-circle-o"></i> <span>Manage Events</span></a></li>
+			<li><a href="{{ route('admin.events.create') }}"><i class="fa fa-circle-o"></i> <span>New Event</span></a></li>
+          </ul>
+        </li>
+		
         <!--<li class="treeview">
           <a href="#">
             <i class="fa fa-share"></i> <span>Multilevel</span>

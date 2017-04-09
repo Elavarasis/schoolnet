@@ -4,6 +4,7 @@ use Illuminate\Http\Request;
 use App\Http\Requests\Student_Request;
 use App\Http\Controllers\Controller;
 use App\Course;
+use App\School;
 use DB;
 use Image;
 use Redirect;
@@ -19,8 +20,9 @@ class Courses extends Controller
     {
 		$title		=	'Courses';
 		$courses 	=	DB::table('courses as c1')
+						->join('schools', 'c1.course_school_id', '=', 'schools.id')
 						->leftJoin('courses as c2', 'c1.course_parent', '=', 'c2.id')
-            			->select('c1.*', 'c2.course_title as parent_name')
+            			->select('c1.*', 'c2.course_title as parent_name','schools.schl_name')
 						->where('c1.course_parent', 0)
 						->orderBy('c1.course_title', 'asc')
             			->get();
@@ -37,8 +39,9 @@ class Courses extends Controller
 
     public function create()
     {
-		$courses = ['0'=>'select'] + Course::orderBy('course_title')->pluck('course_title', 'id')->all();
-		return view('admin.courses.addedit',compact('courses'));
+		$schools 	= [''=>'Please select'] + School::orderBy('schl_name')->pluck('schl_name', 'id')->all();
+		$courses 	= ['0'=>'select'] + Course::orderBy('course_title')->pluck('course_title', 'id')->all();
+		return view('admin.courses.addedit',compact('courses','schools'));
     }
 
 
@@ -60,7 +63,8 @@ class Courses extends Controller
         $data = $request->all();
 		
 		$this->validate($request, [
-            'course_title' => 'required'
+            'course_title' => 'required',
+			'course_school_id' => 'required',
         ]);
 		
 		if($file = $request->hasFile('course_image')) {
@@ -87,6 +91,7 @@ class Courses extends Controller
 			'course_fee' => $data['course_fee'],
             'course_parent' => (isset($data['course_parent'])) ? $data['course_parent'] : 0,
             'course_image' => (isset($course_image)) ? $course_image : '',
+			'course_school_id' => $data['course_school_id'],
             'course_status' => $data['course_status'],
         ])->id;
 		
@@ -133,8 +138,9 @@ class Courses extends Controller
     public function edit($id)
     {
 		$courses 	= ['0'=>'select'] + Course::orderBy('course_title')->pluck('course_title', 'id')->all();
+		$schools 	= [''=>'Please select'] + School::orderBy('schl_name')->pluck('schl_name', 'id')->all();
 		$course		= Course::find($id);
-        return view('admin.courses.addedit',compact('courses','course'));
+        return view('admin.courses.addedit',compact('courses','course','schools'));
     }
 
 
@@ -159,7 +165,8 @@ class Courses extends Controller
 		$data = $request->all();
 		
 		$this->validate($request, [
-            'course_title' => 'required'
+            'course_title' => 'required',
+			'course_school_id' => 'required',
         ]);
 		
 		if($file = $request->hasFile('course_image')) {
@@ -181,6 +188,7 @@ class Courses extends Controller
 				'course_duration' => $data['course_duration'],
 				'course_fee' => $data['course_fee'],
 				'course_parent' => (isset($data['course_parent'])) ? $data['course_parent'] : 0,
+				'course_school_id' => $data['course_school_id'],
 				'course_status' => $data['course_status'],
 				];
 		
@@ -217,12 +225,13 @@ class Courses extends Controller
     {
 		$title		=	'Sub Courses';
 		$courses 	=	DB::table('courses as c1')
+						->join('schools', 'c1.course_school_id', '=', 'schools.id')
 						->leftJoin('courses as c2', 'c1.course_parent', '=', 'c2.id')
-            			->select('c1.*', 'c2.course_title as parent_name')
+            			->select('c1.*', 'c2.course_title as parent_name','schools.schl_name')
 						->where('c1.course_parent', $parent_id)
 						->orderBy('c1.course_title', 'asc')
             			->get();
-						
+		
 		return view('admin.courses.index',compact('courses','title'));
     }
 	

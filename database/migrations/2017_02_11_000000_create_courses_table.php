@@ -21,9 +21,15 @@ class CreateCoursesTable extends Migration
             $table->double('course_fee');
 			$table->integer('course_parent')->default(0);
 			$table->string('course_image');
+			$table->integer('course_school_id')->unsigned();
 			$table->integer('course_status')->default(0);
             $table->timestamps();
         });
+		
+		//Foreign key constraints
+		Schema::table('courses', function (Blueprint $table) {
+			$table->foreign('course_school_id')->references('id')->on('schools');
+		});
     }
 
     /**

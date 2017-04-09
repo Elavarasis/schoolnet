@@ -48,6 +48,7 @@
                 <thead>
                 <tr>
 					<th>No</th>
+					<th>School</th>
 					<th>Title</th>
 					<th>Duration</th>
 					<th>Fee</th>
@@ -61,6 +62,7 @@
 					@foreach ($courses as $key => $course)
 					<tr>
 						<td>{{ ++$i }}</td>
+						<td>{{ $course->schl_name }}</td>
 						<td>{{ $course->course_title }}</td>
 						<td>{{ $course->course_duration }}</td>
 						<td>{{ $course->course_fee }}</td>
@@ -94,6 +96,7 @@
                 <tfoot>
                 <tr>
 					<th>No</th>
+					<th>School</th>
 					<th>Title</th>
 					<th>Duration</th>
 					<th>Fee</th>

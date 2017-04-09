@@ -3,7 +3,9 @@ namespace App\Http\Controllers\Tenant;
 use Illuminate\Http\Request;
 use App\Http\Requests\Student_Request;
 use App\Http\Controllers\Controller;
+use Auth;
 use App\Event;
+use App\School;
 use DB;
 use Image;
 use Redirect;
@@ -12,7 +14,11 @@ class Events extends Controller
 {
     public function index(Request $request)
     {
-		$events = Event::orderBy('id', 'desc')->get();
+		$user_id	= 	Auth::user()->id;
+		$school		= 	School::where('schl_user_id',$user_id)->first();
+		$school_id 	= 	(isset($school)) ? $school->id : 0;
+		
+		$events = Event::orderBy('id', 'desc')->where('event_school_id',$school_id)->get();
 		return view('tenant.events.index',compact('events'));
     }
 
@@ -23,6 +29,9 @@ class Events extends Controller
 
     public function store(Request $request)
     {
+		$user_id	= 	Auth::user()->id;
+		$school		= 	School::where('schl_user_id',$user_id)->first();
+		$school_id 	= 	(isset($school)) ? $school->id : 0;
 		
         $data = $request->all();
 		
@@ -49,6 +58,7 @@ class Events extends Controller
             'event_startDate' => date("Y-m-d", strtotime($data['event_startDate'])),
 			'event_endDate' => date("Y-m-d", strtotime($data['event_endDate'])),
             'event_image' => (isset($event_image)) ? $event_image : '',
+			'event_school_id' => $school_id,
             'event_status' => $data['event_status'],
         ])->id;
 		

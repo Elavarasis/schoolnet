@@ -43,6 +43,7 @@ Route::group(array('namespace' => 'Admin', 'prefix' => 'admin', 'middleware' => 
 	Route::resource('categories', 'Categories');
 	Route::get('courses/sub/{id}', 'Courses@sub');
 	Route::resource('courses', 'Courses');
+	Route::resource('events', 'Events');
 });
 
 Route::group(array('namespace' => 'Tenant', 'prefix' => 'tenant', 'middleware' => ['auth', 'tenant']), function()

@@ -56,35 +56,26 @@ class Attendances extends Controller
 		$school_id 	= 	(isset($school)) ? $school->id : 0;	
 		
 		$data 		= 	$request->all();
-		$data['start_date']		=	(isset($data['start_date'])) ? $data['start_date'] : '';
-		$data['end_date']		=	(isset($data['end_date'])) ? $data['end_date'] : '';
+		$data['month']			= 	(isset($data['month'])) ? $data['month'] : date('m');
+		$data['year']			= 	(isset($data['year'])) ? $data['year'] : date('Y');
 		$data['register_number']=	(isset($data['register_number'])) ? $data['register_number'] : '';
 		$data['class']			=	(isset($data['class'])) ? $data['class'] : '';
 		$data['marker']			=	(isset($data['marker'])) ? $data['marker'] : '';
 		
-		$date		=	explode('/',$data['start_date']);
-		$date2		=	explode('/',$data['end_date']);
-		$start_date	=	'';
-		$end_date	=	'';
-		
-		if(count($date) == 3)
-			$start_date = $date[2].'-'.$date[0].'-'.$date[1];
-		if(count($date2) == 3)
-			$end_date 	= $date2[2].'-'.$date2[0].'-'.$date2[1];
+		$start_date				=	$data['year'].'-'.$data['month'].'-1';
+		$end_date				=	$data['year'].'-'.$data['month'].'-31';
 		
 		$query		=	DB::table('users')
 						->join('attentances', 'attentances.att_user_id', '=', 'users.id')
 						->join('students', 'students.st_user_id', '=', 'users.id')
 						->select('users.first_name','users.last_name','attentances.att_user_id','students.st_reg_no')
 						->where('students.st_school_id', $school_id)
+						->where('attentances.att_date','>=',$start_date)
+						->where('attentances.att_date','<=',$end_date)
 						->orderBy('users.first_name', 'asc');
 						
 						if($data['register_number'])
 							$query->where('students.st_reg_no',$data['register_number']);
-						if($data['start_date'])
-							$query->where('attentances.att_date','>=',$start_date);
-						if($data['end_date'])
-							$query->where('attentances.att_date','<=',$end_date);
 						if($data['class'])
 							$query->where('students.st_class',$data['class']);
 						if($data['marker'])
@@ -106,7 +97,7 @@ class Attendances extends Controller
 		
 		$markers	= 	Option::where('opt_key', $school_id)->where('opt_type', 'attentance_marker')->pluck('opt_text','opt_text')->all();
 
-		return view('tenant.attendances.index',compact('students','divisions','markers','attendances','data'));
+		return view('tenant.attendances.index',compact('students','divisions','markers','attendances','data','school_id'));
     }
 	
 	
@@ -117,48 +108,40 @@ class Attendances extends Controller
 		$school_id 	= 	(isset($school)) ? $school->id : 0;	
 		
 		$data 		= 	$request->all();
-		$data['start_date']		=	(isset($data['start_date'])) ? $data['start_date'] : '';
-		$data['end_date']		=	(isset($data['end_date'])) ? $data['end_date'] : '';
+		$data['month']			= 	(isset($data['month'])) ? $data['month'] : date('m');
+		$data['year']			= 	(isset($data['year'])) ? $data['year'] : date('Y');
 		$data['register_number']=	(isset($data['register_number'])) ? $data['register_number'] : '';
 		$data['class']			=	(isset($data['class'])) ? $data['class'] : '';
 		$data['marker']			=	(isset($data['marker'])) ? $data['marker'] : '';
 		
-		$date		=	explode('/',$data['start_date']);
-		$date2		=	explode('/',$data['end_date']);
-		$start_date	=	'';
-		$end_date	=	'';
-		
-		if(count($date) == 3)
-			$start_date = $date[2].'-'.$date[0].'-'.$date[1];
-		if(count($date2) == 3)
-			$end_date 	= $date2[2].'-'.$date2[0].'-'.$date2[1];
+		$start_date				=	$data['year'].'-'.$data['month'].'-1';
+		$end_date				=	$data['year'].'-'.$data['month'].'-31';
 		
 		$query		=	DB::table('users')
 						->join('attentances', 'attentances.att_user_id', '=', 'users.id')
 						->join('students', 'students.st_user_id', '=', 'users.id')
 						->select('users.first_name','users.last_name','attentances.att_user_id','students.st_reg_no')
 						->where('students.st_school_id', $school_id)
+						->where('attentances.att_date','>=',$start_date)
+						->where('attentances.att_date','<=',$end_date)
 						->orderBy('users.first_name', 'asc');
 						
 						if($data['register_number'])
 							$query->where('students.st_reg_no',$data['register_number']);
-						if($data['start_date'])
-							$query->where('attentances.att_date','>=',$start_date);
-						if($data['end_date'])
-							$query->where('attentances.att_date','<=',$end_date);
 						if($data['class'])
 							$query->where('students.st_class',$data['class']);
 						if($data['marker'])
 							$query->where('attentances.att_attentance',$data['marker']);
 						
 						
-						
-		$attendances = $query->get();
+		$attendances 	= $query->get();
+		
+		$file_name 		= 'Attendance-'.date('F',strtotime('01.'.$data['month'].'.2001')).'-'.$data['year'];
 		
 		header("Content-type: application/vnd-ms-excel");
-		header("Content-Disposition: attachment; filename=attendance.xls");
+		header("Content-Disposition: attachment; filename=$file_name.xls");
 
-		return view('export.attendances',compact('attendances','data'));
+		return view('export.attendances',compact('attendances','data','school_id'));
     }
 
 
@@ -307,15 +290,16 @@ class Attendances extends Controller
 							
 							$date		= $req['year'].'-'.$req['month'].'-'.$i;
 							//check tenant has permission to add attendance for this student
-							$student	= Student::where('st_user_id',$row->userid)->where('st_school_id',$school_id)->first();
+							$student	= Student::where('st_reg_no',$row->regno)->where('st_school_id',$school_id)->first();
 							
 							//check already added
-							$attentance	= Attendance::where('att_date',$date)->where('att_user_id',$row->userid)->first();
+							$attentance	= Attendance::where('att_date',$date)->where('att_reg_no',$row->regno)->first();
 							
 							//if not added already add data
 							if(!$attentance && $student && !empty($row[$i])){
 								$insert[] = [
-									'att_user_id' => $row->userid,
+									'att_user_id' => $student->st_user_id,
+									'att_reg_no' => $row->regno,
 									'att_date' => $date,
 									'att_attentance' => $row[$i],
 									];

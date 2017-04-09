@@ -76,6 +76,12 @@
                 </div>
 				
 				<div class="form-group">
+                  <label for="exampleInputEmail1">School</label>
+                  <?php echo Form::select('course_school_id', $schools, null, array('class' => 'form-control', 'id' => 'school_id')); ?>
+
+                </div>
+				
+				<div class="form-group">
                   <label for=" ">Duration</label>
                   <?php echo Form::text('course_duration', null, array('placeholder' => 'Duration','class' => 'form-control')); ?>
 

@@ -47,6 +47,7 @@
                 <thead>
                 <tr>
 					<th>No</th>
+					<th>School</th>
 					<th>Title</th>
 					<th>Duration</th>
 					<th>Fee</th>
@@ -60,6 +61,7 @@
 					<?php foreach($courses as $key => $course): ?>
 					<tr>
 						<td><?php echo e(++$i); ?></td>
+						<td><?php echo e($course->schl_name); ?></td>
 						<td><?php echo e($course->course_title); ?></td>
 						<td><?php echo e($course->course_duration); ?></td>
 						<td><?php echo e($course->course_fee); ?></td>
@@ -96,6 +98,7 @@
                 <tfoot>
                 <tr>
 					<th>No</th>
+					<th>School</th>
 					<th>Title</th>
 					<th>Duration</th>
 					<th>Fee</th>

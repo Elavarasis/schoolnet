@@ -74,7 +74,7 @@ class School_admins extends Controller
 			$file = $request->file('profile_image') ;
 			
 			$fileName = $file->getClientOriginalName();
-			$destinationPath = public_path().'/images/school_admin/' ;
+			$destinationPath = public_path().'/images/tenant/' ;
 			Image::make($file->getRealPath())->resize(IMG_SW, IMG_SH)->save($destinationPath . 'small--'.IMG_PREFIX.$fileName);
 			Image::make($file->getRealPath())->resize(IMG_MW, IMG_MH)->save($destinationPath . 'medium--'.IMG_PREFIX.$fileName);
 			$file->move($destinationPath, IMG_PREFIX.$fileName);
@@ -190,7 +190,7 @@ class School_admins extends Controller
 			$file = $request->file('profile_image') ;
 			
 			$fileName = $file->getClientOriginalName();
-			$destinationPath = public_path().'/images/school_admin/' ;
+			$destinationPath = public_path().'/images/tenant/' ;
 			Image::make($file->getRealPath())->resize(IMG_SW, IMG_SH)->save($destinationPath . 'small--'.IMG_PREFIX.$fileName);
 			Image::make($file->getRealPath())->resize(IMG_MW, IMG_MH)->save($destinationPath . 'medium--'.IMG_PREFIX.$fileName);
 			$file->move($destinationPath, IMG_PREFIX.$fileName);

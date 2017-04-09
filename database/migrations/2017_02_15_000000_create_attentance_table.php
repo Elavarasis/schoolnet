@@ -15,6 +15,7 @@ class CreateAttentanceTable extends Migration
         Schema::create('attentances', function (Blueprint $table) {
             $table->increments('id');
 			$table->integer('att_user_id')->unsigned();
+			$table->integer('att_reg_no');
 			$table->date('att_date');
 			$table->string('att_attentance');
 			$table->integer('att_status')->default(0);

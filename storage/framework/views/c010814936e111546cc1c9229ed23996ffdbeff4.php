@@ -126,8 +126,8 @@
 				<?php if(isset($school)): ?>
 					<?php echo Form::model($school, ['files'=> true, 'method' => 'post', 'url' => "tenant/home/save_school/"]); ?>
 
-					<?php $school->schl_classes = $classes->divisions; ?>
-					<?php $school->schl_attendance_markers = $attendance_markers->markers; ?>
+					<?php $school->schl_classes = (isset($classes->divisions)) ? $classes->divisions : ''; ?>
+					<?php $school->schl_attendance_markers = (isset($attendance_markers->markers)) ? $attendance_markers->markers : '';?>
 				<?php else: ?>
 					<?php echo Form::open(array('files'=> true, 'url' => 'tenant/home/save_school/', 'method' => 'post')); ?>
 
