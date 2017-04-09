@@ -116,6 +116,12 @@
                 </div>
 				
 				<div class="form-group">
+                  <label for=" ">City</label>
+                  <?php echo Form::select('city', $cities, null, array('class' => 'form-control', 'id' => 'city_id')); ?>
+
+                </div>
+				
+				<div class="form-group">
                   <label for=" ">Phone Number</label>
                   <?php echo Form::text('phone', null, array('placeholder' => 'Phone Number','class' => 'form-control')); ?>
 
@@ -136,7 +142,7 @@
 				<div class="form-group">
                   <label for=" ">Photo</label>
 				  <?php if(isset($school_admin)): ?>
-					<img width="100px" src="<?php echo e(URL::to('/')); ?>/public/images/school_admin/<?php echo e($school_admin->image); ?>" alt="" />
+					<img width="100px" src="<?php echo e(URL::to('/')); ?>/public/images/tenant/<?php echo e($school_admin->image); ?>" alt="" />
 				  <?php endif; ?>
 				  <?php echo Form::file('profile_image', ['class' => 'form-control']); ?>
 

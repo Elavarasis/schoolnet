@@ -126,6 +126,8 @@
               <div class="tab-pane" id="editschool">
 				@if(isset($school))
 					{!! Form::model($school, ['files'=> true, 'method' => 'post', 'url' => "tenant/home/save_school/"])!!}
+					<?php $school->schl_classes = $classes->divisions; ?>
+					<?php $school->schl_attendance_markers = $attendance_markers->markers; ?>
 				@else
 					{!! Form::open(array('files'=> true, 'url' => 'tenant/home/save_school/', 'method' => 'post')) !!}
 				@endif
@@ -146,12 +148,12 @@
 					
 					<div class="form-group">
 					  <label for="exampleInputEmail1">State</label>
-					  {!! Form::select('schl_state_id', $states, null, array('class' => 'form-control', 'id' => 'state_id')) !!}
+					  {!! Form::select('schl_state_id', $school_states, null, array('class' => 'form-control', 'id' => 'state_id')) !!}
 					</div>
 					
 					<div class="form-group">
 					  <label for="exampleInputEmail1">City</label>
-					  {!! Form::select('schl_city_id', $cities, null, array('class' => 'form-control', 'id' => 'city_id')) !!}
+					  {!! Form::select('schl_city_id', $school_cities, null, array('class' => 'form-control', 'id' => 'city_id')) !!}
 					</div>
 					
 					<div class="form-group">
@@ -186,6 +188,18 @@
 					  @endif
 					  {!! Form::file('schl_logo', ['class' => 'form-control']) !!}
 					</div>  
+					
+					<div class="form-group">
+					  <label for=" ">Classes / Divisions</label>
+					  {!! Form::text('schl_classes', null, array('placeholder' => 'School Level','class' => 'form-control')) !!}
+					  <p class="help-block">Enter values separated by pipe( | ) symbol. Eg: 4|5|5A|5B|6A|6B|6C</p>
+					</div>
+					
+					<div class="form-group">
+					  <label for=" ">Attendance Markers</label>
+					  {!! Form::text('schl_attendance_markers', null, array('placeholder' => 'School Level','class' => 'form-control')) !!}
+					  <p class="help-block">Enter values separated by pipe( | ) symbol.['A' means Absent, 'L' means Leave like that..] Eg: A|L </p>
+					</div>
 					
 					<div class="checkbox">
 					  <label style="width:100px;">Status</label>
@@ -237,12 +251,12 @@
 					
 					<div class="form-group">
 					  <label for="exampleInputEmail1">State</label>
-					  {!! Form::select('state_id', $states, null, array('class' => 'form-control', 'id' => 'state_id_2')) !!}
+					  {!! Form::select('state_id', $user_states, null, array('class' => 'form-control', 'id' => 'state_id_2')) !!}
 					</div>
 					
 					<div class="form-group">
 					  <label for="exampleInputEmail1">City</label>
-					  {!! Form::select('city', $cities, null, array('class' => 'form-control', 'id' => 'city_id_2')) !!}
+					  {!! Form::select('city', $user_cities, null, array('class' => 'form-control', 'id' => 'city_id_2')) !!}
 					</div>
 					
 					<div class="form-group">
@@ -262,8 +276,8 @@
 					
 					<div class="form-group">
 					  <label for=" ">Photo</label>
-					  @if(isset($school_admin))
-						<img width="100px" src="{{ URL::to('/') }}/public/images/school_admin/{{$school_admin->image}}" alt="" />
+					  @if(isset($user))
+						<img width="100px" src="{{ URL::to('/') }}/public/images/tenant/{{$user->image}}" alt="" />
 					  @endif
 					  {!! Form::file('profile_image', ['class' => 'form-control']) !!}
 					</div>  

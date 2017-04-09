@@ -13,6 +13,7 @@ use App\User;
 use DB;
 use Image;
 use Redirect;
+
 class Students extends Controller
 {
     /**
@@ -68,7 +69,7 @@ class Students extends Controller
     public function store(Student_Request $request)
     {
 		
-        $data = $request->all();
+        $data = $request->all();		
 		
 		if($file = $request->hasFile('st_image')) {
             
@@ -103,6 +104,7 @@ class Students extends Controller
 		
 			$stud_id = Student::create([
 							'st_user_id' => $user_id,
+							'st_reg_no' => $data['st_reg_no'],
 							'st_school_id' => $data['st_school_id'],
 							'st_parent_id' => $data['st_parent_id'],
 							'st_class' => $data['st_class'],							
@@ -233,6 +235,7 @@ class Students extends Controller
 		User::find($data['st_user_id'])->update($user);
 		
 		$student = ['st_user_id' => $data['st_user_id'],
+					'st_reg_no' => $data['st_reg_no'],
 					'st_school_id' => $data['st_school_id'],
 					'st_parent_id' => $data['st_parent_id'],
 					'st_class' => $data['st_class'],

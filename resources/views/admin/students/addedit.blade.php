@@ -65,6 +65,11 @@
 				{!! Form::open(array('files'=> true, 'route' => 'admin.students.store','method'=>'POST')) !!}
 			@endif
               <div class="box-body">
+				<div class="form-group">
+                  <label for=" ">Register Number</label>
+                  {!! Form::text('st_reg_no', null, array('placeholder' => 'Register Number','class' => 'form-control')) !!}
+                </div>
+				
                 <div class="form-group">
                   <label for=" ">First Name</label>
                   {!! Form::text('first_name', null, array('placeholder' => 'First Name','class' => 'form-control')) !!}

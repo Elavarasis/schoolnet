@@ -8,8 +8,10 @@ use App\Attendance;
 use App\User;
 use App\Student;
 use App\School;
+use App\Option;
 use Excel;
 use DB;
+use Redirect;
 
 class Attendances extends Controller
 {
@@ -25,8 +27,138 @@ class Attendances extends Controller
 
     public function index(Request $request)
     {
-		$cities = City::where('status','<>',2)->orderBy('city_name', 'asc')->get();
-		return view('admin.cities.index',compact('cities'));
+		$user_id	= 	Auth::user()->id;
+		$school		= 	School::where('schl_user_id',$user_id)->first();
+		$school_id 	= 	(isset($school)) ? $school->id : 0;
+		
+		$attendances= $data = array();
+		
+		//Filter Dropdown Data
+		$students	= 	DB::table('users')
+						->join('students', 'students.st_user_id', '=', 'users.id')
+						->select('users.id','users.first_name','users.last_name')
+						->where('students.st_school_id', $school_id)
+						->where('users.status', 1)
+						->get();
+						
+		$divisions	= 	Option::where('opt_key', $school_id)->where('opt_type', 'division')->pluck('opt_text','opt_text')->all();
+		
+		$markers	= 	Option::where('opt_key', $school_id)->where('opt_type', 'attentance_marker')->pluck('opt_text','opt_text')->all();
+		return view('tenant.attendances.index',compact('students','divisions','markers','attendances','data'));
+
+    }
+	
+	
+	public function search(Request $request)
+    {
+		$user_id	= 	Auth::user()->id;
+		$school		= 	School::where('schl_user_id',$user_id)->first();
+		$school_id 	= 	(isset($school)) ? $school->id : 0;	
+		
+		$data 		= 	$request->all();
+		$data['start_date']		=	(isset($data['start_date'])) ? $data['start_date'] : '';
+		$data['end_date']		=	(isset($data['end_date'])) ? $data['end_date'] : '';
+		$data['register_number']=	(isset($data['register_number'])) ? $data['register_number'] : '';
+		$data['class']			=	(isset($data['class'])) ? $data['class'] : '';
+		$data['marker']			=	(isset($data['marker'])) ? $data['marker'] : '';
+		
+		$date		=	explode('/',$data['start_date']);
+		$date2		=	explode('/',$data['end_date']);
+		$start_date	=	'';
+		$end_date	=	'';
+		
+		if(count($date) == 3)
+			$start_date = $date[2].'-'.$date[0].'-'.$date[1];
+		if(count($date2) == 3)
+			$end_date 	= $date2[2].'-'.$date2[0].'-'.$date2[1];
+		
+		$query		=	DB::table('users')
+						->join('attentances', 'attentances.att_user_id', '=', 'users.id')
+						->join('students', 'students.st_user_id', '=', 'users.id')
+						->select('users.first_name','users.last_name','attentances.att_user_id','students.st_reg_no')
+						->where('students.st_school_id', $school_id)
+						->orderBy('users.first_name', 'asc');
+						
+						if($data['register_number'])
+							$query->where('students.st_reg_no',$data['register_number']);
+						if($data['start_date'])
+							$query->where('attentances.att_date','>=',$start_date);
+						if($data['end_date'])
+							$query->where('attentances.att_date','<=',$end_date);
+						if($data['class'])
+							$query->where('students.st_class',$data['class']);
+						if($data['marker'])
+							$query->where('attentances.att_attentance',$data['marker']);
+						
+						
+						
+		$attendances = $query->get();
+		
+		//Filter Dropdown Data
+		$students	= 	DB::table('users')
+						->join('students', 'students.st_user_id', '=', 'users.id')
+						->select('users.id','users.first_name','users.last_name')
+						->where('students.st_school_id', $school_id)
+						->where('users.status', 1)
+						->get();
+						
+		$divisions	= 	Option::where('opt_key', $school_id)->where('opt_type', 'division')->pluck('opt_text','opt_text')->all();
+		
+		$markers	= 	Option::where('opt_key', $school_id)->where('opt_type', 'attentance_marker')->pluck('opt_text','opt_text')->all();
+
+		return view('tenant.attendances.index',compact('students','divisions','markers','attendances','data'));
+    }
+	
+	
+	public function export(Request $request)
+    {
+		$user_id	= 	Auth::user()->id;
+		$school		= 	School::where('schl_user_id',$user_id)->first();
+		$school_id 	= 	(isset($school)) ? $school->id : 0;	
+		
+		$data 		= 	$request->all();
+		$data['start_date']		=	(isset($data['start_date'])) ? $data['start_date'] : '';
+		$data['end_date']		=	(isset($data['end_date'])) ? $data['end_date'] : '';
+		$data['register_number']=	(isset($data['register_number'])) ? $data['register_number'] : '';
+		$data['class']			=	(isset($data['class'])) ? $data['class'] : '';
+		$data['marker']			=	(isset($data['marker'])) ? $data['marker'] : '';
+		
+		$date		=	explode('/',$data['start_date']);
+		$date2		=	explode('/',$data['end_date']);
+		$start_date	=	'';
+		$end_date	=	'';
+		
+		if(count($date) == 3)
+			$start_date = $date[2].'-'.$date[0].'-'.$date[1];
+		if(count($date2) == 3)
+			$end_date 	= $date2[2].'-'.$date2[0].'-'.$date2[1];
+		
+		$query		=	DB::table('users')
+						->join('attentances', 'attentances.att_user_id', '=', 'users.id')
+						->join('students', 'students.st_user_id', '=', 'users.id')
+						->select('users.first_name','users.last_name','attentances.att_user_id','students.st_reg_no')
+						->where('students.st_school_id', $school_id)
+						->orderBy('users.first_name', 'asc');
+						
+						if($data['register_number'])
+							$query->where('students.st_reg_no',$data['register_number']);
+						if($data['start_date'])
+							$query->where('attentances.att_date','>=',$start_date);
+						if($data['end_date'])
+							$query->where('attentances.att_date','<=',$end_date);
+						if($data['class'])
+							$query->where('students.st_class',$data['class']);
+						if($data['marker'])
+							$query->where('attentances.att_attentance',$data['marker']);
+						
+						
+						
+		$attendances = $query->get();
+		
+		header("Content-type: application/vnd-ms-excel");
+		header("Content-Disposition: attachment; filename=attendance.xls");
+
+		return view('export.attendances',compact('attendances','data'));
     }
 
 
@@ -44,9 +176,7 @@ class Attendances extends Controller
 
     public function create()
     {
-        $countries	= Country::where('country_status',1)->pluck('country', 'id' );
-		$states		= array();
-		return view('admin.cities.addedit',compact('countries','states'));
+        //
     }
 
 
@@ -64,19 +194,7 @@ class Attendances extends Controller
 
     public function store(Request $request)
     {
-
-        $this->validate($request, [
-            'city_name' => 'required',
-            'country_id' => 'required',
-			'state_id' => 'required',
-        ]);
-
-        City::create($request->all());
-
-        return redirect()->route('admin.cities.index')
-
-                        ->with('success','City added successfully');
-
+		//
     }
 
 
@@ -94,10 +212,7 @@ class Attendances extends Controller
 
     public function show($id)
     {
-
-        $city = City::find($id);
-        return view('admin.cities.show',compact('city'));
-
+		//
     }
 
 
@@ -115,10 +230,7 @@ class Attendances extends Controller
 
     public function edit($id)
     {
-        $city 		= City::find($id);
-		$countries	= Country::where('country_status',1)->pluck('country', 'id');
-		$states 	= State::where('region_id', $city->country_id)->where('state_status',1)->orderBy('name')->pluck('name', 'id');
-        return view('admin.cities.addedit',compact('city','countries','states'));
+        //
     }
 
 
@@ -138,18 +250,7 @@ class Attendances extends Controller
 
     public function update(Request $request, $id)
     {
-
-        $this->validate($request, [
-            'city_name' => 'required',
-            'country_id' => 'required',
-			'state_id' => 'required',
-        ]);
-
-        City::find($id)->update($request->all());
-
-        return redirect()->route('admin.cities.index')
-                        ->with('success','City updated successfully');
-
+		//
     }
 
 
@@ -167,28 +268,8 @@ class Attendances extends Controller
 
     public function destroy($id)
     {
-
-        City::find($id)->delete();
-
-        return redirect()->route('admin.cities.index')
-
-                        ->with('success','City deleted successfully');
-
+        //
     }
-	
-	
-	/* Get states by country id through ajax */
-	public function getstates(Request $request)
-	{
-		$country 	= Country::find($request->input('c_id'));
-		$states 	= State::where('region_id', $country->id)->where('state_status',1)->get(['id','name']);
-		if($request->ajax()){
-			$res = response()->json([
-				'states' => $states
-			]);
-			return $res;
-		}
-	}
 	
 	
 	/* import */

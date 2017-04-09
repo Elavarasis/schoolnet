@@ -84,7 +84,7 @@
 				<div class="form-group">
                   <label for=" ">Image</label>
 				  @if(isset($event))
-					<img width="100px" src="{{ URL::to('/') }}/public/images/event/medium--{{$event->cat_image}}" alt="" />
+					<img width="100px" src="{{ URL::to('/') }}/public/images/event/medium--{{$event->event_image}}" alt="" />
 				  @endif
 				  {!! Form::file('event_image', ['class' => 'form-control']) !!}
                 </div>

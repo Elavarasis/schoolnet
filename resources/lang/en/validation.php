@@ -95,6 +95,9 @@ return [
         'attribute-name' => [
             'rule-name' => 'custom-message',
         ],
+		'st_reg_no' => [
+			'stud_regno' => 'Register Number already exists',
+		],
     ],
 
     /*

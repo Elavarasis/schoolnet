@@ -18,7 +18,7 @@
   <!-- Theme style -->
   {!! Html::style('assets/admin/dist/css/AdminLTE.min.css') !!}
   {!! Html::style('assets/admin/dist/css/skins/_all-skins.min.css') !!}
-
+  
   {!! Html::style('assets/admin/custom.css') !!}
   <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
   <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
@@ -238,6 +238,32 @@
   <!-- Add the sidebar's background. This div must be placed
        immediately after the control sidebar -->
   <div class="control-sidebar-bg"></div>
+  @if(count($allevents) > 0)
+	@foreach($allevents as $event)
+		<?php
+		$event_array[] = array(
+							'title' => $event->event_name,
+							'description' => $event->event_description,
+							'venue' => $event->event_venue,
+							'start' => $event->event_startDate,
+							'end' => $event->event_endDate,
+							'url' => '',
+							'image' => URL::to('/').'/public/images/event/medium--'.$event->event_image,
+							'allDay' => false,
+							'backgroundColor' => '#00a65a',
+							'borderColor' => '#00a65a',
+						);
+		?>
+	@endforeach
+  @endif  
+  <?php $all_events = (isset($event_array)) ? json_encode($event_array) : array(); 
+?>
+
+<div class="pop_cvr" style="display:none;">
+	<a href="javascript:void(0)" class="closepop pull-right">X</a>
+	<div id="pop-content"></div>
+</div>
+
 </div>
 <!-- ./wrapper -->
 
@@ -255,11 +281,19 @@
 {!! Html::script('assets/admin/dist/js/app.min.js'); !!}
 <!-- AdminLTE for demo purposes -->
 {!! Html::script('assets/admin/dist/js/demo.js'); !!}
+
 <!-- fullCalendar 2.2.5 -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.11.2/moment.min.js"></script>
 {!! Html::script('assets/admin/plugins/fullcalendar/fullcalendar.min.js'); !!}
 <!-- Page Script -->
 <script>
+  $(document).ready(function() {
+		$(document).on('click','.closepop',function(e){
+			e.preventDefault();
+			$('.pop_cvr').fadeOut(200);		
+		});
+  });
+  
   $(function () {
 
     /* initialize the external events
@@ -291,6 +325,7 @@
     /* initialize the calendar
      -----------------------------------------------------------------*/
     //Date for the calendar events (dummy data)
+	var all_events = <?php echo $all_events; ?>;
     var date = new Date();
     var d = date.getDate(),
         m = date.getMonth(),
@@ -308,15 +343,17 @@
         day: 'day'
       },
       //Random default events
-      events: [
+      events: all_events/*[
         {
           title: 'All Day Event',
+		  description: 'Description 1',
           start: new Date(y, m, 1),
           backgroundColor: "#f56954", //red
           borderColor: "#f56954" //red
         },
         {
           title: 'Long Event',
+		  description: 'Description 2',
           start: new Date(y, m, d - 5),
           end: new Date(y, m, d - 2),
           backgroundColor: "#f39c12", //yellow
@@ -324,6 +361,7 @@
         },
         {
           title: 'Meeting',
+		  description: 'Description 3',
           start: new Date(y, m, d, 10, 30),
           allDay: false,
           backgroundColor: "#0073b7", //Blue
@@ -331,6 +369,7 @@
         },
         {
           title: 'Lunch',
+		  description: 'Description 4',
           start: new Date(y, m, d, 12, 0),
           end: new Date(y, m, d, 14, 0),
           allDay: false,
@@ -339,6 +378,7 @@
         },
         {
           title: 'Birthday Party',
+		  description: 'Description 5',
           start: new Date(y, m, d + 1, 19, 0),
           end: new Date(y, m, d + 1, 22, 30),
           allDay: false,
@@ -347,13 +387,25 @@
         },
         {
           title: 'Click for Google',
+		  description: 'Description 6',
           start: new Date(y, m, 28),
           end: new Date(y, m, 29),
           url: 'http://google.com/',
           backgroundColor: "#3c8dbc", //Primary (light-blue)
           borderColor: "#3c8dbc" //Primary (light-blue)
         }
-      ],
+      ]*/,
+	  eventClick: function (event) {
+		//console.log('event click!', event);
+		var content	=	'<table width="100%"><tr><th>&nbsp;</th><td><img src="'+ event.image +'"></td></tr>';
+		content	+=	'<tr><th>Title</th><td>' + event.title + '</td></tr>';
+		content	+=	'<tr><th>Description</th><td>' + event.description + '</td></tr>';
+		content	+=	'<tr><th>Venue</th><td>' + event.venue + '</td></tr>';
+		content	+=	'<tr><th>Start Date</th><td>' + event.start + '</td></tr>';
+		content	+=	'<tr><th>End Date</th><td>' + event.end + '</td></tr></table>';
+		$('.pop_cvr').show();
+		$('#pop-content').html(content);
+	  },
       editable: true,
       droppable: true, // this allows things to be dropped onto the calendar !!!
       drop: function (date, allDay) { // this function is called when something is dropped

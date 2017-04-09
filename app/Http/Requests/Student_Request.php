@@ -32,6 +32,7 @@ class Student_Request extends Request {
 			case 'POST':
 			{
 				return [
+					'st_reg_no' => 'stud_regno',
 					'first_name' => 'required|max:255',
 					'last_name' => 'required|max:255',
 					'email' => 'required|email|max:255|unique:users',
@@ -49,6 +50,7 @@ class Student_Request extends Request {
 			case 'PATCH':
 			{
 				return [
+					'st_reg_no' => 'stud_regno',
 					'first_name' => 'required|max:255',
 					'last_name' => 'required|max:255',
 					'st_school_id' => 'required|numeric',

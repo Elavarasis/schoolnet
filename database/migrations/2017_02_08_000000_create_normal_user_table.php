@@ -19,6 +19,7 @@ class CreateNormalUserTable extends Migration
             $table->string('nu_contact_no');
             $table->string('nu_hcyknow');
             $table->string('nu_description');
+			$table->integer('nu_created_by')->default(0);
             $table->timestamps();
         });
 		

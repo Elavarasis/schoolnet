@@ -1,7 +1,6 @@
 <?php
 
 namespace App;
-
 use Illuminate\Foundation\Auth\User as Authenticatable;
 
 class User extends Authenticatable
@@ -48,12 +47,12 @@ class User extends Authenticatable
 	
 	public function get_normal_user()
     {
-        return $this->hasOne('App\Normal_user','nu_user_id','id');
+		return $this->hasOne('App\Normal_user','nu_user_id','id');
     }
 	
 	public function get_country()
     {
-        return $this->hasOne('App\Country','id','country_id');
+		return $this->hasOne('App\Country','id','country_id');
     }
 	
 	public function get_state()

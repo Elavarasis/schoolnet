@@ -53,13 +53,25 @@ Route::group(array('namespace' => 'Tenant', 'prefix' => 'tenant', 'middleware' =
 	Route::post('home/save_profile/', 'Home@save_profile');
 	Route::post('home/reset_password/', 'Home@reset_password');
 	Route::resource('home', 'Home');
+	Route::get('events/downloadExcel/{type}', 'Events@downloadExcel');
 	Route::resource('events', 'Events');
 	Route::resource('calendars', 'Calendars');
 	Route::post('leaves/update_status/', 'Leaves@update_status');
 	Route::resource('leaves', 'Leaves');
+	
 	Route::get('attendances/import', 'Attendances@import');
 	Route::post('attendances/import_now', 'Attendances@import_now');
+	Route::get('attendances/search', 'Attendances@search');
+	Route::get('attendances/export', 'Attendances@export');
 	Route::resource('attendances', 'Attendances');
+	
+	Route::get('courses/sub/{id}', 'Courses@sub');
+	Route::resource('courses', 'Courses');
+	
+	Route::resource('normal_users', 'Normal_users');
+	Route::resource('parents', 'SN_Parents');
+	Route::resource('students', 'Students');
+	Route::resource('teachers', 'Teachers');
 });
 
 

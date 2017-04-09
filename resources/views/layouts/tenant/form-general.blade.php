@@ -256,7 +256,7 @@
             var ramo, token, url, data;
             token = $('input[name=_token]').val();
             country_id = $('#country_id').val();
-			url = '<?php echo url('/admin/getstates'); ?>';
+			url = '<?php echo url('/tenant/getstates'); ?>';
             data = {c_id: country_id};
             $('#state_id').empty();
             $.ajax({
@@ -277,7 +277,7 @@
             var ramo, token, url, data;
             token = $('input[name=_token]').val();
             state_id = $('#state_id').val();
-			url = '<?php echo url('/admin/getcities'); ?>';
+			url = '<?php echo url('/tenant/getcities'); ?>';
             data = {s_id: state_id};
             $('#city_id').empty();
             $.ajax({

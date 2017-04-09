@@ -86,7 +86,7 @@ class Events extends Controller
 			$file = $request->file('event_image') ;
 			
 			$fileName = $file->getClientOriginalName() ;
-			$destinationPath = public_path().'/images/student/' ;
+			$destinationPath = public_path().'/images/event/' ;
 			
 			Image::make($file->getRealPath())->resize(IMG_SW, IMG_SH)->save($destinationPath . 'small--'.IMG_PREFIX.$fileName);
 			Image::make($file->getRealPath())->resize(IMG_MW, IMG_MH)->save($destinationPath . 'medium--'.IMG_PREFIX.$fileName);

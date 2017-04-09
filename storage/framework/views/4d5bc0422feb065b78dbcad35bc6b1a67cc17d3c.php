@@ -89,7 +89,7 @@
 				<div class="form-group">
                   <label for=" ">Image</label>
 				  <?php if(isset($event)): ?>
-					<img width="100px" src="<?php echo e(URL::to('/')); ?>/public/images/event/medium--<?php echo e($event->cat_image); ?>" alt="" />
+					<img width="100px" src="<?php echo e(URL::to('/')); ?>/public/images/event/medium--<?php echo e($event->event_image); ?>" alt="" />
 				  <?php endif; ?>
 				  <?php echo Form::file('event_image', ['class' => 'form-control']); ?>
 

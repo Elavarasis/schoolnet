@@ -33,6 +33,75 @@
 		
 		<li class="treeview">
           <a href="#">
+            <i class="fa fa-share"></i> <span>User Management</span>
+                <span class="pull-right-container">
+                  <i class="fa fa-angle-left pull-right"></i>
+                </span>
+          </a>
+		  <ul class="treeview-menu">
+            <li>
+              <a href="#"><i class="fa fa-circle-o"></i> Manage Teachers
+                <span class="pull-right-container">
+                  <i class="fa fa-angle-left pull-right"></i>
+                </span>
+              </a>
+              <ul class="treeview-menu">
+                <li><a href="{{ route('tenant.teachers.index') }}"><i class="fa fa-circle-o"></i>Manage Teacher</a></li>
+				<li><a href="{{ route('tenant.teachers.create') }}"><i class="fa fa-circle-o"></i>New Teacher</a></li>
+              </ul>
+            </li>
+			
+			<li>
+              <a href="#"><i class="fa fa-circle-o"></i> Manage Parents
+                <span class="pull-right-container">
+                  <i class="fa fa-angle-left pull-right"></i>
+                </span>
+              </a>
+              <ul class="treeview-menu">
+                <li><a href="{{ route('tenant.parents.index') }}"><i class="fa fa-circle-o"></i>Manage Parents</a></li>
+				<li><a href="{{ route('tenant.parents.create') }}"><i class="fa fa-circle-o"></i>New Parent</a></li>
+              </ul>
+            </li>
+			<li>
+              <a href="#"><i class="fa fa-circle-o"></i> Manage Students
+                <span class="pull-right-container">
+                  <i class="fa fa-angle-left pull-right"></i>
+                </span>
+              </a>
+              <ul class="treeview-menu">
+                <li><a href="{{ route('tenant.students.index') }}"><i class="fa fa-circle-o"></i>Manage Students</a></li>
+				<li><a href="{{ route('tenant.students.create') }}"><i class="fa fa-circle-o"></i>New Student</a></li>
+              </ul>
+            </li>
+			<li>
+              <a href="#"><i class="fa fa-circle-o"></i> Manage Users
+                <span class="pull-right-container">
+                  <i class="fa fa-angle-left pull-right"></i>
+                </span>
+              </a>
+              <ul class="treeview-menu">
+                <li><a href="{{ route('tenant.normal_users.index') }}"><i class="fa fa-circle-o"></i>Manage users</a></li>
+				<li><a href="{{ route('tenant.normal_users.create') }}"><i class="fa fa-circle-o"></i>New user</a></li>
+              </ul>
+            </li>
+          </ul>
+        </li>
+		
+		<li class="treeview">
+          <a href="#">
+            <i class="fa fa-share"></i> <span>Courses</span>
+                <span class="pull-right-container">
+                  <i class="fa fa-angle-left pull-right"></i>
+                </span>
+          </a>
+          <ul class="treeview-menu">
+			<li><a href="{{ route('tenant.courses.index') }}"><i class="fa fa-circle-o"></i> <span>Manage Courses</span></a></li>
+			<li><a href="{{ route('tenant.courses.create') }}"><i class="fa fa-circle-o"></i> <span>New Course</span></a></li>
+          </ul>
+        </li>
+		
+		<li class="treeview">
+          <a href="#">
             <i class="fa fa-share"></i> <span>Events</span>
                 <span class="pull-right-container">
                   <i class="fa fa-angle-left pull-right"></i>
@@ -44,9 +113,20 @@
           </ul>
         </li>
 		
-		<li><a href="{{ route('tenant.leaves.index') }}"><i class="fa fa-circle-o"></i> <span>Leave Management</span></a></li>
+		<li><a href="{{ route('tenant.leaves.index') }}"><i class="fa fa-circle-o"></i> <span>Management Leaves</span></a></li>
 		
-		<li><a href="{{ url('tenant/attendances/import') }}"><i class="fa fa-circle-o"></i> <span>Attentance Management</span></a></li>
+		<li class="treeview">
+          <a href="#">
+            <i class="fa fa-share"></i> <span>Manage Attendance</span>
+                <span class="pull-right-container">
+                  <i class="fa fa-angle-left pull-right"></i>
+                </span>
+          </a>
+          <ul class="treeview-menu">
+			<li><a href="{{ route('tenant.attendances.index') }}"><i class="fa fa-circle-o"></i> <span>Manage Attendance</span></a></li>
+			<li><a href="{{ url('tenant/attendances/import') }}"><i class="fa fa-circle-o"></i> <span>Import</span></a></li>
+          </ul>
+        </li>
 		
 		<li><a href="{{ route('tenant.calendars.index') }}"><i class="fa fa-circle-o"></i> <span>My Calendar</span></a></li> 
 		

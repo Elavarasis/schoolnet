@@ -39,6 +39,7 @@
                 <thead>
                 <tr>
 					<th>No</th>
+					<th>Reg No</th>
 					<th>First Name</th>
 					<th>Last Name</th>
 					<th>Email</th>
@@ -53,6 +54,7 @@
 					@foreach ($students as $key => $student)
 					<tr>
 						<td>{{ ++$i }}</td>
+						<td>{{ $student->get_student->st_reg_no }}</td>
 						<td>{{ $student->first_name }}</td>
 						<td>{{ $student->last_name }}</td>
 						<td>{{ $student->email }}</td>
@@ -80,6 +82,7 @@
                 <tfoot>
                 <tr>
 					<th>No</th>
+					<th>Reg No</th>
 					<th>First Name</th>
 					<th>Last Name</th>
 					<th>Email</th>

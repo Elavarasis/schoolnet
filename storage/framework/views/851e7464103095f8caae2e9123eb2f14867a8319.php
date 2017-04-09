@@ -37,6 +37,7 @@
                 <thead>
                 <tr>
 					<th>No</th>
+					<th>Reg No</th>
 					<th>First Name</th>
 					<th>Last Name</th>
 					<th>Email</th>
@@ -51,6 +52,7 @@
 					<?php foreach($students as $key => $student): ?>
 					<tr>
 						<td><?php echo e(++$i); ?></td>
+						<td><?php echo e($student->get_student->st_reg_no); ?></td>
 						<td><?php echo e($student->first_name); ?></td>
 						<td><?php echo e($student->last_name); ?></td>
 						<td><?php echo e($student->email); ?></td>
@@ -81,6 +83,7 @@
                 <tfoot>
                 <tr>
 					<th>No</th>
+					<th>Reg No</th>
 					<th>First Name</th>
 					<th>Last Name</th>
 					<th>Email</th>

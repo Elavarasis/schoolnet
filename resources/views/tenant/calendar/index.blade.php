@@ -1,4 +1,4 @@
-@extends('layouts.tenant.calendar')
+@extends('layouts.admin.calendar')
 
 @section('content')
 
@@ -59,6 +59,5 @@
     </section>
     <!-- /.content -->
   </div>
-  <!-- /.content-wrapper -->
-
+  <!-- /.content-wrapper -->  
   @endsection

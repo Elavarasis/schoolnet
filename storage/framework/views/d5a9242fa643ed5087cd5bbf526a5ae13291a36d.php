@@ -65,6 +65,12 @@
 
 			<?php endif; ?>
               <div class="box-body">
+				<div class="form-group">
+                  <label for=" ">Register Number</label>
+                  <?php echo Form::text('st_reg_no', null, array('placeholder' => 'Register Number','class' => 'form-control')); ?>
+
+                </div>
+				
                 <div class="form-group">
                   <label for=" ">First Name</label>
                   <?php echo Form::text('first_name', null, array('placeholder' => 'First Name','class' => 'form-control')); ?>
@@ -95,6 +101,12 @@
                   <label for="exampleInputEmail1">School</label>
                   <?php echo Form::select('st_school_id', $schools, null, array('class' => 'form-control', 'id' => 'school_id')); ?>
 
+                </div>				
+				
+				<div class="form-group">
+                  <label for="exampleInputEmail1">Parent</label>
+                  <?php echo Form::select('st_parent_id', $parents, null, array('class' => 'form-control', 'id' => 'parent_id')); ?>
+
                 </div>
 				
 				<div class="form-group">
@@ -110,12 +122,6 @@
                 </div>
 				
 				<div class="form-group">
-                  <label for=" ">City</label>
-                  <?php echo Form::text('city', null, array('placeholder' => 'City','class' => 'form-control')); ?>
-
-                </div>
-				
-				<div class="form-group">
                   <label for="exampleInputEmail1">Country</label>
                   <?php echo Form::select('country_id', $countries, null, array('class' => 'form-control', 'id' => 'country_id')); ?>
 
@@ -127,6 +133,12 @@
 
                 </div>
 				
+				<div class="form-group">
+                  <label for=" ">City</label>
+                  <?php echo Form::select('city', $cities, null, array('class' => 'form-control', 'id' => 'city_id')); ?>
+
+                </div>
+
 				<div class="form-group">
                   <label for=" ">Date of Birth</label>
                   <?php echo Form::text('dob', null, array('placeholder' => 'Date of Birth','class' => 'form-control dob')); ?>
