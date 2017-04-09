@@ -3,9 +3,9 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: 127.0.0.1
--- Generation Time: Feb 13, 2017 at 02:33 PM
--- Server version: 10.1.19-MariaDB
--- PHP Version: 5.6.28
+-- Generation Time: Apr 09, 2017 at 06:35 PM
+-- Server version: 10.1.13-MariaDB
+-- PHP Version: 5.6.21
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET time_zone = "+00:00";
@@ -19,6 +19,67 @@ SET time_zone = "+00:00";
 --
 -- Database: `schoolnet`
 --
+CREATE DATABASE IF NOT EXISTS `schoolnet` DEFAULT CHARACTER SET latin1 COLLATE latin1_swedish_ci;
+USE `schoolnet`;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `attentances`
+--
+
+DROP TABLE IF EXISTS `attentances`;
+CREATE TABLE `attentances` (
+  `id` int(10) UNSIGNED NOT NULL,
+  `att_user_id` int(10) UNSIGNED NOT NULL,
+  `att_reg_no` int(11) NOT NULL,
+  `att_date` date NOT NULL,
+  `att_attentance` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
+  `att_status` int(11) NOT NULL DEFAULT '0',
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+
+--
+-- Dumping data for table `attentances`
+--
+
+INSERT INTO `attentances` (`id`, `att_user_id`, `att_reg_no`, `att_date`, `att_attentance`, `att_status`, `created_at`, `updated_at`) VALUES
+(1, 4, 101, '2017-04-01', 'A', 0, NULL, NULL),
+(2, 4, 101, '2017-04-07', 'A', 0, NULL, NULL),
+(3, 4, 101, '2017-04-14', 'L', 0, NULL, NULL),
+(4, 4, 101, '2017-04-26', 'L2', 0, NULL, NULL),
+(5, 5, 102, '2017-04-01', 'A1', 0, NULL, NULL),
+(6, 5, 102, '2017-04-05', 'L', 0, NULL, NULL),
+(7, 5, 102, '2017-04-10', 'L1', 0, NULL, NULL),
+(8, 5, 102, '2017-04-17', 'A2', 0, NULL, NULL),
+(9, 5, 102, '2017-04-23', 'A', 0, NULL, NULL);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `categories`
+--
+
+DROP TABLE IF EXISTS `categories`;
+CREATE TABLE `categories` (
+  `id` int(10) UNSIGNED NOT NULL,
+  `cat_name` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
+  `cat_slug` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
+  `cat_parent` int(11) NOT NULL DEFAULT '0',
+  `cat_type` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
+  `cat_image` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
+  `cat_status` int(11) NOT NULL DEFAULT '0',
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+
+--
+-- Dumping data for table `categories`
+--
+
+INSERT INTO `categories` (`id`, `cat_name`, `cat_slug`, `cat_parent`, `cat_type`, `cat_image`, `cat_status`, `created_at`, `updated_at`) VALUES
+(1, 'Sample Category 1', 'sample-category-1', 0, 'main', '16772--images.jpeg', 1, '2017-04-09 08:55:26', '2017-04-09 08:55:26');
 
 -- --------------------------------------------------------
 
@@ -26,6 +87,7 @@ SET time_zone = "+00:00";
 -- Table structure for table `cities`
 --
 
+DROP TABLE IF EXISTS `cities`;
 CREATE TABLE `cities` (
   `id` int(10) UNSIGNED NOT NULL,
   `city_name` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
@@ -41,7 +103,7 @@ CREATE TABLE `cities` (
 --
 
 INSERT INTO `cities` (`id`, `city_name`, `state_id`, `country_id`, `status`, `created_at`, `updated_at`) VALUES
-(1, 'kztm', 1313, 356, 1, '2017-02-13 07:14:52', '2017-02-13 07:14:52');
+(2, 'Trivandrum', 1313, 356, 1, '2017-04-09 08:42:58', '2017-04-09 08:42:58');
 
 -- --------------------------------------------------------
 
@@ -49,6 +111,7 @@ INSERT INTO `cities` (`id`, `city_name`, `state_id`, `country_id`, `status`, `cr
 -- Table structure for table `countries`
 --
 
+DROP TABLE IF EXISTS `countries`;
 CREATE TABLE `countries` (
   `id` int(10) UNSIGNED NOT NULL,
   `iso` varchar(45) DEFAULT NULL,
@@ -72,11 +135,11 @@ CREATE TABLE `countries` (
 --
 
 INSERT INTO `countries` (`id`, `iso`, `iso3`, `fips`, `country`, `continent`, `currency_code`, `currency_name`, `phone_prefix`, `postal_code`, `languages`, `geonameid`, `country_status`, `created_at`, `updated_at`) VALUES
-(4, 'AF', 'AFG', 'AF', 'Afghanistan', 'AS', 'AFN', 'Afghani', '93', '', 'fa-AF,ps,uz-AF,tk', '1149361', 0, '2017-02-10 06:00:13', '2017-02-10 00:30:13'),
+(4, 'AF', 'AFG', 'AF', 'Afghanistan', 'AS', 'AFN', 'Afghani', '93', '', 'fa-AF,ps,uz-AF,tk', '1149361', 1, '2017-02-04 04:35:21', '2017-02-03 23:05:21'),
 (8, 'AL', 'ALB', 'AL', 'Albania', 'EU', 'ALL', 'Lek', '355', '', 'sq,el', '783754', 1, '2017-02-04 04:35:21', '2017-02-03 23:05:21'),
 (10, 'AQ', 'ATA', 'AY', 'Antarctica', 'AN', '', '', '', '', '', '6697173', 1, '2017-02-04 04:35:21', '2017-02-03 23:05:21'),
 (12, 'DZ', 'DZA', 'AG', 'Algeria', 'AF', 'DZD', 'Dinar', '213', '^(d{5})$', 'ar-DZ', '2589581', 1, '2017-02-04 04:35:21', '2017-02-03 23:05:21'),
-(16, 'AS', 'ASM', 'AQ', 'American Samoa', 'OC', 'USD', 'Dollar', '+1-684', '', 'en-AS,sm,to', '5880801', 1, '2017-02-04 04:35:21', '2017-02-03 23:05:21'),
+(16, 'AS', 'ASM', 'AQ', 'American Samoa', 'OC', 'USD', 'Dollar', '+1-684', '', 'en-AS,sm,to', '5880801', 0, '2017-03-31 07:34:51', '2017-03-31 02:04:51'),
 (20, 'AD', 'AND', 'AN', 'Andorra', 'EU', 'EUR', 'Euro', '376', '^(?:AD)*(d{3})$', 'ca,fr-AD,pt', '3041565', 1, '2017-02-04 04:35:21', '2017-02-03 23:05:21'),
 (24, 'AO', 'AGO', 'AO', 'Angola', 'AF', 'AOA', 'Kwanza', '244', '', 'pt-AO', '3351879', 1, '2017-02-04 04:35:21', '2017-02-03 23:05:21'),
 (28, 'AG', 'ATG', 'AC', 'Antigua and Barbuda', 'NA', 'XCD', 'Dollar', '+1-268', '', 'en-AG', '3576396', 1, '2017-02-04 04:35:21', '2017-02-03 23:05:21'),
@@ -327,9 +390,103 @@ INSERT INTO `countries` (`id`, `iso`, `iso3`, `fips`, `country`, `continent`, `c
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `courses`
+--
+
+DROP TABLE IF EXISTS `courses`;
+CREATE TABLE `courses` (
+  `id` int(10) UNSIGNED NOT NULL,
+  `course_title` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
+  `course_slug` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
+  `course_description` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
+  `course_duration` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
+  `course_fee` double NOT NULL,
+  `course_parent` int(11) NOT NULL DEFAULT '0',
+  `course_image` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
+  `course_school_id` int(10) UNSIGNED NOT NULL,
+  `course_status` int(11) NOT NULL DEFAULT '0',
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+
+--
+-- Dumping data for table `courses`
+--
+
+INSERT INTO `courses` (`id`, `course_title`, `course_slug`, `course_description`, `course_duration`, `course_fee`, `course_parent`, `course_image`, `course_school_id`, `course_status`, `created_at`, `updated_at`) VALUES
+(1, 'Vocation Course', '', 'Contrary to popular belief, Lorem Ipsum is not simply random text. It has roots in a piece of classical Latin literature from 45 BC, making it over 2000 years old', '6 Months', 8000, 0, '9968--butterfly.jpg', 1, 1, '2017-04-09 08:55:52', '2017-04-09 08:55:52'),
+(2, 'Lorem Ipsum is simply dummy text', '', 'Contrary to popular belief, Lorem Ipsum is not simply random text. It has roots in a piece of classical Latin literature from 45 BC, making it over 2000 years old', '6 Months', 0, 1, '23053--sample-4.jpg', 1, 1, '2017-04-09 08:56:21', '2017-04-09 08:56:21');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `events`
+--
+
+DROP TABLE IF EXISTS `events`;
+CREATE TABLE `events` (
+  `id` int(10) UNSIGNED NOT NULL,
+  `event_name` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
+  `event_description` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
+  `event_venue` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
+  `event_startDate` date NOT NULL,
+  `event_endDate` date NOT NULL,
+  `event_image` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
+  `event_school_id` int(10) UNSIGNED NOT NULL,
+  `event_status` int(11) NOT NULL DEFAULT '0',
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+
+--
+-- Dumping data for table `events`
+--
+
+INSERT INTO `events` (`id`, `event_name`, `event_description`, `event_venue`, `event_startDate`, `event_endDate`, `event_image`, `event_school_id`, `event_status`, `created_at`, `updated_at`) VALUES
+(1, 'Sample Event', 'Contrary to popular belief, Lorem Ipsum is not simply random text. It has roots in a piece of classical Latin literature from 45 BC, making it over 2000 years old', 'Trivamdrum', '2017-04-19', '2017-04-21', '15336--sample-4.jpg', 1, 1, '2017-04-09 08:57:15', '2017-04-09 08:57:15'),
+(2, 'Sample Event 2', 'Contrary to popular belief, Lorem Ipsum is not simply random text. It has roots in a piece of classical Latin literature from 45 BC, making it over 2000 years old', 'Trivamdrum', '2017-04-27', '2017-03-08', '25319--butterfly.jpg', 1, 1, '2017-04-09 08:57:51', '2017-04-09 08:57:51');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `leaves`
+--
+
+DROP TABLE IF EXISTS `leaves`;
+CREATE TABLE `leaves` (
+  `id` int(10) UNSIGNED NOT NULL,
+  `lv_user_id` int(10) UNSIGNED NOT NULL,
+  `lv_applicant` int(10) UNSIGNED NOT NULL,
+  `lv_totaldays` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
+  `lv_start_date` date NOT NULL,
+  `lv_start_time` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
+  `lv_end_date` date NOT NULL,
+  `lv_end_time` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
+  `lv_reason` longtext COLLATE utf8_unicode_ci NOT NULL,
+  `lv_user_del` int(11) NOT NULL DEFAULT '0',
+  `lv_parent_del` int(11) NOT NULL DEFAULT '0',
+  `lv_tenant_del` int(11) NOT NULL DEFAULT '0',
+  `lv_status` int(11) NOT NULL DEFAULT '0',
+  `lv_remarks` longtext COLLATE utf8_unicode_ci NOT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+
+--
+-- Dumping data for table `leaves`
+--
+
+INSERT INTO `leaves` (`id`, `lv_user_id`, `lv_applicant`, `lv_totaldays`, `lv_start_date`, `lv_start_time`, `lv_end_date`, `lv_end_time`, `lv_reason`, `lv_user_del`, `lv_parent_del`, `lv_tenant_del`, `lv_status`, `lv_remarks`, `created_at`, `updated_at`) VALUES
+(1, 4, 4, '2 Days', '2017-04-28', '12:00 AM', '2017-04-29', '12:00 AM', 'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry''s standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting', 0, 0, 0, 0, '', '2017-04-09 08:59:57', '2017-04-09 09:00:37'),
+(2, 4, 4, '1 Day', '2017-05-10', '12:00 AM', '2017-05-10', '12:30 AM', 'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry''s standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting', 0, 0, 0, 0, '', '2017-04-09 09:01:05', '2017-04-09 09:01:05');
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `migrations`
 --
 
+DROP TABLE IF EXISTS `migrations`;
 CREATE TABLE `migrations` (
   `migration` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
   `batch` int(11) NOT NULL
@@ -340,10 +497,58 @@ CREATE TABLE `migrations` (
 --
 
 INSERT INTO `migrations` (`migration`, `batch`) VALUES
-('2014_10_12_000000_create_school_admin_table', 1),
-('2014_10_12_000000_create_users_table', 1),
-('2014_10_12_100000_create_password_resets_table', 1),
-('2017_01_19_054420_create_cities_table', 2);
+('2017_02_01_000000_create_users_table', 1),
+('2017_02_02_000000_create_password_resets_table', 1),
+('2017_02_03_000000_create_cities_table', 1),
+('2017_02_04_000000_create_school_admin_table', 1),
+('2017_02_05_000000_create_schools_table', 1),
+('2017_02_05_000010_create_parents_table', 1),
+('2017_02_05_000020_create_teachers_table', 1),
+('2017_02_06_000000_create_students_table', 1),
+('2017_02_07_000000_create_options_table', 1),
+('2017_02_08_000000_create_normal_user_table', 1),
+('2017_02_09_000006_create_newsletters_table', 1),
+('2017_02_10_000000_create_categories_table', 1),
+('2017_02_11_000000_create_courses_table', 1),
+('2017_02_12_000000_create_events_table', 1),
+('2017_02_13_000005_create_leaves_table', 1),
+('2017_02_14_000000_create_marks_table', 1),
+('2017_02_15_000000_create_attentance_table', 1);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `newsletters`
+--
+
+DROP TABLE IF EXISTS `newsletters`;
+CREATE TABLE `newsletters` (
+  `id` int(10) UNSIGNED NOT NULL,
+  `nl_user_id` int(10) UNSIGNED DEFAULT NULL,
+  `nl_email` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
+  `nl_status` int(11) NOT NULL DEFAULT '0',
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `normal_users`
+--
+
+DROP TABLE IF EXISTS `normal_users`;
+CREATE TABLE `normal_users` (
+  `id` int(10) UNSIGNED NOT NULL,
+  `nu_user_id` int(10) UNSIGNED NOT NULL,
+  `nu_class` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
+  `nu_contact_no` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
+  `nu_hcyknow` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
+  `nu_description` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
+  `nu_created_by` int(11) NOT NULL DEFAULT '0',
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 -- --------------------------------------------------------
 
@@ -351,6 +556,7 @@ INSERT INTO `migrations` (`migration`, `batch`) VALUES
 -- Table structure for table `options`
 --
 
+DROP TABLE IF EXISTS `options`;
 CREATE TABLE `options` (
   `id` int(10) UNSIGNED NOT NULL,
   `opt_key` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
@@ -367,19 +573,50 @@ CREATE TABLE `options` (
 --
 
 INSERT INTO `options` (`id`, `opt_key`, `opt_text`, `opt_image`, `opt_type`, `opt_status`, `created_at`, `updated_at`) VALUES
-(1, 'paypal', 'Paypal', 'PayPal-logo-20071.png', 'payment', 1, NULL, '2017-02-03 01:02:50'),
-(2, 'payumoney', 'PayUMoney', 'PayU-biz-logo.png', 'payment', 0, NULL, '2017-02-03 01:03:03'),
-(3, 'w1', 'Lorem Ipsum is simply dummy text of the printing and typesetting industry.', '404.png', 'widget', 1, NULL, '2017-02-03 02:50:54'),
-(4, 'w2', '', '404.png', 'widget', 1, NULL, '2017-02-03 02:51:43'),
-(5, 'w3', 'Lorem Ipsum is simply dummy text of the printing and typesetting industry.', '', 'widget', 1, NULL, '2017-02-03 02:51:51'),
-(6, 'w4', '', '', 'widget', 0, NULL, '2017-02-03 02:51:21'),
-(7, 'w5', '', '', 'widget', 0, NULL, '2017-02-03 02:51:27'),
-(14, '', '', 'giphy2.gif', 'advert', 1, '2017-02-03 03:02:34', '2017-02-03 03:02:34'),
-(15, '', '', 'giphy.gif', 'advert', 1, '2017-02-03 03:02:55', '2017-02-03 03:02:55'),
-(16, '', '', 'giphy3.gif', 'advert', 1, '2017-02-03 03:03:07', '2017-02-03 03:03:07'),
-(17, '', '', 'giphy4.gif', 'advert', 1, '2017-02-03 03:03:17', '2017-02-03 03:03:17'),
-(18, '', '', 'giphy5.gif', 'advert', 0, '2017-02-03 03:03:23', '2017-02-03 03:03:23'),
-(19, '', '', 'Desert.jpg', 'advert', 1, '2017-02-13 07:18:46', '2017-02-13 07:18:46');
+(1, 'paypal', 'Paypal', '', 'payment', 0, NULL, NULL),
+(2, 'payumoney', 'PayUMoney', '', 'payment', 0, NULL, NULL),
+(3, 'w1', '', '11892--butterfly.jpg', 'widget', 0, NULL, '2017-04-09 08:51:33'),
+(4, 'w2', '', '', 'widget', 0, NULL, NULL),
+(5, 'w3', '', '21996--butterfly.jpg', 'widget', 1, NULL, '2017-04-09 08:51:46'),
+(6, 'w4', '', '', 'widget', 0, NULL, NULL),
+(7, 'w5', '', '13862--butterfly.jpg', 'widget', 1, NULL, '2017-04-09 08:51:55'),
+(8, '1', '5', '', 'division', 0, NULL, NULL),
+(9, '1', '6', '', 'division', 0, NULL, NULL),
+(10, '1', '7', '', 'division', 0, NULL, NULL),
+(11, '1', 'A', '', 'attentance_marker', 0, NULL, NULL),
+(12, '1', 'A1', '', 'attentance_marker', 0, NULL, NULL),
+(13, '1', 'A2', '', 'attentance_marker', 0, NULL, NULL),
+(14, '1', 'L', '', 'attentance_marker', 0, NULL, NULL),
+(15, '1', 'L1', '', 'attentance_marker', 0, NULL, NULL),
+(16, '1', 'L2', '', 'attentance_marker', 0, NULL, NULL);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `parents`
+--
+
+DROP TABLE IF EXISTS `parents`;
+CREATE TABLE `parents` (
+  `id` int(10) UNSIGNED NOT NULL,
+  `pa_user_id` int(10) UNSIGNED NOT NULL,
+  `pa_mother_fname` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
+  `pa_mother_lname` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
+  `pa_school_id` int(10) UNSIGNED NOT NULL,
+  `pa_guardian` int(11) NOT NULL DEFAULT '0',
+  `pa_contact_no` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
+  `pa_hcyknow` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
+  `pa_description` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+
+--
+-- Dumping data for table `parents`
+--
+
+INSERT INTO `parents` (`id`, `pa_user_id`, `pa_mother_fname`, `pa_mother_lname`, `pa_school_id`, `pa_guardian`, `pa_contact_no`, `pa_hcyknow`, `pa_description`, `created_at`, `updated_at`) VALUES
+(1, 3, 'Hiran', 'Kiaan', 1, 1, '8985758574', 'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry''s standard dummy text ever since the 1500s', 'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry''s standard dummy text ever since the 1500s, Contrary to popular belief, Lorem Ipsum is not simply random text. It has roots in a piece of classica', '2017-04-09 08:51:04', '2017-04-09 08:51:04');
 
 -- --------------------------------------------------------
 
@@ -387,6 +624,7 @@ INSERT INTO `options` (`id`, `opt_key`, `opt_text`, `opt_image`, `opt_type`, `op
 -- Table structure for table `password_resets`
 --
 
+DROP TABLE IF EXISTS `password_resets`;
 CREATE TABLE `password_resets` (
   `email` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
   `token` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
@@ -399,13 +637,14 @@ CREATE TABLE `password_resets` (
 -- Table structure for table `schools`
 --
 
+DROP TABLE IF EXISTS `schools`;
 CREATE TABLE `schools` (
   `id` int(10) UNSIGNED NOT NULL,
   `schl_user_id` int(10) UNSIGNED NOT NULL,
   `schl_name` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
   `schl_country_id` int(10) UNSIGNED NOT NULL,
   `schl_state_id` int(10) UNSIGNED NOT NULL,
-  `schl_city_id` int(10) UNSIGNED DEFAULT NULL,
+  `schl_city_id` int(10) UNSIGNED NOT NULL,
   `schl_address` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
   `schl_contact_no` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
   `schl_email` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
@@ -422,9 +661,7 @@ CREATE TABLE `schools` (
 --
 
 INSERT INTO `schools` (`id`, `schl_user_id`, `schl_name`, `schl_country_id`, `schl_state_id`, `schl_city_id`, `schl_address`, `schl_contact_no`, `schl_email`, `schl_level`, `schl_features`, `schl_logo`, `schl_status`, `created_at`, `updated_at`) VALUES
-(1, 10, 'St.Pius Higher Secondary School', 356, 1313, 2, 'address', '9854558575', 'admin@gmail.com', 'Higher Secondary', 'Features', '404.png', 1, '2017-02-02 00:57:42', '2017-02-02 23:39:51'),
-(20, 20, 'St.Pius Higher Secondary School', 356, 1313, 2, '', '', '', '', '', '', 1, '2017-02-02 06:28:52', '2017-02-02 06:28:52'),
-(21, 3, 'rchss', 356, 1313, 1, 'xcvf', '456456', 'ggg@gmial.com', 'dg', 'dfg', '15305@@Tulips.jpg', 1, '2017-02-13 07:15:26', '2017-02-13 07:15:26');
+(1, 2, 'St.Aloysius Hr.Sec.School', 356, 1313, 2, 'Kazhakuttam', '8574857485', 'alouysius@gmail.com', 'Higher Secondary', 'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry''s standard dummy text ever since the 1500s', '12296--images.jpeg', 1, '2017-04-09 08:49:03', '2017-04-09 08:49:03');
 
 -- --------------------------------------------------------
 
@@ -432,6 +669,7 @@ INSERT INTO `schools` (`id`, `schl_user_id`, `schl_name`, `schl_country_id`, `sc
 -- Table structure for table `school_admin`
 --
 
+DROP TABLE IF EXISTS `school_admin`;
 CREATE TABLE `school_admin` (
   `id` int(10) UNSIGNED NOT NULL,
   `user_id` int(10) UNSIGNED NOT NULL,
@@ -448,9 +686,7 @@ CREATE TABLE `school_admin` (
 --
 
 INSERT INTO `school_admin` (`id`, `user_id`, `designation`, `phone`, `mobile`, `website`, `created_at`, `updated_at`) VALUES
-(1, 2, 'desig', '3453', '454', 'http://fghgh.bbb', '2017-02-13 06:38:50', '2017-02-13 06:38:50'),
-(2, 3, 'dfgdfg', '4564', '56456', 'http://fghgh.bbb', '2017-02-13 06:54:31', '2017-02-13 06:54:31'),
-(3, 5, 'yyy', '565656', '565656', 'http://fghgh.bbb', '2017-02-13 07:08:22', '2017-02-13 07:08:22');
+(1, 2, 'Manager', '8595748574', '8574857485', 'http://example.com', '2017-04-09 08:44:44', '2017-04-09 08:44:44');
 
 -- --------------------------------------------------------
 
@@ -458,6 +694,7 @@ INSERT INTO `school_admin` (`id`, `user_id`, `designation`, `phone`, `mobile`, `
 -- Table structure for table `states`
 --
 
+DROP TABLE IF EXISTS `states`;
 CREATE TABLE `states` (
   `id` int(10) UNSIGNED NOT NULL,
   `region_id` int(10) UNSIGNED DEFAULT NULL,
@@ -4367,10 +4604,13 @@ INSERT INTO `states` (`id`, `region_id`, `name`, `timezone`, `state_status`, `cr
 -- Table structure for table `students`
 --
 
+DROP TABLE IF EXISTS `students`;
 CREATE TABLE `students` (
   `id` int(10) UNSIGNED NOT NULL,
   `st_user_id` int(10) UNSIGNED NOT NULL,
+  `st_reg_no` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
   `st_school_id` int(10) UNSIGNED NOT NULL,
+  `st_parent_id` int(10) UNSIGNED NOT NULL,
   `st_class` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
   `st_contact_no` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
   `st_hcyknow` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
@@ -4383,10 +4623,29 @@ CREATE TABLE `students` (
 -- Dumping data for table `students`
 --
 
-INSERT INTO `students` (`id`, `st_user_id`, `st_school_id`, `st_class`, `st_contact_no`, `st_hcyknow`, `st_description`, `created_at`, `updated_at`) VALUES
-(1, 4, 1, 'dfg', '4545', 'hfg', 'hfh', '2017-02-13 07:06:23', '2017-02-13 07:06:23'),
-(2, 6, 21, 'fh', '45', 'dgdf', 'cvbcv', '2017-02-13 07:33:01', '2017-02-13 07:33:01'),
-(3, 7, 21, 'c', '3434', 'f', 'dfgdfg', '2017-02-13 07:52:48', '2017-02-13 07:52:48');
+INSERT INTO `students` (`id`, `st_user_id`, `st_reg_no`, `st_school_id`, `st_parent_id`, `st_class`, `st_contact_no`, `st_hcyknow`, `st_description`, `created_at`, `updated_at`) VALUES
+(1, 4, '101', 1, 3, '5', '8597485748', 'Contrary to popular belief, Lorem Ipsum is not simply random text. It has roots in a piece of classical Latin literature from 45 BC, making it over 2000 years old', 'Contrary to popular belief, Lorem Ipsum is not simply random text. It has roots in a piece of classical Latin literature from 45 BC, making it over 2000 years old', '2017-04-09 08:53:38', '2017-04-09 08:53:38'),
+(2, 5, '102', 1, 3, '6', '8597485748', 'Contrary to popular belief, Lorem Ipsum is not simply random text. It has roots in a piece of classical Latin literature from 45 BC, making it over 2000 years old', 'Contrary to popular belief, Lorem Ipsum is not simply random text. It has roots in a piece of classical Latin literature from 45 BC, making it over 2000 years old', '2017-04-09 08:54:51', '2017-04-09 08:54:51');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `teachers`
+--
+
+DROP TABLE IF EXISTS `teachers`;
+CREATE TABLE `teachers` (
+  `id` int(10) UNSIGNED NOT NULL,
+  `te_user_id` int(10) UNSIGNED NOT NULL,
+  `te_school_id` int(10) UNSIGNED NOT NULL,
+  `te_contact_no` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
+  `te_profession` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
+  `te_skillset` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
+  `te_level` int(11) NOT NULL,
+  `te_hcyknow` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 -- --------------------------------------------------------
 
@@ -4394,6 +4653,7 @@ INSERT INTO `students` (`id`, `st_user_id`, `st_school_id`, `st_class`, `st_cont
 -- Table structure for table `users`
 --
 
+DROP TABLE IF EXISTS `users`;
 CREATE TABLE `users` (
   `id` int(10) UNSIGNED NOT NULL,
   `first_name` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
@@ -4418,17 +4678,28 @@ CREATE TABLE `users` (
 --
 
 INSERT INTO `users` (`id`, `first_name`, `last_name`, `email`, `password`, `role`, `address`, `city`, `country_id`, `state_id`, `dob`, `image`, `status`, `remember_token`, `created_at`, `updated_at`) VALUES
-(1, 'admin', 'admin', 'admin123@gmail.com', '$2y$10$6Vtpgzq1tWrPkROdBCFTQ.gBNc3uNj0CtTBJtBhbXkGtHxOoBHtR2', 'superadmin', '', '', NULL, NULL, '0000-00-00', '', 0, NULL, '2017-02-13 05:53:08', '2017-02-13 05:53:08'),
-(2, 'jj', 'jjj', 'jj@gmail.com', '$2y$10$68F2/C3QsE8r2V1AljPAfuXPdeoUIPgGIDlLOA222z9DY1rDsvKqe', 'school_admin', '', '', NULL, NULL, '0000-00-00', '', 1, NULL, '2017-02-13 06:38:50', '2017-02-13 06:38:50'),
-(3, 'Ela', 'dfd', 'adsdfdmin123@gmail.com', '$2y$10$KJbcE2dYPbwIZnodNSvZouy2RXXTnjjHlH6I/.MI40Fa59tmLv6ce', 'school_admin', '', '', 356, 1306, '1951-04-01', '15069@@Tulips.jpg', 1, NULL, '2017-02-13 06:54:31', '2017-02-13 07:50:33'),
-(4, 'dfd', 'gdfg', 'addfgdmin123@gmail.com', '$2y$10$qaBUnSnQY/myJfTELOawou5CCJ6lXnNwyiEVaMhGu2NRLJ3n/e.Ca', 'student', 'addd', 'cityy', 356, 1316, '1955-06-01', '', 1, NULL, '2017-02-13 07:06:22', '2017-02-13 07:51:44'),
-(5, 'yyyyy', 'yyy', 'yyyy@gmail.com', '$2y$10$rV309Ii7IkdTp65qEJf.ZOa1d4xP7bvH4aYp7r0jNliCvx9l9TrOK', 'school_admin', '', '', 356, 1302, '1970-01-01', '5782@@Chrysanthemum.jpg', 1, NULL, '2017-02-13 07:08:22', '2017-02-13 07:08:22'),
-(6, 'rajj', 'rajj', 'raj@fff.cof', '$2y$10$r67CZj77NG5Ub1Q/paSXweENCbl6btJrtwGWSUy72BnBateww0J5O', 'student', 'add', 'city', 356, 1318, '1970-01-01', 'Penguins.jpg', 1, NULL, '2017-02-13 07:33:01', '2017-02-13 07:40:09'),
-(7, 'jobin123', 'G', 'jj@g.com', '$2y$10$L6Sa5wVCwb3S.laYm41xw./HzCPwptCZVxQXJcdj/TETE3zWQVFpu', 'student', 'add', 'cc', 356, 1302, '1970-01-01', 'Tulips.jpg', 1, NULL, '2017-02-13 07:52:48', '2017-02-13 07:56:12');
+(1, 'ela', 's', 'admin@gmail.com', '$2y$10$W1AdgSXuTVVdZ4YYQ5m53OQlrjHPRivNozaqdyG3sRqfLExmeJidG', 'superadmin', '', '', NULL, NULL, '0000-00-00', 'user.png', 0, '2dj1BwDP6DrXFTqgLQmqfx3H4A28k0ZhTm1pysHkOG2wixcec1XEiZAtjbGy', NULL, '2017-04-09 08:57:56'),
+(2, 'Tenant', 'Admin', 'tenant@gmail.com', '$2y$10$inKrUPc/o/vmcCNs2gU/DucMYxcC0JiPcCAzQAzjHe7DslmzKdXaW', 'tenant', '', '2', 356, 1313, '2017-09-04', '20564--circos-sample-58.png', 1, 'bKXbAf21GLyDmjFaGznHrPMnAHGT4qbpKF8tJz0XIWeRHgpeSaT9AnjkcBDO', '2017-04-09 08:44:44', '2017-04-09 09:12:21'),
+(3, 'Kishore', 'Sathya', 'parent@gmail.com', '$2y$10$FmvhWp7kX9E3agKVeTPhu.XhlneGJVkU6Guh4MrQ9I7eSZkWCKl9.', 'parent', 'kazhakuttam', '2', 356, 1313, '2017-04-10', '22629--sample-4.jpg', 1, NULL, '2017-04-09 08:51:04', '2017-04-09 08:51:04'),
+(4, 'Student', '1', 'student1@gmail.com', '$2y$10$TeANckJi66I1o5HlmdX2TuUq4ciNcj0mi2eTADVj0s5KyHnwYoTMW', 'student', 'Contrary to popular belief, Lorem Ipsum is not simply random text. It has roots in a piece of classical Latin literature from 45 BC, making it over 2000 years old', '2', 356, 1313, '2017-04-10', '32728--circos-sample-58.png', 1, NULL, '2017-04-09 08:53:38', '2017-04-09 08:53:38'),
+(5, 'Student', '2', 'student2@gmail.com', '$2y$10$X3FctPIrXZwDtXnpksPzpe23SZ6dwaHKVAoOUdBy7e4SIS.19CwYC', 'student', 'Kazhakuttam', '2', 356, 1313, '2017-04-06', '9860--images.jpeg', 1, NULL, '2017-04-09 08:54:51', '2017-04-09 08:54:51');
 
 --
 -- Indexes for dumped tables
 --
+
+--
+-- Indexes for table `attentances`
+--
+ALTER TABLE `attentances`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `attentances_att_user_id_foreign` (`att_user_id`);
+
+--
+-- Indexes for table `categories`
+--
+ALTER TABLE `categories`
+  ADD PRIMARY KEY (`id`);
 
 --
 -- Indexes for table `cities`
@@ -4445,10 +4716,54 @@ ALTER TABLE `countries`
   ADD PRIMARY KEY (`id`);
 
 --
+-- Indexes for table `courses`
+--
+ALTER TABLE `courses`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `courses_course_school_id_foreign` (`course_school_id`);
+
+--
+-- Indexes for table `events`
+--
+ALTER TABLE `events`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `events_event_school_id_foreign` (`event_school_id`);
+
+--
+-- Indexes for table `leaves`
+--
+ALTER TABLE `leaves`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `leaves_lv_user_id_foreign` (`lv_user_id`),
+  ADD KEY `leaves_lv_applicant_foreign` (`lv_applicant`);
+
+--
+-- Indexes for table `newsletters`
+--
+ALTER TABLE `newsletters`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `newsletters_nl_user_id_foreign` (`nl_user_id`);
+
+--
+-- Indexes for table `normal_users`
+--
+ALTER TABLE `normal_users`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `normal_users_nu_user_id_foreign` (`nu_user_id`);
+
+--
 -- Indexes for table `options`
 --
 ALTER TABLE `options`
   ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `parents`
+--
+ALTER TABLE `parents`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `parents_pa_user_id_foreign` (`pa_user_id`),
+  ADD KEY `parents_pa_school_id_foreign` (`pa_school_id`);
 
 --
 -- Indexes for table `password_resets`
@@ -4485,7 +4800,17 @@ ALTER TABLE `states`
 --
 ALTER TABLE `students`
   ADD PRIMARY KEY (`id`),
-  ADD KEY `students_st_user_id_foreign` (`st_user_id`);
+  ADD KEY `students_st_user_id_foreign` (`st_user_id`),
+  ADD KEY `students_st_school_id_foreign` (`st_school_id`),
+  ADD KEY `students_st_parent_id_foreign` (`st_parent_id`);
+
+--
+-- Indexes for table `teachers`
+--
+ALTER TABLE `teachers`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `teachers_te_user_id_foreign` (`te_user_id`),
+  ADD KEY `teachers_te_school_id_foreign` (`te_school_id`);
 
 --
 -- Indexes for table `users`
@@ -4501,30 +4826,70 @@ ALTER TABLE `users`
 --
 
 --
+-- AUTO_INCREMENT for table `attentances`
+--
+ALTER TABLE `attentances`
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
+--
+-- AUTO_INCREMENT for table `categories`
+--
+ALTER TABLE `categories`
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+--
 -- AUTO_INCREMENT for table `cities`
 --
 ALTER TABLE `cities`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 --
 -- AUTO_INCREMENT for table `countries`
 --
 ALTER TABLE `countries`
   MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=898;
 --
+-- AUTO_INCREMENT for table `courses`
+--
+ALTER TABLE `courses`
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+--
+-- AUTO_INCREMENT for table `events`
+--
+ALTER TABLE `events`
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+--
+-- AUTO_INCREMENT for table `leaves`
+--
+ALTER TABLE `leaves`
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+--
+-- AUTO_INCREMENT for table `newsletters`
+--
+ALTER TABLE `newsletters`
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT;
+--
+-- AUTO_INCREMENT for table `normal_users`
+--
+ALTER TABLE `normal_users`
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT;
+--
 -- AUTO_INCREMENT for table `options`
 --
 ALTER TABLE `options`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=20;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=17;
+--
+-- AUTO_INCREMENT for table `parents`
+--
+ALTER TABLE `parents`
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 --
 -- AUTO_INCREMENT for table `schools`
 --
 ALTER TABLE `schools`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=22;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 --
 -- AUTO_INCREMENT for table `school_admin`
 --
 ALTER TABLE `school_admin`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 --
 -- AUTO_INCREMENT for table `states`
 --
@@ -4534,15 +4899,26 @@ ALTER TABLE `states`
 -- AUTO_INCREMENT for table `students`
 --
 ALTER TABLE `students`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+--
+-- AUTO_INCREMENT for table `teachers`
+--
+ALTER TABLE `teachers`
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT;
 --
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 --
 -- Constraints for dumped tables
 --
+
+--
+-- Constraints for table `attentances`
+--
+ALTER TABLE `attentances`
+  ADD CONSTRAINT `attentances_att_user_id_foreign` FOREIGN KEY (`att_user_id`) REFERENCES `users` (`id`);
 
 --
 -- Constraints for table `cities`
@@ -4552,10 +4928,66 @@ ALTER TABLE `cities`
   ADD CONSTRAINT `cities_state_id_foreign` FOREIGN KEY (`state_id`) REFERENCES `states` (`id`);
 
 --
+-- Constraints for table `courses`
+--
+ALTER TABLE `courses`
+  ADD CONSTRAINT `courses_course_school_id_foreign` FOREIGN KEY (`course_school_id`) REFERENCES `schools` (`id`);
+
+--
+-- Constraints for table `events`
+--
+ALTER TABLE `events`
+  ADD CONSTRAINT `events_event_school_id_foreign` FOREIGN KEY (`event_school_id`) REFERENCES `schools` (`id`);
+
+--
+-- Constraints for table `leaves`
+--
+ALTER TABLE `leaves`
+  ADD CONSTRAINT `leaves_lv_applicant_foreign` FOREIGN KEY (`lv_applicant`) REFERENCES `users` (`id`),
+  ADD CONSTRAINT `leaves_lv_user_id_foreign` FOREIGN KEY (`lv_user_id`) REFERENCES `users` (`id`);
+
+--
+-- Constraints for table `newsletters`
+--
+ALTER TABLE `newsletters`
+  ADD CONSTRAINT `newsletters_nl_user_id_foreign` FOREIGN KEY (`nl_user_id`) REFERENCES `users` (`id`);
+
+--
+-- Constraints for table `normal_users`
+--
+ALTER TABLE `normal_users`
+  ADD CONSTRAINT `normal_users_nu_user_id_foreign` FOREIGN KEY (`nu_user_id`) REFERENCES `users` (`id`);
+
+--
+-- Constraints for table `parents`
+--
+ALTER TABLE `parents`
+  ADD CONSTRAINT `parents_pa_school_id_foreign` FOREIGN KEY (`pa_school_id`) REFERENCES `schools` (`id`),
+  ADD CONSTRAINT `parents_pa_user_id_foreign` FOREIGN KEY (`pa_user_id`) REFERENCES `users` (`id`);
+
+--
+-- Constraints for table `schools`
+--
+ALTER TABLE `schools`
+  ADD CONSTRAINT `schools_schl_city_id_foreign` FOREIGN KEY (`schl_city_id`) REFERENCES `cities` (`id`),
+  ADD CONSTRAINT `schools_schl_country_id_foreign` FOREIGN KEY (`schl_country_id`) REFERENCES `countries` (`id`),
+  ADD CONSTRAINT `schools_schl_state_id_foreign` FOREIGN KEY (`schl_state_id`) REFERENCES `states` (`id`),
+  ADD CONSTRAINT `schools_schl_user_id_foreign` FOREIGN KEY (`schl_user_id`) REFERENCES `users` (`id`);
+
+--
 -- Constraints for table `students`
 --
 ALTER TABLE `students`
+  ADD CONSTRAINT `students_st_parent_id_foreign` FOREIGN KEY (`st_parent_id`) REFERENCES `users` (`id`),
+  ADD CONSTRAINT `students_st_school_id_foreign` FOREIGN KEY (`st_school_id`) REFERENCES `schools` (`id`),
   ADD CONSTRAINT `students_st_user_id_foreign` FOREIGN KEY (`st_user_id`) REFERENCES `users` (`id`);
+
+--
+-- Constraints for table `teachers`
+--
+ALTER TABLE `teachers`
+  ADD CONSTRAINT `teachers_te_school_id_foreign` FOREIGN KEY (`te_school_id`) REFERENCES `schools` (`id`),
+  ADD CONSTRAINT `teachers_te_user_id_foreign` FOREIGN KEY (`te_user_id`) REFERENCES `users` (`id`);
 
 --
 -- Constraints for table `users`
