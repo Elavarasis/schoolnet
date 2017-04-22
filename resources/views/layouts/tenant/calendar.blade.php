@@ -241,6 +241,13 @@
   @if(count($allevents) > 0)
 	@foreach($allevents as $event)
 		<?php
+		if($event->event_endDate >= date('Y-m-d')){
+			$bg_color 		= '#00a65a';
+			$border_color 	= '#00a65a';
+		} else {
+			$bg_color 		= '#DA5757';
+			$border_color 	= '#DA5757';
+		}
 		$event_array[] = array(
 							'title' => $event->event_name,
 							'description' => $event->event_description,
@@ -250,8 +257,8 @@
 							'url' => '',
 							'image' => URL::to('/').'/public/images/event/medium--'.$event->event_image,
 							'allDay' => false,
-							'backgroundColor' => '#00a65a',
-							'borderColor' => '#00a65a',
+							'backgroundColor' => $bg_color,
+							'borderColor' => $border_color,
 						);
 		?>
 	@endforeach

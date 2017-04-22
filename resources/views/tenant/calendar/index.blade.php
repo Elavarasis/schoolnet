@@ -1,4 +1,4 @@
-@extends('layouts.admin.calendar')
+@extends('layouts.tenant.calendar')
 
 @section('content')
 
@@ -7,7 +7,7 @@
     <!-- Content Header (Page header) -->
     <section class="content-header">
       <h1>
-        Calendar
+        My Calendar
         <small>Control panel</small>
       </h1>
       <ol class="breadcrumb">
@@ -29,7 +29,14 @@
               <div id="external-events">
 				@if(count($cur_month_events) > 0 )
 					@foreach($cur_month_events as $event)
-						<div class="external-event bg-green">{{ $event->event_name }}</div>
+						<?php
+						if($event->event_endDate >= date('Y-m-d')){
+							$bg_color 		= 'green';
+						} else {
+							$bg_color 		= 'red';
+						}
+						?>
+						<div class="external-event bg-<?=$bg_color?>">{{ $event->event_name }}</div>
 					@endforeach
 				@endif
                 <!--<div class="external-event bg-green">Lunch</div>
