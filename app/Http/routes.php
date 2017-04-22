@@ -66,6 +66,12 @@ Route::group(array('namespace' => 'Tenant', 'prefix' => 'tenant', 'middleware' =
 	Route::get('attendances/export', 'Attendances@export');
 	Route::resource('attendances', 'Attendances');
 	
+	Route::get('marks/import', 'Marks@import');
+	Route::post('marks/import_now', 'Marks@import_now');
+	Route::get('marks/search', 'Marks@search');
+	Route::get('marks/export', 'Marks@export');
+	Route::resource('marks', 'Marks');
+	
 	Route::get('courses/sub/{id}', 'Courses@sub');
 	Route::resource('courses', 'Courses');
 	
