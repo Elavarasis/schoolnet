@@ -286,13 +286,17 @@
 <script>
     $(document).ready(function(){		
 
-		$(document).on('change','.country_status',function(e){
-            var status 		= $(this).val();
-			var country_id 	= $(this).attr('data-country');
+		$(document).on('click','.add_batch',function(e){
+			var fee_id 		= $('#fee_id').val();
+            var fee_reg_no 	= $('#register_number').val();
+			var fee_class 	= $('#class').val();
 			var token = "<?php echo e(csrf_token()); ?>";
-			url = '<?php echo url('/admin/countries/country_status'); ?>';
-            data = {id:country_id, s:status};
-			if(status != null && country_id != null){
+			url = '<?php echo url('/tenant/fee/add_batch'); ?>';
+            data = {rno:fee_reg_no, c:fee_class, f:fee_id};
+			if(fee_id == null || fee_id == ''){
+				$('#error').html('Please select Fee');
+				$('#error').show();
+			} else {
 				$.ajax({
 					url: url,
 					headers: {'X-CSRF-TOKEN': token},
@@ -300,8 +304,15 @@
 					type: 'POST',
 					datatype: 'JSON',
 					success: function (resp) {
-						if(country_id == 0){
-							location.reload();
+						var res = $.parseJSON(resp);
+						if(res.status == 'success'){
+							$('#error').hide();
+							$('#success').html(res.message);
+							$('#success').show();
+						} else {
+							$('#success').hide();
+							$('#error').html(res.message);
+							$('#error').show();
 						}
 					}
 				});
@@ -309,14 +320,17 @@
         });
 		
 		
-		$(document).on('change','.state_status',function(e){
-            var status 		= $(this).val();
-			var country_id 	= $(this).attr('data-country');
-			var state_id 	= $(this).attr('data-state');
+		$(document).on('click','.remove_batch',function(e){
+			var fee_id 		= $('#fee_id').val();
+            var fee_reg_no 	= $('#register_number').val();
+			var fee_class 	= $('#class').val();
 			var token = "<?php echo e(csrf_token()); ?>";
-			url = '<?php echo url('/admin/countries/state_status'); ?>';
-            data = {cid:country_id, id:state_id, s:status};
-			if(status != null && state_id != null){
+			url = '<?php echo url('/tenant/fee/remove_batch'); ?>';
+            data = {rno:fee_reg_no, c:fee_class, f:fee_id};
+			if(fee_id == null || fee_id == ''){
+				$('#error').html('Please select Fee');
+				$('#error').show();
+			} else {
 				$.ajax({
 					url: url,
 					headers: {'X-CSRF-TOKEN': token},
@@ -324,9 +338,42 @@
 					type: 'POST',
 					datatype: 'JSON',
 					success: function (resp) {
-						if(state_id == 0){
-							location.reload();
+						var res = $.parseJSON(resp);
+						if(res.status == 'success'){
+							$('#error').hide();
+							$('#success').html(res.message);
+							$('#success').show();
+						} else {
+							$('#success').hide();
+							$('#error').html(res.message);
+							$('#error').show();
 						}
+					}
+				});
+			}
+        });
+		
+		
+		$(document).on('click','.single_fee_id',function(e){
+			var user_id 	= $(this).data('u');
+			var fee_id 		= $('#single_fee_'+user_id).val();
+			var token 		= "<?php echo e(csrf_token()); ?>";
+			url = '<?php echo url('/tenant/fee/add_single'); ?>';
+            data = {u:user_id, f:fee_id};
+			if(fee_id == null || fee_id == '' || user_id == null || user_id == ''){
+				$('#msg_'+user_id).remove();
+				$('#btn_'+user_id).after( "<p id='msg_"+user_id+"'>Please select Fee</p>" );
+			} else {
+				$.ajax({
+					url: url,
+					headers: {'X-CSRF-TOKEN': token},
+					data: data,
+					type: 'POST',
+					datatype: 'JSON',
+					success: function (resp) {
+						var res = $.parseJSON(resp);
+						$('#msg_'+user_id).remove();
+						$('#btn_'+user_id).after( "<p id='msg_"+user_id+"'>"+res.message+"</p>" );
 					}
 				});
 			}

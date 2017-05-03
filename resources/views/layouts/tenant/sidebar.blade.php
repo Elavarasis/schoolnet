@@ -141,6 +141,21 @@
           </ul>
         </li>
 		
+		<li class="treeview">
+          <a href="#">
+            <i class="fa fa-share"></i> <span>Manage Fee</span>
+                <span class="pull-right-container">
+                  <i class="fa fa-angle-left pull-right"></i>
+                </span>
+          </a>
+          <ul class="treeview-menu">
+			<li><a href="{{ route('tenant.fee.index') }}"><i class="fa fa-circle-o"></i> <span>Manage Fee</span></a></li>
+			<li><a href="{{ route('tenant.fee.create') }}"><i class="fa fa-circle-o"></i> <span>Add Fee</span></a></li>
+			<li><a href="{{ url('tenant/fee/assign_fee') }}"><i class="fa fa-circle-o"></i> <span>Assign Fee</span></a></li>
+			<li><a href="{{ url('tenant/fee/pay_fee') }}"><i class="fa fa-circle-o"></i> <span>Pay Fee</span></a></li>
+          </ul>
+        </li>
+		
 		<li><a href="{{ route('tenant.calendars.index') }}"><i class="fa fa-circle-o"></i> <span>My Calendar</span></a></li> 
 		
       </ul>

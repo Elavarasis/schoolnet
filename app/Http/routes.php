@@ -79,6 +79,12 @@ Route::group(array('namespace' => 'Tenant', 'prefix' => 'tenant', 'middleware' =
 	Route::resource('parents', 'SN_Parents');
 	Route::resource('students', 'Students');
 	Route::resource('teachers', 'Teachers');
+	
+	Route::get('fee/assign_fee', 'Fees@assign_fee');
+	Route::post('fee/add_batch/', 'Fees@add_batch');
+	Route::post('fee/remove_batch/', 'Fees@remove_batch');
+	Route::post('fee/add_single/', 'Fees@add_single');
+	Route::resource('fee', 'Fees');
 });
 
 

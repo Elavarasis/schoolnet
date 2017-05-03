@@ -29,49 +29,49 @@
 
               <div class="box-body">
                 <div class="form-group">
-                  <label for="exampleInputEmail1">Student Name:</label>
+                  <label for="exampleInputEmail1" style="width:20%">Student Name:</label>
                   <?php echo e($leave->first_name); ?> <?php echo e($leave->last_name); ?>
 
                 </div>
                 
                 <div class="form-group">
-                  <label for="exampleInputEmail1">Student Email:</label>
+                  <label for="exampleInputEmail1" style="width:20%">Student Email:</label>
                   <?php echo e($leave->email); ?>
 
                 </div>
 				
 				<div class="form-group">
-                  <label for="exampleInputEmail1">Total Days/Hours:</label>
+                  <label for="exampleInputEmail1" style="width:20%">Total Days/Hours:</label>
                   <?php echo e($leave->lv_totaldays); ?>
 
                 </div>
 				
 				<div class="form-group">
-                  <label for="exampleInputEmail1">From:</label>
+                  <label for="exampleInputEmail1" style="width:20%">From:</label>
                   <?php echo e($leave->lv_start_date); ?> <?php echo e($leave->lv_start_time); ?>
 
                 </div>
 				
 				<div class="form-group">
-                  <label for="exampleInputEmail1">To:</label>
+                  <label for="exampleInputEmail1" style="width:20%">To:</label>
                   <?php echo e($leave->lv_end_date); ?> <?php echo e($leave->lv_end_time); ?>
 
                 </div>
 				
 				<div class="form-group">
-                  <label for="exampleInputEmail1">Reason for Leave:</label>
+                  <label for="exampleInputEmail1" style="width:20%">Reason for Leave:</label>
                   <?php echo e($leave->lv_reason); ?>
 
                 </div>
 				
 				<div class="form-group">
-                  <label for="exampleInputEmail1">Applicant:</label>
+                  <label for="exampleInputEmail1" style="width:20%">Applicant:</label>
                   <?php echo e($leave->apl_first_name); ?> <?php echo e($leave->apl_last_name); ?>
 
                 </div>
 				
 				<div class="form-group">
-                  <label for="exampleInputEmail1">Applicant Email:</label>
+                  <label for="exampleInputEmail1" style="width:20%">Applicant Email:</label>
                   <?php echo e($leave->apl_email); ?>
 
                 </div>
@@ -89,7 +89,7 @@
                 </div>
 				
 				<div class="form-group">
-                  <label for=" ">Remarks</label>
+                  <label for=" ">Staff's Remark</label>
 				  <?php echo Form::textarea('lv_remarks',null,['placeholder' => 'Remarks','class'=>'form-control', 'rows' => 5]); ?>
 
                 </div>
