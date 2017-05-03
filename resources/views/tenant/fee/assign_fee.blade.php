@@ -39,7 +39,7 @@
 						
 						<div class="form-group col-md-2">
 						  <label for=" ">Class/Division</label>
-						  {!! Form::select('class', [null=>'Select'] + $divisions, $class, array('class' => 'form-control','id' => 'class')) !!}
+						  {!! Form::select('class', [null=>'All'] + $divisions, $class, array('class' => 'form-control','id' => 'class')) !!}
 						</div>
 						
 						<div class="form-group col-md-1">
