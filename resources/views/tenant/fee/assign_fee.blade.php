@@ -56,11 +56,11 @@
 					</div>
 						
 					<div class="form-group col-md-1">
-						<a href="javascript:void(0)" class="btn btn-primary add_batch" style="margin-top:24px;">Add to All</a>
+						<a href="javascript:void(0)" class="btn btn-success add_batch" style="margin-top:24px;">Add to All</a>
 					</div>
 					
 					<div class="form-group col-md-1">
-						<a href="javascript:void(0)" class="btn btn-primary remove_batch" style="margin-top:24px;">Remove from All</a>
+						<a href="javascript:void(0)" class="btn btn-danger remove_batch" style="margin-top:24px;">Remove from All</a>
 					</div>
 					@endif
 					
@@ -100,7 +100,7 @@
 							<td>{{ $stud->first_name }} {{ $stud->last_name }}</td>
 							<td>{{ $stud->st_class }}</td>
 							<td>
-							{!! Form::select('single_fee_val', [null=>'Select'] + $all_fee, null, array('class' => 'form-control', 'id' => "single_fee_$stud->id")) !!}
+							{!! Form::select('single_fee_val', [null=>'Select Fee'] + $all_fee, null, array('class' => 'form-control', 'id' => "single_fee_$stud->id")) !!}
 							<a href="javascript:void(0)" class="btn-sm btn-primary single_fee_id" id="btn_{{ $stud->id }}" data-u="{{ $stud->id }}">Assign</a>
 							</td>
 						</tr>

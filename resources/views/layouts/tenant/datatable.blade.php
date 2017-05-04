@@ -275,6 +275,7 @@
     $(document).ready(function(){		
 
 		$(document).on('click','.add_batch',function(e){
+			
 			var fee_id 		= $('#fee_id').val();
             var fee_reg_no 	= $('#register_number').val();
 			var fee_class 	= $('#class').val();
@@ -285,26 +286,29 @@
 				$('#error').html('Please select Fee');
 				$('#error').show();
 			} else {
-				$.ajax({
-					url: url,
-					headers: {'X-CSRF-TOKEN': token},
-					data: data,
-					type: 'POST',
-					datatype: 'JSON',
-					success: function (resp) {
-						var res = $.parseJSON(resp);
-						if(res.status == 'success'){
-							$('#error').hide();
-							$('#success').html(res.message);
-							$('#success').show();
-						} else {
-							$('#success').hide();
-							$('#error').html(res.message);
-							$('#error').show();
+				if (confirm('Are you sure you want to add this fee for All selected students?')) {
+					$.ajax({
+						url: url,
+						headers: {'X-CSRF-TOKEN': token},
+						data: data,
+						type: 'POST',
+						datatype: 'JSON',
+						success: function (resp) {
+							var res = $.parseJSON(resp);
+							if(res.status == 'success'){
+								$('#error').hide();
+								$('#success').html(res.message);
+								$('#success').show();
+							} else {
+								$('#success').hide();
+								$('#error').html(res.message);
+								$('#error').show();
+							}
 						}
-					}
-				});
+					});
+				}
 			}
+			
         });
 		
 		
@@ -319,25 +323,27 @@
 				$('#error').html('Please select Fee');
 				$('#error').show();
 			} else {
-				$.ajax({
-					url: url,
-					headers: {'X-CSRF-TOKEN': token},
-					data: data,
-					type: 'POST',
-					datatype: 'JSON',
-					success: function (resp) {
-						var res = $.parseJSON(resp);
-						if(res.status == 'success'){
-							$('#error').hide();
-							$('#success').html(res.message);
-							$('#success').show();
-						} else {
-							$('#success').hide();
-							$('#error').html(res.message);
-							$('#error').show();
+				if (confirm('Are you sure you want to remove this fee from All selected students?')) {
+					$.ajax({
+						url: url,
+						headers: {'X-CSRF-TOKEN': token},
+						data: data,
+						type: 'POST',
+						datatype: 'JSON',
+						success: function (resp) {
+							var res = $.parseJSON(resp);
+							if(res.status == 'success'){
+								$('#error').hide();
+								$('#success').html(res.message);
+								$('#success').show();
+							} else {
+								$('#success').hide();
+								$('#error').html(res.message);
+								$('#error').show();
+							}
 						}
-					}
-				});
+					});
+				}
 			}
         });
 		
