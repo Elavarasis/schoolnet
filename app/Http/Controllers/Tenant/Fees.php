@@ -176,7 +176,9 @@ class Fees extends Controller
 									'fs_user_id' => $stud->id,
 									'fs_status' => 0,
 									];
-					}					
+					} else {
+						DB::table('fee_students')->where('fs_fee_id', $fee_id)->where('fs_user_id', $stud->id)->update(['fs_status' => 0]);
+					}
 				}
 			}
 			
@@ -189,8 +191,8 @@ class Fees extends Controller
 							);
 			} else {	
 				$return = array(
-							'status' => 'error',
-							'message' => 'Something went wrong, please try again later'
+							'status' => 'success',
+							'message' => 'Updated'
 							);
 			}
 		} else {
@@ -293,6 +295,15 @@ class Fees extends Controller
 		}
 		
 		echo json_encode($return);
+    }
+	
+	
+	public function pay_fee()
+    {
+        $user_id	= 	Auth::user()->id;
+		$school		= 	School::where('schl_user_id',$user_id)->first();		
+		$fee 		= 	Fee::where('id',$id)->where('fee_school_id',$school->id)->first();
+        return view('tenant.fee.addedit',compact('fee','school'));
     }
 	
 }

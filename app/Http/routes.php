@@ -84,6 +84,8 @@ Route::group(array('namespace' => 'Tenant', 'prefix' => 'tenant', 'middleware' =
 	Route::post('fee/add_batch/', 'Fees@add_batch');
 	Route::post('fee/remove_batch/', 'Fees@remove_batch');
 	Route::post('fee/add_single/', 'Fees@add_single');
+	Route::get('fee/pay_fee/', 'Fees@pay_fee');
+	Route::post('fee/do_payment/', 'Fees@do_payment');
 	Route::resource('fee', 'Fees');
 });
 
