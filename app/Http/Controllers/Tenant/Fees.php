@@ -270,22 +270,60 @@ class Fees extends Controller
 			
 			if(!$exists){
 				$insert[] 	= 	[
-							'fs_fee_id' => $fee_id,
-							'fs_user_id' => $user_id,
-							'fs_status' => 0,
-							];
-				DB::table('fee_students')->insert($insert);
-				$return = array(
-								'status' => 'success',
-								'message' => 'Assigned'
-								);	
+								'fs_fee_id' => $fee_id,
+								'fs_user_id' => $user_id,
+								'fs_status' => 0,
+								];
+				DB::table('fee_students')->insert($insert);	
 			} else {
-				$return = array(
-								'status' => 'success',
-								'message' => 'Already Assigned'
-								);
+				DB::table('fee_students')->where('fs_fee_id', $fee_id)->where('fs_user_id', $user_id)->update(['fs_status' => 0]);
 			}
-								
+			
+			$return = array(
+							'status' => 'success',
+							'message' => 'Assigned'
+							);								
+
+		} else {
+			$return = array(
+							'status' => 'error',
+							'message' => 'Try Again Later'
+							);
+		}
+		
+		echo json_encode($return);
+    }
+	
+	
+	public function add_single(Request $request)
+    {
+		$data 		= 	$request->all();
+		$user_id	=	$data['u'];
+		$fee_id		=	$data['f'];
+		
+		$logged_user_id	= 	Auth::user()->id;
+		$school		= 	School::where('schl_user_id',$logged_user_id)->first();		
+		$fee 		= 	Fee::where('id',$fee_id)->where('fee_school_id',$school->id)->first();
+		
+		if($fee){
+			
+			$exists		= 	Fee_student::where('fs_fee_id',$fee_id)->where('fs_user_id',$user_id)->first();
+			
+			if(!$exists){
+				$insert[] 	= 	[
+								'fs_fee_id' => $fee_id,
+								'fs_user_id' => $user_id,
+								'fs_status' => 0,
+								];
+				DB::table('fee_students')->insert($insert);	
+			} else {
+				DB::table('fee_students')->where('fs_fee_id', $fee_id)->where('fs_user_id', $user_id)->update(['fs_status' => 0]);
+			}
+			
+			$return = array(
+							'status' => 'success',
+							'message' => 'Assigned'
+							);								
 
 		} else {
 			$return = array(
