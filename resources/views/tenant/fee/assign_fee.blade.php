@@ -88,7 +88,8 @@
 					<th>Reg No</th>
 					<th>Name</th>
 					<th>Class</th>
-					<th width="280px">Assign Fee</th>
+					<th width="250px">Assign Fee</th>
+					<th width="250px">Assigned Fee</th>
                 </tr>
                 </thead>
                 <tbody>
@@ -103,6 +104,10 @@
 							{!! Form::select('single_fee_val', [null=>'Select Fee'] + $all_fee, null, array('class' => 'form-control', 'id' => "single_fee_$stud->id")) !!}
 							<a href="javascript:void(0)" class="btn-sm btn-primary single_fee_id" id="btn_{{ $stud->id }}" data-u="{{ $stud->id }}">Assign</a>
 							</td>
+							<td>
+							{!! Form::select('single_fee_del', [null=>'Select Fee'] + $all_fee, null, array('class' => 'form-control', 'id' => "single_del_$stud->id")) !!}
+							<a href="javascript:void(0)" class="btn-sm btn-danger single_fee_del" id="btndel_{{ $stud->id }}" data-u="{{ $stud->id }}">Remove</a>
+							</td>
 						</tr>
 					@endforeach
                 </tbody>
@@ -113,6 +118,7 @@
 					<th>Name</th>
 					<th>Class</th>
 					<th>Assign Fee</th>
+					<th>Assigned Fee</th>
                 </tr>
                 </tfoot>
               </table>
