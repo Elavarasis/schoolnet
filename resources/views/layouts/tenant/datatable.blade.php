@@ -348,12 +348,144 @@
         });
 		
 		
-		$(document).on('click','.single_fee_id',function(e){
+		$(document).on('click','.single_fee_add',function(e){
 			var user_id 	= $(this).data('u');
 			var fee_id 		= $('#single_fee_'+user_id).val();
 			var token 		= "{{ csrf_token() }}";
+			
 			url = '<?php echo url('/tenant/fee/add_single'); ?>';
             data = {u:user_id, f:fee_id};
+			if(fee_id == null || fee_id == '' || user_id == null || user_id == ''){
+				$('#msg_'+user_id).remove();
+				$('#btn_'+user_id).after( "<p id='msg_"+user_id+"'>Please select Fee</p>" );
+			} else {
+				$.ajax({
+					url: url,
+					headers: {'X-CSRF-TOKEN': token},
+					data: data,
+					type: 'POST',
+					datatype: 'JSON',
+					success: function (resp) {
+						var res = $.parseJSON(resp);
+						$('#msg_'+user_id).remove();
+						$('#btn_'+user_id).after( "<p id='msg_"+user_id+"'>"+res.message+"</p>" );
+						$('#single_fee_'+user_id+' option[value="'+fee_id+'"]').remove();
+					}
+				});
+			}
+        });
+		
+		
+		$(document).on('click','.single_fee_del',function(e){
+			var user_id 	= $(this).data('u');
+			var fee_id 		= $('#single_del_'+user_id).val();
+			var token 		= "{{ csrf_token() }}";
+			url = '<?php echo url('/tenant/fee/remove_single'); ?>';
+            data = {u:user_id, f:fee_id};
+			if(fee_id == null || fee_id == '' || user_id == null || user_id == ''){
+				$('#msg_'+user_id).remove();
+				$('#btndel_'+user_id).after( "<p id='msg_"+user_id+"'>Please select Fee</p>" );
+			} else {
+				$.ajax({
+					url: url,
+					headers: {'X-CSRF-TOKEN': token},
+					data: data,
+					type: 'POST',
+					datatype: 'JSON',
+					success: function (resp) {
+						var res = $.parseJSON(resp);
+						$('#msg_'+user_id).remove();
+						$('#btndel_'+user_id).after( "<p id='msg_"+user_id+"'>"+res.message+"</p>" );
+						$('#single_del_'+user_id+' option[value="'+fee_id+'"]').remove();
+					}
+				});
+			}
+        });
+		
+		
+		
+		$(document).on('click','.pay_batch',function(e){
+			
+			var fee_id 		= $('#fee_id').val();
+            var fee_reg_no 	= $('#register_number').val();
+			var fee_class 	= $('#class').val();
+			var token = "{{ csrf_token() }}";
+			url = '<?php echo url('/tenant/fee/pay_batch'); ?>';
+            data = {rno:fee_reg_no, c:fee_class, f:fee_id};
+			if(fee_id == null || fee_id == ''){
+				$('#error').html('Please select Fee');
+				$('#error').show();
+			} else {
+				if (confirm('Are you sure you want to pay this fee for All selected students?')) {
+					$.ajax({
+						url: url,
+						headers: {'X-CSRF-TOKEN': token},
+						data: data,
+						type: 'POST',
+						datatype: 'JSON',
+						success: function (resp) {
+							var res = $.parseJSON(resp);
+							if(res.status == 'success'){
+								$('#error').hide();
+								$('#success').html(res.message);
+								$('#success').show();
+							} else {
+								$('#success').hide();
+								$('#error').html(res.message);
+								$('#error').show();
+							}
+						}
+					});
+				}
+			}
+			
+        });
+		
+		
+		$(document).on('click','.unpay_batch',function(e){
+			var fee_id 		= $('#fee_id').val();
+            var fee_reg_no 	= $('#register_number').val();
+			var fee_class 	= $('#class').val();
+			var token = "{{ csrf_token() }}";
+			url = '<?php echo url('/tenant/fee/unpay_batch'); ?>';
+            data = {rno:fee_reg_no, c:fee_class, f:fee_id};
+			if(fee_id == null || fee_id == ''){
+				$('#error').html('Please select Fee');
+				$('#error').show();
+			} else {
+				if (confirm('Are you sure you want to remove this fee from All selected students?')) {
+					$.ajax({
+						url: url,
+						headers: {'X-CSRF-TOKEN': token},
+						data: data,
+						type: 'POST',
+						datatype: 'JSON',
+						success: function (resp) {
+							var res = $.parseJSON(resp);
+							if(res.status == 'success'){
+								$('#error').hide();
+								$('#success').html(res.message);
+								$('#success').show();
+							} else {
+								$('#success').hide();
+								$('#error').html(res.message);
+								$('#error').show();
+							}
+						}
+					});
+				}
+			}
+        });
+		
+		
+		$(document).on('click','.single_pay_add',function(e){
+			var user_id 	= $(this).data('u');
+			var fee_id 		= $('#single_pay_'+user_id).val();
+			var fee_amount	= $('#single_amount_'+user_id).val();
+			var token 		= "{{ csrf_token() }}";
+			
+			url = '<?php echo url('/tenant/fee/pay_single'); ?>';
+            data = {u:user_id, f:fee_id, a:fee_amount};
 			if(fee_id == null || fee_id == '' || user_id == null || user_id == ''){
 				$('#msg_'+user_id).remove();
 				$('#btn_'+user_id).after( "<p id='msg_"+user_id+"'>Please select Fee</p>" );
@@ -372,6 +504,7 @@
 				});
 			}
         });
+		
 		
     });
 </script>

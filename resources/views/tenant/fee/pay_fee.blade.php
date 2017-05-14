@@ -7,7 +7,7 @@
     <!-- Content Header (Page header) -->
     <section class="content-header">
       <h1>
-        Assign Fee
+        Pay Fee
         <small>Settings</small>
       </h1>
       <ol class="breadcrumb">
@@ -23,11 +23,11 @@
         <div class="col-xs-12">
           <div class="box">
             <div class="box-header">
-				<h3 class="box-title">Assign Fee</h3>
+				<h3 class="box-title">Pay Fee</h3>
 				<p class="alert alert-success" id="success" style="display:none;"></p>
 				<p class="alert alert-danger" id="error" style="display:none;"></p>
 				<div class="filter">
-					{!! Form::open(array('files'=> true, 'url' => 'tenant/fee/assign_fee', 'method' => 'get')) !!}
+					{!! Form::open(array('files'=> true, 'url' => 'tenant/fee/pay_fee', 'method' => 'get')) !!}
 						<?php
 						$register_number 	= (isset($data['register_number'])) ? $data['register_number'] : '';
 						$class			 	= (isset($data['class'])) ? $data['class'] : '';					
@@ -56,11 +56,11 @@
 					</div>
 						
 					<div class="form-group col-md-1">
-						<a href="javascript:void(0)" class="btn btn-success add_batch" style="margin-top:24px;">Add to All</a>
+						<a href="javascript:void(0)" class="btn btn-success pay_batch" style="margin-top:24px;">Make All<br> as Paid</a>
 					</div>
 					
 					<div class="form-group col-md-1">
-						<a href="javascript:void(0)" class="btn btn-danger remove_batch" style="margin-top:24px;">Remove from All</a>
+						<a href="javascript:void(0)" class="btn btn-danger unpay_batch" style="margin-top:24px;">Make All<br> as Unpaid</a>
 					</div>
 					@endif
 					
@@ -88,28 +88,29 @@
 					<th>Reg No</th>
 					<th>Name</th>
 					<th>Class</th>
-					<th width="250px">Assign Fee</th>
-					<th width="250px">Assigned Fee</th>
+					<th width="350px">Pay Fee</th>
+					<!--<th width="250px">Remove Payment</th>-->
                 </tr>
                 </thead>
                 <tbody>
 					{{--*/ $count = 0 /*--}}	
 					@foreach($students as $key => $stud)
 						
-						<?php $assigned_fee = $unassigned_fee = array(); ?>
+						<?php $paid_fee = $unpaid_fee = array(); ?>
 						
 						@if(count($all_fee) > 0)
 							@foreach($all_fee as $key => $fee)
 								<?php
-								$assigned =	DB::table('fee_students')
-												->select('id')
-												->where('fs_fee_id', $key)
-												->where('fs_user_id', $stud->id)
-												->first();
-								if(count($assigned) > 0){
-									$assigned_fee[$key]	= $fee;	
+								$single_fee = 	DB::table('fee')->where('id',$key)->first();								
+								$total_fee	=	$single_fee->fee_amount;
+								$paid 		= 	DB::table('fee_paid')->where('fp_user_id',$stud->id)->where('fp_fee_id',$single_fee->id)->sum('fp_amount');
+					
+								$balance_fee=	$total_fee - $paid;
+
+								if($balance_fee > 0){
+									$unpaid_fee[$key]	= $fee;
 								} else {
-									$unassigned_fee[$key]	= $fee;	
+									$paid_fee[$key]	= $fee;
 								}	
 								?>
 							@endforeach
@@ -121,13 +122,19 @@
 							<td>{{ $stud->first_name }} {{ $stud->last_name }}</td>
 							<td>{{ $stud->st_class }}</td>
 							<td>
-							{!! Form::select('single_fee_val', [null=>'Select Fee'] + $unassigned_fee, null, array('class' => 'form-control', 'id' => "single_fee_$stud->id")) !!}
-							<a href="javascript:void(0)" class="btn-sm btn-primary single_fee_add" id="btn_{{ $stud->id }}" data-u="{{ $stud->id }}">Assign</a>
+							{!! Form::select('single_fee_val', [null=>'Select Fee'] + $unpaid_fee, null, array('class' => 'form-control', 'id' => "single_pay_$stud->id")) !!}
+							
+							{!! Form::text('fp_amount', null, array('placeholder' => 'Amount','class' => 'form-control', 'id' => "single_amount_$stud->id")) !!}
+							
+							<a href="javascript:void(0)" class="btn-sm btn-primary single_pay_add" id="btn_{{ $stud->id }}" data-u="{{ $stud->id }}">Paid</a>
+							
+							<p class="help-block">Amount field blank means full amount paid</p>
+							
 							</td>
-							<td>
-							{!! Form::select('single_fee_del', [null=>'Select Fee'] + $assigned_fee, null, array('class' => 'form-control', 'id' => "single_del_$stud->id")) !!}
+							<!--<td>
+							{!! Form::select('single_fee_del', [null=>'Select Fee'] + $paid_fee, null, array('class' => 'form-control', 'id' => "single_del_$stud->id")) !!}
 							<a href="javascript:void(0)" class="btn-sm btn-danger single_fee_del" id="btndel_{{ $stud->id }}" data-u="{{ $stud->id }}">Remove</a>
-							</td>
+							</td>-->
 						</tr>
 					@endforeach
                 </tbody>
@@ -137,8 +144,8 @@
 					<th>Reg No</th>
 					<th>Name</th>
 					<th>Class</th>
-					<th>Assign Fee</th>
-					<th>Assigned Fee</th>
+					<th>Pay Fee</th>
+					<!--<th>Remove Payment</th>-->
                 </tr>
                 </tfoot>
               </table>
