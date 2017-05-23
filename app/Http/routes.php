@@ -102,6 +102,13 @@ Route::group(array('namespace' => 'Student', 'prefix' => 'stud', 'middleware' =>
 	Route::post('home/reset_password/', 'Home@reset_password');
 	Route::resource('home', 'Home');
 	Route::resource('leaves', 'Leaves');
+	
+	Route::get('marks/import', 'Marks@import');
+	Route::post('marks/import_now', 'Marks@import_now');
+	Route::get('marks/search', 'Marks@search');
+	Route::get('marks/export', 'Marks@export');
+	Route::resource('marks', 'Marks');
+	
 });
 
 /*
