@@ -86,12 +86,15 @@ class Courses extends Controller
 		$cat_id = Course::create([
             'course_title' => $data['course_title'],
             'course_slug' => $course_slug,
+			'course_short_desc' => $data['course_short_desc'],
 			'course_description' => $data['course_description'],
 			'course_duration' => $data['course_duration'],
 			'course_fee' => $data['course_fee'],
             'course_parent' => (isset($data['course_parent'])) ? $data['course_parent'] : 0,
             'course_image' => (isset($course_image)) ? $course_image : '',
+			'course_video_url' => $data['course_video_url'],
 			'course_school_id' => $data['course_school_id'],
+			'course_featured' => $data['course_featured'],
             'course_status' => $data['course_status'],
         ])->id;
 		
@@ -184,11 +187,14 @@ class Courses extends Controller
 		
 		$course = [
 				'course_title' => $data['course_title'],
+				'course_short_desc' => $data['course_short_desc'],
 				'course_description' => $data['course_description'],
 				'course_duration' => $data['course_duration'],
 				'course_fee' => $data['course_fee'],
 				'course_parent' => (isset($data['course_parent'])) ? $data['course_parent'] : 0,
 				'course_school_id' => $data['course_school_id'],
+				'course_video_url' => $data['course_video_url'],
+				'course_featured' => $data['course_featured'],
 				'course_status' => $data['course_status'],
 				];
 		

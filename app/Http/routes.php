@@ -111,6 +111,23 @@ Route::group(array('namespace' => 'Student', 'prefix' => 'stud', 'middleware' =>
 	
 });
 
+Route::group(array('middleware' => ['auth']), function()
+{
+    Route::resource('home', 'Home');
+	Route::get('friends', 'Friends@index');
+	Route::post('search_nonfriends', 'Friends@search_nonfriends');
+	Route::post('send_friend_req', 'Friends@send_friend_req');
+	Route::post('accept_friend_req', 'Friends@accept_friend_req');
+	Route::get('courses/view/{id}', 'Courses@view');
+	Route::get('courses/tutors/{id}', 'Courses@tutors');
+	Route::get('courses/tutor/{id}', 'Courses@tutor');
+});
+
+Route::get('home', 'Home@index');
+Route::post('home/dologin', 'Home@dologin');
+
+Route::any('friends/testing', 'Friends@testing');
+
 /*
 Sample routings#
 
