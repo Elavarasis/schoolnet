@@ -69,8 +69,13 @@
                 </div>
 				
 				<div class="form-group">
+                  <label for=" ">Short Description</label>
+				  {!! Form::textarea('course_short_desc',null,['placeholder' => 'Short Description','class'=>'form-control', 'rows' => 3]) !!}
+                </div>
+				
+				<div class="form-group">
                   <label for=" ">Description</label>
-				  {!! Form::textarea('course_description',null,['placeholder' => 'Course Description','class'=>'form-control', 'rows' => 6]) !!}
+				  {!! Form::textarea('course_description',null,['placeholder' => 'Course Description','class'=>'form-control', 'rows' => 7]) !!}
                 </div>
 				
 				<div class="form-group">
@@ -99,6 +104,17 @@
 					<img width="100px" src="{{ URL::to('/') }}/public/images/course/medium--{{$course->course_image}}" alt="" />
 				  @endif
 				  {!! Form::file('course_image', ['class' => 'form-control']) !!}
+                </div>
+				
+				<div class="form-group">
+                  <label for=" ">Video Url</label>
+                  {!! Form::text('course_video_url', null, array('placeholder' => 'Video Url','class' => 'form-control')) !!}
+                </div>
+				
+				<div class="checkbox">
+                  <label style="width:100px;">Featured</label>
+                  {!! Form::hidden('course_featured', '0') !!} <!-- checkbox will pass this value when it's not checked -->
+				  {!! Form::checkbox('course_featured', '1', null, ['class' => 'form-control-block']) !!}
                 </div>
 				
 				<div class="checkbox">
