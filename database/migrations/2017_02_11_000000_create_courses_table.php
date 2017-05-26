@@ -16,12 +16,15 @@ class CreateCoursesTable extends Migration
             $table->increments('id');
             $table->string('course_title');
 			$table->string('course_slug');
+			$table->string('course_short_desc');
             $table->string('course_description');
             $table->string('course_duration');
             $table->double('course_fee');
 			$table->integer('course_parent')->default(0);
 			$table->string('course_image');
+			$table->string('course_video_url');
 			$table->integer('course_school_id')->unsigned();
+			$table->integer('course_featured')->default(0);
 			$table->integer('course_status')->default(0);
             $table->timestamps();
         });

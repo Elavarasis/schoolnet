@@ -25,6 +25,7 @@ class CreateUsersTable extends Migration
 			$table->integer('state_id')->unsigned()->nullable();
 			$table->date('dob');
             $table->string('image'); 
+			$table->integer('school_id')->unsigned()->default(0);
 			$table->integer('status')->default(0);
 			$table->rememberToken();
             $table->timestamps();
@@ -33,7 +34,8 @@ class CreateUsersTable extends Migration
 		Schema::table('users', function (Blueprint $table) {
 			$table->foreign('country_id')->references('id')->on('countries');
 			$table->foreign('state_id')->references('id')->on('states');
-		});
+			$table->foreign('school_id')->references('id')->on('schools');
+		});		
 		
 		DB::table('users')->insert(
 						array(
