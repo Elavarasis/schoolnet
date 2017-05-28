@@ -31,6 +31,9 @@ class Courses extends Controller
     }
 
 
+    public function courses_list(){
+		return view('course_list');
+	}
     public function view($id)
     {
 		$user_id	= 	Auth::user()->id;

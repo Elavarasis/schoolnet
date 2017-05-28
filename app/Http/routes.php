@@ -118,6 +118,9 @@ Route::group(array('middleware' => ['auth']), function()
 	Route::post('search_nonfriends', 'Friends@search_nonfriends');
 	Route::post('send_friend_req', 'Friends@send_friend_req');
 	Route::post('accept_friend_req', 'Friends@accept_friend_req');
+	Route::get('profile', 'Profile@index');
+	Route::get('help', 'Profile@help');
+	Route::get('courses', 'Courses@courses_list');
 	Route::get('courses/view/{id}', 'Courses@view');
 	Route::get('courses/tutors/{id}', 'Courses@tutors');
 	Route::get('courses/tutor/{id}', 'Courses@tutor');
