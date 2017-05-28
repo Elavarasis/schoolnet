@@ -23,9 +23,11 @@ if($active_users){
 		}
 		
 		if(!$friend){
-			echo '<img width="50px" src="'.$image_path.'/'.$user->image.'" alt="" />
-					'.$user->first_name.' &nbsp; '.$user->last_name;
-			echo '<a href="javascript:void(0)" class="send_req" data-uid="'.$user->id.'">Send Request</a><br>';
+			echo '<div class="row"><div class="col-lg-2"><img width="124px" class="img-responsive" src="'.$image_path.'/'.$user->image.'" alt="" /></div>
+					<div class="col-lg-8">
+							<p class="sara">'.$user->first_name.' &nbsp; '.$user->last_name.'</p></div>';
+			echo '<div class="col-lg-2 ">
+								<a href="javascript:void(0)" class="send_req btn btn-success comment-overflow-e-s" style="color: white;" data-uid="'.$user->id.'">Send Request</a></div></div><hr>';
 		}			
 	}
 }
