@@ -1,0 +1,1185 @@
+<!DOCTYPE html>
+
+<html>
+
+	<head>
+	
+	<!-- title -->
+	<title></title>
+	<!-- end title -->
+
+	<meta name="description" content=""/>
+	<meta name="keywords" content=""/>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<link rel="icon" href="images/favicon.png" />
+		
+	<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Sail&amp;subset=latin-ext" >
+	<link rel="stylesheet" href="css/css/bootstrap.css">
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+	<link rel="stylesheet" href="css/style.css">
+	<link rel="stylesheet" href="css/responsive.css">
+	<link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700,800" rel="stylesheet">
+	
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/owl-carousel/1.3.3/owl.carousel.min.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/owl-carousel/1.3.3/owl.theme.min.css">
+
+<link href="css/slide.css" rel="stylesheet" type="text/css">
+<link href="css/mixed.css" rel="stylesheet" type="text/css">
+	
+<link href="css/last.css" rel="stylesheet" type="text/css">	
+
+<link rel="stylesheet"  href="src/css/lightslider.css"/>
+ <script src="https://code.jquery.com/jquery-1.12.4.min.js"></script>
+    <script src="src/js/lightslider.js"></script> 
+    <script>
+    	 $(document).ready(function() {
+			$("#content-slider").lightSlider({
+                loop:true,
+                keyPress:true
+            });
+            $('#image-gallery').lightSlider({
+                gallery:true,
+                item:1,
+                thumbItem:9,
+                slideMargin: 0,
+                speed:500,
+                auto:true,
+                loop:true,
+                onSliderLoad: function() {
+                    $('#image-gallery').removeClass('cS-hidden');
+                }  
+            });
+		});
+    </script>
+
+
+
+<link rel="stylesheet" href="css/style1.css">
+<link rel="stylesheet" href="css/style5.css">
+
+<script type="text/javascript">
+$(document).ready(function(){
+  var currentPosition = 0;
+  var slideWidth = 560;
+  var slides = $('.slide');
+  var numberOfSlides = slides.length;
+
+
+  $('#slidesContainer').css('overflow', 'hidden');
+
+
+  slides
+    .wrapAll('<div id="slideInner"></div>')
+
+	.css({
+      'float' : 'left',
+      'width' : slideWidth
+    });
+
+
+  $('#slideInner').css('width', slideWidth * numberOfSlides);
+
+
+  $('#slideshow')
+    .prepend('<span class="control" id="leftControl">Clicking moves left</span>')
+    .append('<span class="control" id="rightControl">Clicking moves right</span>');
+
+
+  manageControls(currentPosition);
+
+
+  $('.control')
+    .bind('click', function(){
+
+	currentPosition = ($(this).attr('id')=='rightControl') ? currentPosition+1 : currentPosition-1;
+    
+
+    manageControls(currentPosition);
+ 
+    $('#slideInner').animate({
+      'marginLeft' : slideWidth*(-currentPosition)
+    });
+  });
+
+
+  function manageControls(position){
+   
+	if(position==0){ $('#leftControl').hide() } else{ $('#leftControl').show() }
+	
+    if(position==numberOfSlides-1){ $('#rightControl').hide() } else{ $('#rightControl').show() }
+  }	
+});
+</script>
+
+ <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+    <script type="text/javascript">
+      google.charts.load("current", {packages:["corechart"]});
+      google.charts.setOnLoadCallback(drawChart);
+      function drawChart() {
+        var data = google.visualization.arrayToDataTable([
+          ['Task', 'Hours per Day'],
+          ['Study',     8],
+          ['Eat',      2],
+          ['Commute',  3],
+          ['Watch TV', 2],
+          ['Sleep',    7]
+        ]);
+
+        var options = {
+          title: 'My Daily Activities',
+          pieHole: 0.2,
+        };
+
+        var chart = new google.visualization.PieChart(document.getElementById('donutchart'));
+        chart.draw(data, options);
+      }
+    </script>
+
+
+	</head>
+
+
+	<body>
+	
+	<div class="topbar">
+		<div class="container">
+			<div class="row">
+				<div class="col-md-6">
+			
+					
+				</div>
+				
+				<div class="col-md-3">
+					<div class="top-search">
+						 <div id="custom-search-input">
+								<div class="input-group col-md-12">
+									<input type="text" class="  search-query form-control" placeholder="Search" />
+									<span class="input-group-btn">
+										<button class="btn sear btn-danger" type="button">
+											<i class="fa fa-search"></i>
+										</button>
+									</span>
+								</div>
+							</div>
+					</div>
+				</div>
+				
+				<div class="col-md-3">
+				
+						<div class="demo1 topers">
+						
+							<ul>
+							
+							<li>							
+								<p><a href="#" data-tooltip="Messages."><i class="fa fa-comments"></i></a></p>
+							</li>
+							
+							<li>							
+								<p><a href="forum.html" data-tooltip="Notifications."><i class="fa fa-bell"></i></a></p>
+							</li>
+							
+							<li>							
+								<p><a href="friends-listing.html" data-tooltip="Friend Request."><i class="fa fa-user-plus"></i></a></p>
+							</li>
+							
+							</ul>
+							
+						</div>
+				</div>
+				
+			</div>
+		</div>
+	</div>
+	
+	<div class="menu-section jig">
+		<div class="container">
+			<div class="row">
+				<div class="col-md-3">
+					<div class="logo">
+						<a href="index.html"><img src="images/logo.png"></a>
+					</div>
+				</div>
+			
+				<div class="col-md-9">
+					<div class="nav-bar">
+							<div class="bar">
+								<ul>
+									<li><a href="index.html">Home</a></li>
+									<li><a href="profile.html">Profile</a></li>
+									<li><a href="#">Network</a></li>
+									<li><a href="#">Learning</a></li>
+									<li><a href="#">Payment</a></li>
+								
+								</ul>
+								
+							</div>
+							
+							<div id="mySidenav" class="sidenav side-cick">
+ <a href="javascript:void(0)" class="closebtn" onclick="closeNav()"><i class="fa fa-times-circle"></i></a>
+  <a href="#"> <i class="fa fa-chevron-right mim"></i>Account Settings</a>
+  <a href="#"> <i class="fa fa-chevron-right mim"></i>Notifications</a>
+  <a href="#"> <i class="fa fa-chevron-right mim"></i>Message</a>
+  <a href="#"> <i class="fa fa-chevron-right mim"></i>General Settings</a>
+</div>
+
+<span style="cursor:pointer" onclick="openNav()"><i class="fa fa-bars hyop"></i></span>
+
+					</div>
+				</div>
+				
+				
+			</div>
+		</div>
+	</div>
+	<div class="clearfix"></div>
+	
+	<section class="first-section no-ger">
+		<div class="container">
+			<div class="row">
+			<div class="col-md-3">
+				<div class="side-course">
+					<ul>
+						
+						<li><img src="images/c-1.png"><a href="index.html#courses">Courses</a> <i class="fa fa-angle-double-right"></i></li>
+						<li><img src="images/c-2.png"><a href="index.html#courses">Opportunity</a> <i class="fa fa-angle-double-right"></i></li>
+						<li><img src="images/c-3.png"><a href="#">Teacher</a> <i class="fa fa-angle-double-right"></i></li>
+						<li><img src="images/c-4.png"><a href="#">Education</a> <i class="fa fa-angle-double-right"></i></li>
+						<li><img src="images/c-5.png"><a href="help.html">Help</a><i class="fa fa-angle-double-right"></i></li>
+						<li><img src="images/c-6.png"><a href="#">Support</a> <i class="fa fa-angle-double-right"></i></li>
+						<li><img src="images/c-7.png"><a href="groups.html">Groups</a> <i class="fa fa-angle-double-right"></i></li>
+						<li><img src="images/c-8.png"><a href="#">Parents</a> <i class="fa fa-angle-double-right"></i></li>
+					</ul>
+					
+					</div>
+					
+					
+					<div class="adv-1">
+						<img src="images/ads1.jpg">
+					</div>
+					
+				</div>
+			
+			
+				<div class="col-md-6">
+				
+				<div class="demo">
+        <div class="item">            
+            <div class="clearfix" style="max-width:100%;">
+                <ul id="image-gallery" class="gallery list-unstyled cS-hidden">
+                    <li data-thumb="img/thumb/cS-1.jpg"> 
+                        <img src="img/cS-1.jpg" />
+                         </li>
+                    <li data-thumb="img/thumb/cS-2.jpg"> 
+                        <img src="img/cS-2.jpg" />
+                         </li>
+                    <li data-thumb="img/thumb/cS-3.jpg"> 
+                        <img src="img/cS-3.jpg" />
+                         </li>
+                    <li data-thumb="img/thumb/cS-4.jpg"> 
+                        <img src="img/cS-4.jpg" />
+                         </li>
+                    <li data-thumb="img/thumb/cS-5.jpg"> 
+                        <img src="img/cS-5.jpg" />
+                         </li>
+                    <li data-thumb="img/thumb/cS-6.jpg"> 
+                        <img src="img/cS-6.jpg" />
+                         </li>
+                    <li data-thumb="img/thumb/cS-7.jpg"> 
+                        <img src="img/cS-7.jpg" />
+                         </li>
+                    <li data-thumb="img/thumb/cS-8.jpg"> 
+                        <img src="img/cS-8.jpg" />
+                         </li>
+                    <li data-thumb="img/thumb/cS-9.jpg"> 
+                        <img src="img/cS-9.jpg" />
+                         </li>
+                    <li data-thumb="img/thumb/cS-10.jpg"> 
+                        <img src="img/cS-10.jpg" />
+                         </li>
+                    <li data-thumb="img/thumb/cS-11.jpg"> 
+                        <img src="img/cS-11.jpg" />
+                         </li>
+                    <li data-thumb="img/thumb/cS-12.jpg"> 
+                        <img src="img/cS-12.jpg" />
+                         </li>
+                    <li data-thumb="img/thumb/cS-13.jpg"> 
+                        <img src="img/cS-13.jpg" />
+                         </li>
+                    <li data-thumb="img/thumb/cS-14.jpg"> 
+                        <img src="img/cS-14.jpg" />
+                         </li>
+                    <li data-thumb="img/thumb/cS-15.jpg"> 
+                        <img src="img/cS-15.jpg" />
+                         </li>
+                </ul>
+            </div>
+        </div>
+
+
+    </div>	
+	
+				<div class="status-update">
+				
+					<textarea row="30" class="stat-mind" type="text" placeholder="on your mind...."></textarea>
+					
+					<div class="stat-date">
+						
+						<div class="stat-date1">
+								<ul>
+									<li>
+									<button>Post</button>
+									<button>View</button>
+									</li>
+								</ul>
+						</div>
+						
+						<div class="stat-date2">
+								<button>Share</button>
+						</div>
+					
+					</div>				
+					
+				</div>
+				
+				<div class="land">
+				
+					<div class="land1">
+					
+					  <img src="images/img_01/a.jpg">
+					
+					</div>
+					
+					<div class="land2">
+					
+						<h5>Giri</h5>
+						<p>St. Marys School</p>
+						
+					
+					</div>
+					
+					<div class="land3">
+					
+						<h5>landers</h5>
+						<p>Open source teams of people, and work.</p>
+					
+					</div>
+				
+				</div>
+				
+				<div class="land">
+				
+					<div class="land1">
+					
+					<img src="images/teac.jpg">
+					
+					</div>
+					
+					<div class="land2">
+					
+						<h5>Malar</h5>
+						<p>Maths Teacher</p>
+						
+					
+					</div>
+					
+					<div class="land3">
+					
+						<h5>landers</h5>
+						<p>Open source teams of people, and work.</p>
+					
+					</div>
+				
+				</div>
+				
+				<div class="fors-img">
+					<ul>
+						<li>
+							<img src="images/teac.jpg">
+							<p>Teacher</p>
+						</li>
+						<li>
+							<img src="images/boy.png">
+							<p>Tutor</p>
+						</li>
+						<li>
+							  <img src="images/img_01/a.jpg">
+							<p>Student</p>
+						</li>
+						<li>
+							<img src="images/mom.jpg">
+							<p>Parent</p>
+						</li>
+					</ul>
+				</div>
+				
+			</div>
+				
+				<div class="col-md-3">
+			
+			
+			<div class="land-scroll">
+			
+				<ul>
+				
+					<li>
+						
+						<div class="kraft1">
+							  <img src="images/img_01/a.jpg">
+						</div>
+						<div class="kraft2">
+							<h5>Giri</h5>
+							<p>St. Marys School</p>
+						</div>
+						<div class="kraft3">
+							<img src="images/award.png">
+						</div>
+						<div class="dashes"></div>
+					
+					</li>
+					
+						<li>
+						
+						<div class="kraft1">
+							  <img src="images/img_01/b.jpg">
+						</div>
+						<div class="kraft2">
+							<h5>Maria</h5>
+							<p>Carmel School</p>
+						</div>
+						<div class="kraft3">
+							<img src="images/award.png">
+						</div>
+						<div class="dashes"></div>
+					
+					</li>
+					
+						<li>
+						
+						<div class="kraft1">
+							  <img src="images/img_01/c.jpg">
+						</div>
+						<div class="kraft2">
+							<h5>Sara</h5>
+							<p>CBSE School</p>
+						</div>
+						<div class="kraft3">
+							<img src="images/award.png">
+						</div>
+						<div class="dashes"></div>
+					
+					</li>
+					
+						<li>
+						
+						<div class="kraft1">
+						  <img src="images/img_01/d.jpg">
+						</div>
+						<div class="kraft2">
+							<h5>Jameson</h5>
+							<p>Bosco School</p>
+						</div>
+						<div class="kraft3">
+							<img src="images/award.png">
+						</div>
+						<div class="dashes"></div>
+					
+					</li>
+					
+						<li>
+						
+						<div class="kraft1">
+							  <img src="images/img_01/e.jpg">
+						</div>
+						<div class="kraft2">
+							<h5>Bisna</h5>
+							<p>Primary School</p>
+						</div>
+						<div class="kraft3">
+							<img src="images/award.png">
+						</div>
+						<div class="dashes"></div>
+					
+					</li>
+					
+						<li>
+						
+						<div class="kraft1">
+							  <img src="images/img_01/f.jpg">
+						</div>
+						<div class="kraft2">
+							<h5>John Doe</h5>
+							<p>A.P.J School</p>
+						</div>
+						<div class="kraft3">
+							<img src="images/award.png">
+						</div>
+						<div class="dashes"></div>
+					
+					</li>
+					
+						<li>
+						
+						<div class="kraft1">
+							  <img src="images/img_01/g.jpg">
+						</div>
+						<div class="kraft2">
+							<h5>Dona</h5>
+							<p>Akash School</p>
+						</div>
+						<div class="kraft3">
+							<img src="images/award.png">
+						</div>
+						<div class="dashes"></div>
+					
+					</li>
+					
+						<li>
+						
+						<div class="kraft1">
+							  <img src="images/img_01/h.jpg">
+						</div>
+						<div class="kraft2">
+							<h5>John Doe</h5>
+							<p>Nanjil School</p>
+						</div>
+						<div class="kraft3">
+							<img src="images/award.png">
+						</div>
+						<div class="dashes"></div>
+					
+					</li>
+							
+				</ul>	
+			
+			
+		</div>
+		
+				<div class="foot-side">
+				
+				<h5>THE SCHOOL NETWORK</h5>
+				
+				<div class="down-line"></div>
+					
+					<ul>
+						
+						<li><a href="#"><i class="fa fa-long-arrow-right"></i> About Us</a></li>
+						<li><a href="#"><i class="fa fa-long-arrow-right"></i> Terms & Conditions</a></li>
+						<li><a href="#"><i class="fa fa-long-arrow-right"></i> Privacy Policy</a></li>
+						<li><a href="#"><i class="fa fa-long-arrow-right"></i> Contact Us</a></li>
+						<li><a href="#"><i class="fa fa-long-arrow-right"></i> Feedback</a></li>
+						
+					</ul>
+		
+		
+				</div>	
+		
+		</div>
+		
+		</div>
+		</div>
+	</section>
+	
+	
+	<section class="sec-section">
+		<div class="container">
+			<div class="row">
+				<div class="col-md-3">
+				
+				
+				
+					  <div id="testimonial-slider" class="owl-carousel left-test">
+                <div class="testimonial">
+                    <div class="pic">
+                        <img src="images/img-1.jpg" alt="">
+                    </div>
+					 <h3 class="testimonial-title"> Williamson</h3>
+                    <p class="description">
+                        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut eu dolor eget ante pretium commodo. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus.
+                    </p>
+                   
+                </div>
+ 
+                <div class="testimonial">
+                    <div class="pic">
+                          <img src="images/img_01/1a.jpg">
+                    </div>
+					<h3 class="testimonial-title">kristian</h3>
+                    <p class="description">
+                        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut eu dolor eget ante pretium commodo. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. 
+                    </p>
+                 
+                </div>
+				
+				<div class="testimonial">
+                    <div class="pic">
+                         <img src="images/img_01/1b.jpg">
+                    </div>
+					<h3 class="testimonial-title"> Merin</h3>
+                    <p class="description">
+                        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut eu dolor eget ante pretium commodo. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus.
+                    </p>
+                    
+                </div>
+            </div>
+				
+				
+				
+				
+				
+				
+				<div class="parent-ass">
+					
+					<h5>Parent Association</h5>
+					
+					<div class="down-line"></div>
+					
+					  <img src="images/img_01/a.jpg">
+					  <img src="images/img_01/b.jpg">
+					  <img src="images/img_01/c.jpg">
+					  <img src="images/img_01/d.jpg">
+					  <img src="images/img_01/e.jpg">
+					  <img src="images/img_01/f.jpg">
+					
+					
+					<button>Group</button> <button>Add</button>
+				</div>
+				
+				</div>
+				
+				<div class="col-md-6">
+				
+	
+  <!-- Slideshow HTML -->
+  <div id="slideshow">
+    <div id="slidesContainer">
+      <div class="slide">
+			<div class="slide-1">
+				<img src="images/fc1.jpg">
+			</div>
+			
+			<div class="slide-2">
+				<ul>
+					<li><a href="course-listing.html"><button>View More</button></a></li>
+					<li><a href="#"><button>Like</button></a></li>
+					<li><a href="#"><button>Comment</button></a></li>
+					<li><a href="#"><button>Share</button></a></li>
+			</div>
+			
+      </div>
+      <div class="slide">
+			<div class="slide-1">
+				<img src="images/fc2.jpg">
+			</div>
+			
+			<div class="slide-2">
+				<ul>
+					<li><a href="course-listing.html"><button>View More</button></a></li>
+					<li><a href="#"><button>Like</button></a></li>
+					<li><a href="#"><button>Comment</button></a></li>
+					<li><a href="#"><button>Share</button></a></li>
+			</div>
+			
+      </div>
+	  
+	   <div class="slide">
+			<div class="slide-1">
+				<img src="images/fc3.jpg">
+			</div>
+			
+			<div class="slide-2">
+				<ul>
+					<li><a href="course-listing.html"><button>View More</button></a></li>
+					<li><a href="#"><button>Like</button></a></li>
+					<li><a href="#"><button>Comment</button></a></li>
+					<li><a href="#"><button>Share</button></a></li>
+			</div>
+			
+      </div>
+	  
+	   <div class="slide">
+			<div class="slide-1">
+				<img src="images/fc4.jpg">
+			</div>
+			
+			<div class="slide-2">
+				<ul>
+					<li><a href="course-listing.html"><button>View More</button></a></li>
+					<li><a href="#"><button>Like</button></a></li>
+					<li><a href="#"><button>Comment</button></a></li>
+					<li><a href="#"><button>Share</button></a></li>
+			</div>
+			
+      </div>
+	  
+	   <div class="slide">
+			<div class="slide-1">
+				<img src="images/fc5.jpg">
+			</div>
+			
+			<div class="slide-2">
+				<ul>
+					<li><a href="course-listing.html"><button>View More</button></a></li>
+					<li><a href="#"><button>Like</button></a></li>
+					<li><a href="#"><button>Comment</button></a></li>
+					<li><a href="#"><button>Share</button></a></li>
+			</div>
+			
+      </div>
+	  
+	   <div class="slide">
+			<div class="slide-1">
+				<img src="images/fc6.jpg">
+			</div>
+			
+			<div class="slide-2">
+				<ul>
+					<li><a href="course-listing.html"><button>View More</button></a></li>
+					<li><a href="#"><button>Like</button></a></li>
+					<li><a href="#"><button>Comment</button></a></li>
+					<li><a href="#"><button>Share</button></a></li>
+			</div>
+			
+      </div>
+	  
+	   <div class="slide">
+			<div class="slide-1">
+				<img src="images/fc7.jpg">
+			</div>
+			
+			<div class="slide-2">
+				<ul>
+					<li><a href="course-listing.html"><button>View More</button></a></li>
+					<li><a href="#"><button>Like</button></a></li>
+					<li><a href="#"><button>Comment</button></a></li>
+					<li><a href="#"><button>Share</button></a></li>
+			</div>
+			
+      </div>
+	  
+	   <div class="slide">
+			<div class="slide-1">
+				<img src="images/fc8.jpg">
+			</div>
+			
+			<div class="slide-2">
+				<ul>
+					<li><a href="course-listing.html"><button>View More</button></a></li>
+					<li><a href="#"><button>Like</button></a></li>
+					<li><a href="#"><button>Comment</button></a></li>
+					<li><a href="#"><button>Share</button></a></li>
+			</div>
+			
+      </div>
+	  
+	   <div class="slide">
+			<div class="slide-1">
+				<img src="images/fc9.jpg">
+			</div>
+			
+			<div class="slide-2">
+				<ul>
+					<li><a href="course-listing.html"><button>View More</button></a></li>
+					<li><a href="#"><button>Like</button></a></li>
+					<li><a href="#"><button>Comment</button></a></li>
+					<li><a href="#"><button>Share</button></a></li>
+			</div>
+			
+      </div>
+
+    </div>
+  </div>
+
+
+				<div class="clearfix"></div>
+				
+				<div class="land">
+				
+					<div class="land1">
+					
+					  <img src="images/img_01/a.jpg">
+					
+					</div>
+					
+					<div class="land2">
+					
+						<h5>Giri</h5>
+						<p>St. Marys School</p>
+						
+					
+					</div>
+					
+					<div class="land3">
+					
+						<h5>landers</h5>
+						<p>Open source teams of people, and work.</p>
+					
+					</div>
+				
+				</div>
+				
+				<div class="land">
+				
+					<div class="land1">
+					
+					<img src="images/teac.jpg">
+					
+					</div>
+					
+					<div class="land2">
+					
+						<h5>Malar</h5>
+						<p>Maths Teacher</p>
+						
+					
+					</div>
+					
+					<div class="land3">
+					
+						<h5>landers</h5>
+						<p>Open source teams of people, and work.</p>
+					
+					</div>
+				
+				</div>
+				
+				<div class="clearfix"></div>
+
+<div id="mixedSlider">
+                    <div class="MS-content">
+						
+						<div class="ms-head">
+							<h4>Courses Online</h4>
+						</div>
+						
+						<div class="down-line"></div>
+					
+                        <div class="item">
+                            <div class="imgTitle">
+                                
+                                <img src="images/fc1.jpg" alt="" />
+                            </div>
+                           
+                           
+                        </div>
+                        <div class="item">
+                            <div class="imgTitle">
+                                
+                                <img src="images/fc2.jpg" alt="" />
+                            </div>
+                       
+                           
+                        </div>
+                        <div class="item">
+                            <div class="imgTitle">
+                                
+                                <img src="images/fc3.jpg" alt="" />
+                            </div>
+                        
+                           
+                        </div>
+                        <div class="item">
+                            <div class="imgTitle">
+                             
+                                <img src="images/fc4.jpg" alt="" />
+                            </div>
+                           
+                           
+                        </div>
+						
+                        <div class="item">
+                            <div class="imgTitle">
+                                
+                                <img src="images/fc5.jpg" alt="" />
+                            </div>
+                           
+                          
+                        </div>
+						
+						<div class="item">
+                            <div class="imgTitle">
+                                
+                                <img src="images/fc6.jpg" alt="" />
+                            </div>
+                           
+                          
+                        </div>
+						
+						<div class="item">
+                            <div class="imgTitle">
+                                
+                                <img src="images/fc7.jpg" alt="" />
+                            </div>
+                           
+                          
+                        </div>
+						
+						<div class="item">
+                            <div class="imgTitle">
+                                
+                                <img src="images/fc8.jpg" alt="" />
+                            </div>
+                           
+                          
+                        </div>
+						
+						
+						
+						
+                    </div>
+					
+					<div class="fbs">
+							<ul>
+								<li><button>Like</button></li>
+								<li><button>Comment</button></li>
+								<li><button>Share</button></li>
+							</ul>
+						</div>
+                    <div class="MS-controls">
+                        <button class="MS-left"><i class="fa fa-angle-left"></i></button>
+                        <button class="MS-right"><i class="fa fa-angle-right"></i></button>
+                    </div>
+                </div>
+			
+			
+				<div class="temp-add">
+					<img src="images/ads2.jpg">
+			
+				</div>
+			
+				</div>
+				
+				<div class="col-md-3">
+				
+				<div class="pie-chart">
+					
+					<div id="donutchart" style="width: 100%; height: 170px;"></div>
+					
+				</div>
+					
+					<div class="add-start ajus">
+					
+						<div class="ads">
+							<img src="images/ads2.jpg">
+						</div>
+					
+			
+					</div>
+					
+					<div class="articles">
+					
+						<h3>Our Articles</h3>
+						
+						<div class="lines"></div>
+					
+						<div class="our-article">
+						
+								<span>10 Nov</span>
+								
+							<img src="images/art.jpg">
+							
+							<span></span>
+						
+						</div>
+						
+						<div class="art-para">
+						
+							<h5>Our Articles</h5>
+							
+							<p> Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.</p>
+						
+						</div>
+
+					</div>	
+			
+				</div>
+				
+				</div>
+			</div>
+		</section>
+		
+		
+	
+		<section class="footer">
+			<div class="container lifr">
+				<div class="row">
+					<div class="col-md-4">
+						<div class="foot-links">
+							<h5>QUICK LINK</h5>
+						
+						<ul>
+	 
+							 <li><i class="fa fa-caret-right"></i> <a href="#"> Our Courses</a></li>
+															  
+							 <li><i class="fa fa-caret-right"></i> <a href="#"> News/Blog </a></li>
+																
+							 <li><i class="fa fa-caret-right"></i> <a href="#"> Event </a></li>
+																
+							 <li><i class="fa fa-caret-right"></i> <a href="#"> Privacy Policy </a></li>
+																
+							 <li><i class="fa fa-caret-right"></i> <a href="#"> Help </a></li>
+
+							 <li><i class="fa fa-caret-right"></i> <a href="#"> Support </a></li>
+												
+							 <li><i class="fa fa-caret-right"></i> <a href="#"> Education </a></li>
+							 
+							  <li><i class="fa fa-caret-right"></i> <a href="#"> Teacher </a></li>
+
+						 </ul>
+							
+						</div>
+					</div>
+					
+					<div class="col-md-4">
+					
+						<h5>CONTACT US</h5>
+					
+						<div class="foot-contact">
+							
+							<ul>
+							
+								<li>
+								
+								<i class="fa fa-envelope"></i>
+								
+								<p><a href="mailto:helpneed@edutech.com "> helpneed@edutech.com </a><p>
+								
+								</li>
+								
+								<li>
+								
+								<i class="fa fa-phone"></i>
+								
+								<p><a href="#">+8801712570051</a><p>
+								
+								</li>
+								
+								<li>
+								
+								<i class="fa fa-globe"></i>
+								
+								<p><a href="#">Edine rode, 1234 Plot/Rs, CA</a><p>
+								
+								</li>
+							
+							<ul>
+					
+					</div>
+					
+					</div>
+					
+					<div class="col-md-4">
+					
+					
+                <h5>FEEDBACK</h5>
+				<form action="" method="post">
+					<input id="foot_name" type="text" class="inpTx" placeholder="Name">
+					<input id="foot_email" type="Email" class="inpTx" placeholder="Email">
+					<textarea id="foot_message" style="min-height:90px;" class="inpTx" placeholder="Message"></textarea>
+					<input id="foot-send" type="submit" class="send-foot" value="SEND">
+				</form>
+          
+					
+					</div>
+					
+				</div>
+			</div>
+		</section>
+		
+		<section class="copy-foot">
+			<div class="container">
+				<div class="row">
+					<div class="col-md-7">
+						<p> &copy; 2017 School network | Terms and Conditions | Privacy Policy <p>
+					</div>
+					
+					<div class="col-md-5">
+						
+						<div class="foot-soc">
+							<ul>
+							
+								<li><i class="fa fa-facebook"></i></li>
+								<li><i class="fa fa-twitter"></i></li>
+								<li><i class="fa fa-linkedin"></i></li>
+								
+							</ul>
+						</div>
+				
+					</div>
+					
+				</div>
+			</div>
+		</section>
+					
+					
+	
+	
+
+<script src="js/multislider.js"></script> 
+<script>
+$('#basicSlider').multislider({
+			continuous: true,
+			duration: 2000
+		});
+		$('#mixedSlider').multislider({
+			duration: 750,
+			interval: 3000
+		});
+</script>
+
+
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/owl-carousel/1.3.3/owl.carousel.min.js"></script>
+ 
+<script> 
+$(document).ready(function(){
+    $("#testimonial-slider").owlCarousel({
+        items:1,
+        itemsDesktop:[1000,1],
+        itemsDesktopSmall:[979,1],
+        itemsTablet:[768,1],
+        pagination:true,
+        navigation:false,
+        navigationText:["",""],
+        slideSpeed:1000,
+        singleItem:true,
+        autoPlay:true
+    });
+});
+</script>
+	
+	
+
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-3415878-12', 'dandywebsolution.com');
+  ga('send', 'pageview');
+
+</script>
+	
+		
+	
+	<script>
+	  $(document).ready(function() {
+    $('.carousel').carousel({
+      interval: 6000
+    })
+  });</script>
+	
+	<script>
+function openNav() {
+    document.getElementById("mySidenav").style.width = "200px";
+}
+
+function closeNav() {
+    document.getElementById("mySidenav").style.width = "0";
+}
+</script>
+	
+
+	</body>
+	
+	</html>

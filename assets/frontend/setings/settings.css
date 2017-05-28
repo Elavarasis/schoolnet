@@ -1,0 +1,177 @@
+h3 {
+  color: #333;
+  font-family: arial, sans-serif;
+  margin: 1em auto;
+    width: 84%;
+}
+
+.tabordion {
+  color: #333;
+  display: block;
+  font-family: arial, sans-serif;
+  margin: auto;
+  position: relative;
+    width: 85%;
+}
+
+.tabordion input[name="sections"] {
+  left: -9999px;
+  position: absolute;
+  top: -9999px;
+}
+
+.tabordion section {
+  display: block;
+}
+.li-hr{
+    border: 1px dotted rgba(158, 158, 158, 0.58);
+}
+.tabordion section label {
+     background: white;
+    border: 1px dotted #1bbc9b;;
+  cursor: pointer;
+  display: block;
+  font-size: 1.2em;
+  font-weight: bold;
+  padding: 15px 20px;
+     position: inherit;
+  width: 216px;
+  z-index:100;
+}
+
+.tabordion section article {
+    display: none;
+    left: 230px;
+    min-width: 300px;
+    padding: 17px;
+    position: absolute;
+    top: 0;
+    background-color: #ffffff;
+    border: 1px solid #f1f1f1;
+    border-radius: 31px;
+}
+
+/*.tabordion section article:after {
+  background-color: #ccc;
+  bottom: 0;
+  content: "";
+  display: block;
+  left:-229px;
+  position: absolute;
+  top: 0;
+  width: 220px;
+  z-index:1;
+}*/
+
+.tabordion input[name="sections"]:checked + label { 
+        background: #1bbc9b;
+    color: #FFF;
+}
+
+.tabordion input[name="sections"]:checked ~ article {
+  display: block;
+}
+
+
+@media (max-width: 533px) {
+  .tabordion section article {
+   
+    position: inherit;
+   
+}
+.tabordion {
+   
+    position: inherit;
+  
+}
+.tabordion section label {
+  
+    position: inherit;
+    
+}
+  h1 {
+    width: 100%;
+  }
+
+  .tabordion {
+    width: 100%;
+  }
+  
+  .tabordion section label {
+    font-size: 1em;
+    width: 160px;
+  }  
+
+ .tabordion section article {
+    left: 200px;
+    min-width: 270px;
+  } 
+  
+  .tabordion section article:after {
+    background-color: #ccc;
+    bottom: 0;
+    content: "";
+    display: block;
+    left:-199px;
+    position: absolute;
+    top: 0;
+    width: 200px;
+
+  }  
+  
+}
+
+@media (max-width: 991px) {
+ .tabordion section article {
+   
+    position: inherit;
+   
+}
+.tabordion {
+   
+    position: inherit;
+  
+}
+.tabordion section label {
+  
+    position: inherit;
+    
+}
+}
+@media (max-width: 1999px){
+
+}
+@media (max-width: 768px) {
+  h1 {
+    width: 96%;
+  }
+ .tabordion section article {
+   
+    position: inherit;
+   
+}
+.tabordion {
+   
+    position: inherit;
+  
+}
+.tabordion section label {
+  
+    position: inherit;
+    
+}
+  .tabordion {
+    width: 96%;
+  }
+}
+
+
+@media (min-width: 1366px) {
+  h3 {
+    width: 85%;
+  }
+
+  .tabordion {
+       width: 100%;
+  }
+}

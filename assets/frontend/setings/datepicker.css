@@ -1,0 +1,77 @@
+.datepickerdropdown {
+  background:#FFFFFF;
+  border:1px solid #888;
+  border-radius:5px;
+  padding:10px;
+  position:absolute;
+  text-align:center;
+  z-index:1;
+}
+.datepickerdropdown table {
+  border-collapse:collapse;
+  margin:auto;
+}
+.datepickerdropdown input {
+  font-family:monospace;
+  border:0px solid #888;
+  border-radius:3px;
+  margin:4px;
+  padding:5px 5px;
+  text-align:center;
+  color:#000000;
+}
+.datepickerdropdown table input[type=button] {
+  width:2em;
+}
+.datepickerdropdown input[type=button] {
+ background:#FFFFFF;
+}
+.datepickerdropdown input[type=button]:hover {
+  background-image:url(../images/img/calenderselect.png);
+  color:#FFFFFF;
+}
+.datepickerdropdown input[type=button]:active {
+  background-image:url(../images/img/calender.png);
+  padding:2px 4px 2px 6px;
+}      
+.datepickerdropdown input.selected {
+  background-image:url(../images/img/calenderhover.png);
+  border:2px solid #000000;
+}
+.datepickerdropdown input[type=text] {
+  background:#fff;
+  color:#000;
+}
+.datepickerdropdown input.today {
+  border:2px solid #27A4E1;
+}
+.datepickerdropdown input.othermonth {
+  color:#aaa;
+  border:0px solid #bbb;
+}
+
+.bbb {
+    position: absolute;
+    width: 22%;
+}
+.bbb1 {
+    position: absolute;
+    width: 100%;
+}
+.datepickershow img {
+       border: 0;
+    position: relative;
+    float: left;
+    margin-top: 0px;
+       margin-left: 171px;
+	}
+.monthDsp
+{
+width:100px;
+font-size:13px;
+}
+.daysRow
+{
+font-family:sans-serif;
+font-size:11px;
+}
