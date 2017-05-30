@@ -67,12 +67,14 @@
 				
 					<div class="home-signs">
 						<ul>
-							<li>
+							@if(!isset(Auth::user()->id))
+								<li>
 
-								<a class="home-sign-in" href="#"><p id="onclick">Sign up</p></a>
-        
-					</li>
-		
+											<a class="home-sign-in" href="#"><p id="onclick">Sign up</p></a>
+					
+								</li>
+							@endif
+					
 		 <div id="contactdiv" class="top-up">
             <form class="form" action="#" id="contact">
                 <img  src="{{url('/assets/frontend/images/close.png')}}" class="img sign-close" id="cancel"/>	
@@ -122,10 +124,11 @@
              
             </form>
         </div>
-						
+					@if(!isset(Auth::user()->id))	
 					<li>
 							<a class="home-sign-in" href="#"><p id="onclick1">Sign in</p></a>
 					</li>
+					@endif
 							
 							
 								 <div id="contactdiv1" class="top-up">
