@@ -85,31 +85,31 @@
 				</div>
 				
                 
-                <input class="just" type="text" id="name" placeholder=" Your Name"/>
-                <br/>
-               
-                <input class="just"  type="text" id="email1" placeholder=" Your Email"/>
+                <!--<input class="just" type="text" id="reg_name" placeholder=" Your Name"/>
+                <br/>-->
+          
+                <input class="just"  type="text" id="reg_email" placeholder="Your Email"/>
                 <br/>
 				
-                <input class="just"  type="password" id="password1" placeholder="Create Password"/>
+                <input class="just"  type="password" id="reg_password" placeholder="Create Password"/>
 				<br/>
 				
-                <input class="just" type="password" id="password2" placeholder="Confirm Password"/>
+                <input class="just" type="password" id="reg_confirm_password" placeholder="Confirm Password"/>
 				<br/>
                
-                <input class="just" type="text" id="contactno" placeholder="Phone Number"/>
+                <input class="just" type="text" id="reg_contactno" placeholder="Phone Number"/>
                 <br/>
 				<div class="checkbox checkbox-success">
-                        <input id="checkbox3" type="checkbox">
+                        <!--<input id="checkbox3" type="checkbox">
                         <label for="checkbox3">
                            Remember Me
-                        </label>
+                        </label>-->
 						
-						   <input type="button" id="loginbtn" value="Sign Up"/>
-						   
-			
-			
-                    </div>
+						<input type="button" class="sign_up" id="loginbtn" value="Sign Up"/>
+                </div>
+				<br><br>
+				<span class="reg_msg alert alert-danger" id="reg_error" style="display:none;"></span>
+				<span class="reg_msg alert alert-success" id="reg_success" style="display:none;"></span>
 				
 				
 				
@@ -443,6 +443,50 @@ function closeNav() {
 					});
 				}
 			});
+			
+			
+			$(document).on('click','.sign_up',function(e){
+				var email			= $('#reg_email').val();
+				var password		= $('#reg_password').val();
+				var confrm_password	= $('#reg_confirm_password').val();
+				var contactno		= $('#reg_contactno').val();
+				
+				var token 	= "{{ csrf_token() }}";
+				var filter 	= /^([a-zA-Z0-9_.+-])+\@(([a-zA-Z0-9-])+\.)+([a-zA-Z0-9]{2,4})+$/;
+		
+				url = '<?php echo url('/home/doregister'); ?>';
+				data = {e:email, p:password, c:contactno};
+				if(email == ''){
+					$('#reg_error').html( 'Please enter your email address' ).show();
+				} else if (!filter.test(email)) {
+					$('#reg_error').html( 'Please enter valid email address' ).show();
+				} else if(password == ''){
+					$('#reg_error').html( 'Please enter your password' ).show();
+				} else if(confrm_password == ''){
+					$('#reg_error').html( 'Please confirm your password' ).show();
+				} else if(password != confrm_password){
+					$('#reg_error').html( 'Passwords are not match' ).show();
+				} else {
+					$.ajax({
+						url: url,
+						headers: {'X-CSRF-TOKEN': token},
+						data: data,
+						type: 'POST',
+						datatype: 'JSON',
+						success: function (response) {
+							$('.reg_msg').html('').hide();
+							var res = $.parseJSON(response);
+							if(res.status == 'error'){
+								$('#reg_error').html( res.message ).show();
+							} else {
+								$('#reg_success').html( res.message ).show();
+								$('.just').html('');
+							}						
+						}
+					});
+				}
+			});
+			
 			
 			$(document).on('keyup','.seach_non_friend',function(e){
 				var key 		= $(this).val();
