@@ -120,6 +120,8 @@ Route::group(array('middleware' => ['auth']), function()
 	Route::post('accept_friend_req', 'Friends@accept_friend_req');
 	Route::get('profile', 'Profile@index');
 	Route::get('help', 'Profile@help');
+	Route::get('profile/update', 'Profile@update');
+	Route::post('profile/doupdate', 'Profile@doupdate');
 });
 
 Route::get('/', 'Home@index');
