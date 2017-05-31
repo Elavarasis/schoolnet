@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Input;
 use Auth;
 use App\User;
+use App\Normal_user;
 use App\Course;
 use DB;
 use Image;
@@ -63,6 +64,53 @@ class Home extends Controller
 						'message' => 'Given credentials are invalid'
 					);
 		}
+		
+		echo json_encode($return);
+    }
+	
+	public function doregister()
+    {
+		$email 		= Input::get('e');
+		$password 	= Input::get('p');
+		$contact	= Input::get('c');
+
+		if (User::where('email', '=', $email)->count() > 0) {
+			$return = array(
+							'status' => 'error',
+							'message' => 'This email address is already registered'
+						);
+		} else {
+			DB::beginTransaction();	
+		
+			$user_id = User::create([
+				'email' => $email,
+				'password' => bcrypt($password),
+				'role' => 'normal_user'
+			])->id;
+			
+			if($user_id){
+		
+				$nu_user_id = Normal_user::create([
+								'nu_user_id' => $user_id,							
+								'nu_contact_no' => $contact							
+								])->id;
+				if(empty($nu_user_id)){
+					DB::rollback();
+				}
+				DB::commit();
+				
+				$return = array(
+							'status' => 'success',
+							'message' => 'Registration successfully completed'
+						);
+						
+			} else {
+				$return = array(
+							'status' => 'error',
+							'message' => 'Something went wrong, please try again later'
+						);
+			}
+		}		
 		
 		echo json_encode($return);
     }

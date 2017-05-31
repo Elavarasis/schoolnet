@@ -26,9 +26,10 @@ class Friends extends Controller
 							->leftJoin('teachers', 'teachers.te_user_id', '=', 'users.id')
 							->select('users.*')
 							->where('users.id', '<>', $user_id)
-							->where('students.st_school_id', $school_id)
-							->orWhere('parents.pa_school_id', $school_id)
-							->orWhere('teachers.te_school_id', $school_id)
+							->where('users.role', '<>', 'superadmin')
+							//->where('students.st_school_id', $school_id)
+							//->orWhere('parents.pa_school_id', $school_id)
+							//->orWhere('teachers.te_school_id', $school_id)
 							->get();
 
 		return view('friends',compact('active_users','user_id'));
@@ -48,15 +49,16 @@ class Friends extends Controller
 							->leftJoin('teachers', 'teachers.te_user_id', '=', 'users.id')
 							->select('users.*')
 							->where('users.id', '<>', $user_id)
+							->where('users.role', '<>', 'superadmin')
 							->where(function($query) use ($data) {
 								$query->where('users.first_name', 'like' , $data['s'].'%')
 									->orWhere('users.last_name', 'like' , $data['s'].'%');
 							})
-							->where(function($query) use ($school_id) {
+							/*->where(function($query) use ($school_id) {
 								$query->where('students.st_school_id', $school_id)
 									->orWhere('parents.pa_school_id', $school_id)
 									->orWhere('teachers.te_school_id', $school_id);
-							})
+							})*/
 							->get();
 							
 		return view('ajax_search_nonfriends',compact('active_users','user_id'));			

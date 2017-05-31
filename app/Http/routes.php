@@ -124,7 +124,7 @@ Route::group(array('middleware' => ['auth']), function()
 
 Route::get('/', 'Home@index');
 Route::post('home/dologin', 'Home@dologin');
-
+Route::post('home/doregister', 'Home@doregister');
 Route::get('courses', 'Courses@index');
 Route::get('courses/view/{id}', 'Courses@view');
 Route::get('courses/tutors/{id}', 'Courses@tutors');
