@@ -539,6 +539,19 @@ function closeNav() {
 				});
 			});
 			
+			$(document).on('click','.profile_inner .goto',function(e){
+				var total_sections 	= 3;
+				var section_id 		= parseInt($(this).data('id'));
+				if(section_id == total_sections){
+					var width 		= 99;
+				} else {
+					var width 		= section_id / total_sections * 100;
+				}
+				$('.progress_outer .progress_bar').css('width', width+'%');
+				$('.profile_inner').fadeOut(400);
+				$('#section_'+section_id).fadeIn(300);
+			});
+			
 		});
 	</script>
 	
