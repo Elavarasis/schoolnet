@@ -455,7 +455,7 @@ function closeNav() {
 					data: data,
 					type: 'POST',
 					success: function (response) {
-						$('#fri_con').html(response);
+						$('#non_friends_list').html(response);
 					}
 				});
 			});

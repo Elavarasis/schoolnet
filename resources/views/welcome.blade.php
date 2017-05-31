@@ -1,7 +1,7 @@
 @extends('layouts.frontend.app')
 
 @section('content')
-	
+
 	<section class="first-section">
 		<div class="container">
 			<div class="row">
@@ -469,49 +469,16 @@
 							<div class="all-course-1">
 							
 								<ul>
-							
-									<li>
-									
-									<p><i class="fa fa-graduation-cap"></i><a href="{{url('/courses')}}"> English Grammer </a></p>
-									
-									</li>
-									
-									<li>
-									
-									<p><i class="fa fa-graduation-cap"></i><a href="{{url('/courses')}}"> Maths </a></p>
-									
-									</li>
-									
-									<li>
-									
-									<p><i class="fa fa-graduation-cap"></i><a href="{{url('/courses')}}"> Physics </a></p>
-									
-									</li>
-									
-									<li>
-									
-									<p><i class="fa fa-graduation-cap"></i><a href="{{url('/courses')}}"> Chemistry </a></p>
-									
-									</li>
-									
-									<li>
-									
-									<p><i class="fa fa-graduation-cap"></i><a href="{{url('/courses')}}"> Botany </a></p>
-									
-									</li>
-									
-									<li>
-									
-									<p><i class="fa fa-graduation-cap"></i><a href="{{url('/courses')}}"> Zoology </a></p>
-									
-									</li>
-									
-									<li>
-									
-									<p><i class="fa fa-graduation-cap"></i><a href="{{url('/courses')}}"> Civics </a></p>
-									
-									</li>
-							
+									@if($courses_list1)
+										@foreach($courses_list1 as $course1)
+											<li>
+												<p>
+												<i class="fa fa-graduation-cap"></i>
+												<a href="{{ url('/courses/view') }}/{{ $course1->id }}"> {{ $course1->course_title }} </a>
+												</p>
+											</li>
+										@endforeach
+									@endif
 								</ul>
 							
 							</div>
@@ -519,53 +486,20 @@
 							<div class="all-course-2">
 							
 								<ul>
-							
-									<li>
-									
-									<p><i class="fa fa-graduation-cap"></i><a href="{{url('/courses')}}"> History </a></p>
-									
-									</li>
-									
-									<li>
-									
-									<p><i class="fa fa-graduation-cap"></i><a href="{{url('/courses')}}"> Geography </a></p>
-									
-									</li>
-									
-									<li>
-									
-									<p><i class="fa fa-graduation-cap"></i><a href="{{url('/courses')}}"> Accountancy </a></p>
-									
-									</li>
-									
-									<li>
-									
-									<p><i class="fa fa-graduation-cap"></i><a href="{{url('/courses')}}"> Economics </a></p>
-									
-									</li>
-									
-									<li>
-									
-									<p><i class="fa fa-graduation-cap"></i> Arabic </p>
-									
-									</li>
-									
-									<li>
-									
-									<p><i class="fa fa-graduation-cap"></i> Academic English </p>
-									
-									</li>
-									
-									<li>
-									
-									<p><i class="fa fa-graduation-cap"></i> Grammar </p>
-									
-									</li>
-							
+									@if($courses_list2)
+										@foreach($courses_list2 as $course2)
+											<li>
+												<p>
+												<i class="fa fa-graduation-cap"></i>
+												<a href="{{ url('/courses/view') }}/{{ $course2->id }}"> {{ $course2->course_title }} </a>
+												</p>
+											</li>
+										@endforeach
+									@endif							
 								</ul>
 								
 								<div class="view-more">
-								<a href="#">VIEW MORE</a>
+								<a href="{{ url('/courses') }}">VIEW MORE</a>
 							</div>
 							
 							</div>
