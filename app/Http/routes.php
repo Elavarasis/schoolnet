@@ -11,9 +11,9 @@ include('ela.php');
 |
 */
 
-Route::get('/', function () {
+/*Route::get('/', function () {
     return view('welcome');
-});
+});*/
 
 // Admin area
 Route::get('admin', function () {
@@ -120,16 +120,15 @@ Route::group(array('middleware' => ['auth']), function()
 	Route::post('accept_friend_req', 'Friends@accept_friend_req');
 	Route::get('profile', 'Profile@index');
 	Route::get('help', 'Profile@help');
-	Route::get('courses', 'Courses@courses_list');
-	Route::get('courses/view/{id}', 'Courses@view');
-	Route::get('courses/tutors/{id}', 'Courses@tutors');
-	Route::get('courses/tutor/{id}', 'Courses@tutor');
 });
 
-Route::get('home', 'Home@index');
+Route::get('/', 'Home@index');
 Route::post('home/dologin', 'Home@dologin');
 
-Route::any('friends/testing', 'Friends@testing');
+Route::get('courses', 'Courses@index');
+Route::get('courses/view/{id}', 'Courses@view');
+Route::get('courses/tutors/{id}', 'Courses@tutors');
+Route::get('courses/tutor/{id}', 'Courses@tutor');
 
 /*
 Sample routings#

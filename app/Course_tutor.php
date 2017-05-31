@@ -12,4 +12,9 @@ class Course_tutor extends Model
     {
         return $this->hasOne('App\User','id','ct_user_id');
     }
+	
+	public function get_teacher()
+    {
+        return $this->hasOne('App\Teacher','te_user_id','ct_user_id');
+    }
 }
