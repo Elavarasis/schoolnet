@@ -134,7 +134,7 @@ class Fees extends Controller
 			$students 	= 	array();
 		}
 		
-		$all_fee 	= 	Fee::where('fee_status','<>',2)->where('fee_school_id',$school_id)->orderBy('created_at', 'desc')->pluck('fee_name','id')->all();
+		$all_fee 	= 	Fee::where('fee_status',1)->where('fee_school_id',$school_id)->orderBy('created_at', 'desc')->pluck('fee_name','id')->all();
 		
 		$divisions	= 	Option::where('opt_key', $school_id)->where('opt_type', 'division')->pluck('opt_text','opt_text')->all();
 		return view('tenant.fee.assign_fee',compact('students','divisions','data','all_fee'));
@@ -357,7 +357,7 @@ class Fees extends Controller
 			$students 	= 	array();
 		}
 		
-		$all_fee 	= 	Fee::where('fee_status','<>',2)->where('fee_school_id',$school_id)->orderBy('created_at', 'desc')->pluck('fee_name','id')->all();
+		$all_fee 	= 	Fee::where('fee_status',1)->where('fee_school_id',$school_id)->orderBy('created_at', 'desc')->pluck('fee_name','id')->all();
 		
 		$divisions	= 	Option::where('opt_key', $school_id)->where('opt_type', 'division')->pluck('opt_text','opt_text')->all();
 		return view('tenant.fee.pay_fee',compact('students','divisions','data','all_fee'));
