@@ -44,17 +44,15 @@
           </ul>
         </li>
 		<li class="treeview">
-          <a href="#">
-            <i class="fa fa-share"></i> <span>Manage Marks</span>
-                <span class="pull-right-container">
-                  <i class="fa fa-angle-left pull-right"></i>
-                </span>
+          <a href="{{ route('stud.marks.index') }}">
+            <i class="fa fa-share"></i> <span>View Marks</span>
           </a>
-          <ul class="treeview-menu">
-			<li><a href="{{ route('stud.marks.index') }}"><i class="fa fa-circle-o"></i> <span>Manage Marks</span></a></li>
-			<li><a href="{{ url('stud/marks/import') }}"><i class="fa fa-circle-o"></i> <span>Import</span></a></li>
-          </ul>
-        </li>		
+        </li>
+        <li class="treeview">
+          <a href="{{ url('stud/fee') }}">
+            <i class="fa fa-share"></i> <span>View Fee</span>
+          </a>
+        </li>
       </ul>
     </section>
     <!-- /.sidebar -->
