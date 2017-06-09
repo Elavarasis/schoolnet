@@ -28,7 +28,8 @@
 
               <h3 class="profile-username text-center">{{ $user->first_name }} {{ $user->last_name }}</h3>
 
-              <p class="text-muted text-center">{{ $user->st_class }}</p>
+              <p class="text-muted text-center">Class: {{ $user->st_class }}</p>
+              <p class="text-muted text-center">Reg No.: {{ $user->st_reg_no }}</p>
 
               <ul class="list-group list-group-unbordered">
                 <li class="list-group-item">
