@@ -108,7 +108,7 @@ Route::group(array('namespace' => 'Student', 'prefix' => 'stud', 'middleware' =>
 	Route::get('marks/search', 'Marks@search');
 	Route::get('marks/export', 'Marks@export');
 	Route::resource('marks', 'Marks');
-
+	Route::resource('calendars', 'Calendars');
 	Route::get('fee', 'Fees@get_fee');
 	
 });
