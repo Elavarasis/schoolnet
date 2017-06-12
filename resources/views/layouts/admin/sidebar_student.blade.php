@@ -53,6 +53,11 @@
             <i class="fa fa-share"></i> <span>View Fee</span>
           </a>
         </li>
+		<li class="treeview">
+          <a href="{{ url('stud/calendars') }}">
+            <i class="fa fa-share"></i> <span>My Calendars</span>
+          </a>
+        </li>
       </ul>
     </section>
     <!-- /.sidebar -->
